@@ -1,3 +1,4 @@
+import { url } from './url';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -5,19 +6,19 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ProfileService {
-
+Url:url;
   constructor(
         private http: Http,
   ) { }
 
-  articles(genjouristId){
+  profileArticles(genjouristId){
     //console.log(genjouristId);
-      return this.http.get('/genjourist/article/'+genjouristId)
+      return this.http.get(url.profileArticles+genjouristId)
       .map(response=>response.json())
   }
   
-  quotation(genjouristId){
-    return this.http.get('/genjourist/quotation/'+genjouristId)
+  profileQuotation(genjouristId){
+    return this.http.get(url.profileQuotation+genjouristId)
     .map(response=>response.json())
 }
 

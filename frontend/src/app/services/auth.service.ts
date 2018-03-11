@@ -4,9 +4,11 @@ import { Http, Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
+import { url } from './url';
 
 @Injectable()
 export class AuthService {
+  Url:url;
   authToken : any;
   user : any;
 
@@ -21,14 +23,14 @@ export class AuthService {
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','Application/json');
-    return this.http.post('/register',user,{headers:headers})
+    return this.http.post(url.register,user,{headers:headers})
     .map(res=>res.json());
   }
 
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','Application/json');
-    return this.http.post('/authenticate',user,{headers:headers})
+    return this.http.post(url.authenticate,user,{headers:headers})
     .map(res=>res.json());
   }
 
@@ -37,7 +39,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type','Application/json');
-    return this.http.post('/journal/add/quotation',user,{headers:headers})
+    return this.http.post(url.postQuotation,user,{headers:headers})
     .map(res=>res.json());
   }
 
@@ -46,7 +48,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type','Application/json');
-    return this.http.post('/journal/add/article',user,{headers:headers})
+    return this.http.post(url.postArticle,user,{headers:headers})
     .map(res=>res.json());
   }
 
@@ -55,7 +57,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type','Application/json');
-    return this.http.post('/journal/add/article',user,{headers:headers})
+    return this.http.post(url.saveArticle,user,{headers:headers})
     .map(res=>res.json());
   }
 
@@ -64,7 +66,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization',this.authToken);
     headers.append('Content-Type','Application/json');
-    return this.http.get('/profile',{headers:headers})
+    return this.http.get(url.profile,{headers:headers})
     .map(res=>res.json());
   }
 

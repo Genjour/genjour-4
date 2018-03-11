@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map'; 
+import { url } from './url';
 
-const webUrl = "http://localhost:3000";
 
 @Injectable()
 export class SupportService {
-
+Url:url;
   constructor(
     private http:Http,
   ) { }
@@ -16,26 +16,20 @@ export class SupportService {
     supportJournal(journalId, genjouristId){
       let headers = new Headers();
       headers.append('Content-Type','Application/json');
-      const URL = `/support/journal/${journalId}/${genjouristId}`;
-      // console.log(URL);
-      return this.http.post(URL,{headers:headers}).map(res=>res.json());
+      return this.http.post(url.supportJournal+journalId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
 
     }
 
     journalSupporters(journalId){
       let headers = new Headers();
       headers.append('Content-Type','Application/json');
-      const URL = `/journal/supportersList/${journalId}`;
-      // console.log(URL);
-      return this.http.get(URL,{headers:headers}).map(res=>res.json());
-
+      return this.http.get(url.journalSupporters+journalId,{headers:headers}).map(res=>res.json());
     }
 
     supportGenjourist(userId, genjouristId){
       let headers = new Headers();
       headers.append('Content-Type','Application/json');
-      const URL = `/support/genjourist/${userId}/${genjouristId}`;
-      return this.http.post(URL,{headers:headers}).map(res=>res.json());
+      return this.http.post(url.supportGenjourist+'/'+userId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
 
     }
 
@@ -43,7 +37,7 @@ export class SupportService {
       let headers = new Headers();
       headers.append('Content-Type','Application/json');
       const URL = `/supporting/genjourist/${userId}/${genjouristId}`;
-      return this.http.post(URL,{headers:headers}).map(res=>res.json());
+      return this.http.post(url.supportingGenjourist+userId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
 
     }
 

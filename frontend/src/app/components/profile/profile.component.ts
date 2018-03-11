@@ -38,10 +38,10 @@ supportGenjouristId : String;
       data=> {
                 this.user = data;
 
-                this.profileService.articles(this.user.genjouristId).subscribe(article=>{
+                this.profileService.profileArticles(this.user.genjouristId).subscribe(article=>{
                    this.journals = article;
                 });
-                this.profileService.quotation(this.user.genjouristId).subscribe(quotation=>{
+                this.profileService.profileQuotation(this.user.genjouristId).subscribe(quotation=>{
                   this.quotations = quotation;
                 });
         //=================================================================================================
@@ -74,7 +74,7 @@ supportGenjouristId : String;
         if (confirm('Are you sure you want to delete this article?')) {
           this.genjouristService.deleteArticle(articleId).subscribe(data=>{
             console.log(data);
-            this.profileService.articles(this.user.genjouristId).subscribe(article=>{
+            this.profileService.profileArticles(this.user.genjouristId).subscribe(article=>{
               this.journals = article;
            });
           });
