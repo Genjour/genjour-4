@@ -1,0 +1,34 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">
+          Recommended users
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+      <div class="m-widget4">
+          <!--begin::Widget 14 Item-->
+          <div *ngFor="let recommendedUser of recommendedUsers" class="m-widget4__item">
+            <div class="m-widget4__img m-widget4__img--pic">
+              <img src="{{recommendedUser.profileImg}}" alt="">
+            </div>
+            <div class="m-widget4__info">
+              <span class="m-widget4__title">
+                <a [routerLink]="['/genjourist',recommendedUser.genjouristId]">{{recommendedUser.name}}</a>
+              </span>
+              <br>
+              <span class="m-widget4__sub">
+                  <span class="m-badge  m-badge--info m-badge--wide">{{recommendedUser.dob | ageCategory}}</span>
+              </span>
+            </div>
+            <div class="m-widget4__ext">
+              <app-support-btn></app-support-btn>
+            </div>
+          </div>
+          <!--end::Widget 14 Item-->       
+      </div>
+  </div>
+</div>

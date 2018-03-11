@@ -1,0 +1,28 @@
+{
+  "name": "Genjour",
+  "version": "1.0.0",
+  "description": "Generations Journal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "bluebird": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "express-sessions": "^1.0.6",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "morgan": "^1.9.0",
+    "passport": "*",
+    "passport-jwt": "*",
+    "socket.io": "^2.0.4",
+    "uniqid": "^4.1.1",
+    "unique-id-generator": "^1.0.1"
+  },
+  "author": "amit",
+  "license": "ISC"
+}

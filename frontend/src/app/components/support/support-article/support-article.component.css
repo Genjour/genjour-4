@@ -1,0 +1,13 @@
+span{
+    cursor:pointer;
+}
+
+.m-stack__item:hover{
+    
+}
+
+a, a:active, a:link, a:visited{
+    color: black;
+    text-decoration: none;
+}
+

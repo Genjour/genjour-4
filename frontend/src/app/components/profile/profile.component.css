@@ -1,0 +1,12 @@
+.profileContainer{
+    background-color: #F2F3F8;
+}
+
+.p-details{
+    color: #7b7e8a;
+}
+
+a, a:link, a:visited, a:hover {
+    text-decoration: none;
+    color:#333439;
+}
