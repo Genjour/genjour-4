@@ -1,12 +1,19 @@
-export class draftArticles {
+export class draftJournal {
 
-    imgUrl   : String;
-    title    : String;
-    tags     : String;
-    image    : String;
-    category : String;
-    content  : String;
-    throwStatus : String;
-    status : Boolean;
+
+        journalId        : String;
+        genjouristId     : String;
+        genjourist       : String;
+        category         : String;
+        title            : String;
+        content          : String;
+        date             : String;
+        tags             : String;
+        imgUrl           : String;
+        supportersNumber : Number;
+        repilicateNumber : Number;
+        status           : Boolean;
+        type             : String
+
     
 }

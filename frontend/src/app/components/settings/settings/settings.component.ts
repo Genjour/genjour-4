@@ -29,11 +29,15 @@ export class SettingsComponent implements OnInit {
 
   user : user;
   profileImg: String;
+  name:String;
+  mobileNumber:String="";
 
   ngOnInit() {
     this.authService.userSubject.subscribe(
       data=> {
                 this.user = data;
+                this.name = data.name;
+                this.mobileNumber = data.mobileNumber;
           })
   }
 
@@ -52,6 +56,23 @@ export class SettingsComponent implements OnInit {
       }
     })
     }
+  }
+
+  save(){
+    
+    let a ={
+      name:this.name,
+      mobileNumber:this.mobileNumber
+    }
+
+    console.log(a);
+    this.genjouristService.findUserAndUpdateInfo(this.user.genjouristId,a).subscribe(data=>{
+      if(data.success){
+        console.log(data.msg);
+      }else{
+        console.log(data.msg);
+      }
+    })
   }
 
 }

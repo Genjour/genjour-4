@@ -43,7 +43,7 @@ checkStatus: String;
     }
     else if(data.success == true){
       this.authService.storeUserData(data.token,data.user);
-      this.router.navigate(['feeds']);
+      this.router.navigate(['/']);
     }else{
       console.log("Inncoret Username or password");
       this.router.navigate(['login']);

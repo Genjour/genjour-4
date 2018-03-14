@@ -16,7 +16,7 @@ const  UserSchema = mongoose.Schema({
   profileImg       : String,
   createdOn        : String,
   status           : Boolean,
-  mobile           : String,
+  mobileNumber     : String,
   
   
 });
@@ -115,3 +115,6 @@ module.exports.changeProfileImg = function(genjouristId,imgAddress,callback){
   )
 }
 
+module.exports.findUserAndUpdateInfo = function(userId,data,callback){
+  User.findOneAndUpdate({genjouristId:userId}, data, callback)
+}

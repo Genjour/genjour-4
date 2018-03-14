@@ -4,12 +4,12 @@
       <div class="m-grid__item m-grid__item--fluid m-wrapper">
         <!-- BEGIN: Subheader -->
         <div class="row">
-              <div class="col-md-9 col-xs-12 m-subheader m--padding-50 ">
+              <div class="col-md-9 col-xs-12 m-subheader m--padding-top-50 m--padding-left-50">
                   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
                       <div class="m-portlet__head m-portlet__head--fit">
                         <div class="m-portlet__head-caption">
                           <div class="m-portlet__head-action">
-                            <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
+                            <button [routerLink]="['/category',articleData?.category]" type="button" class="btn btn-sm m-btn--pill  btn-brand">
                               {{articleData?.category}}
                             </button>
                           </div>
@@ -18,7 +18,7 @@
                       <div class="m-portlet__body">
                         <div class="m-widget19">    
                               <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height: 286px">
-                                <img src="assets/{{articleData?.imgUrl}}" alt="">
+                                <img src="{{articleData?.imgUrl}}" alt="">
                                 <h3 class="m-widget19__title m--font-light">
                                   {{articleData?.title}}
                                 </h3>
@@ -56,7 +56,7 @@
                       </div>
                     </div>           
               </div>
-              <div class="col-md-3 m--padding-30">
+              <div class="col-md-3 m--padding-10">
                 <app-sidenav></app-sidenav>
               </div>
         </div>

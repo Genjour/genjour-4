@@ -1,5 +1,4 @@
 import { url } from './url';
-import { draftArticles } from './../components/models/draftArticles';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http, Headers } from '@angular/http';
@@ -34,24 +33,21 @@ export class GenjouristService {
     return this.http.get(url.getSupportersList+userId).map(res=>res.json());
   }
 
-  getDraftArticles(articleId){
-    return this.http.get(url.getDraftArticles+articleId).map(res=>res.json());
+  getDraftJournal(journalId){
+    return this.http.get(url.getDraftJournal+journalId).map(res=>res.json());
   }
 
   getDraftQuotation(quotationId){
     return this.http.get(url.getDraftQuotation+quotationId).map(res=>res.json());
   }
 
-  deleteArticle(articleId){
-    return this.http.delete(url.deleteArticle+articleId).map(res=>res.json());
+  deleteJournal(articleId){
+    return this.http.delete(url.deleteJournal+articleId).map(res=>res.json());
   }
 
-  draftArticles(articleId,article){
-    return this.http.put(url.draftArticles+articleId,article).map(res=>res.json());
-  }
 
-  updateArticle(articleId,article){
-    return this.http.put(url.updateArticle+articleId,article).map(res=>res.json());
+  updateJournal(journalId,data){
+    return this.http.put(url.updateJournal+journalId,data).map(res=>res.json());
   }
 
   recommendedUser(userId){
@@ -62,4 +58,11 @@ export class GenjouristService {
     return this.http.put(url.changeProfileImage+genjouristId,imgAddress).map(res=>res.json());
   }
 
+  checkSupportStatus(userId,genjouristId){
+    return this.http.get(url.checkSupportStatus+userId+'/'+genjouristId).map(res=>res.json());
+  }
+
+  findUserAndUpdateInfo(userId,data){
+    return this.http.put(url.findUserAndUpdateInfo+userId, data).map(res=>res.json());
+  }
 }

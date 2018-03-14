@@ -57,7 +57,6 @@
 														<!-- <input [(ngModel)]="image" type="file" name="image" >		-->											
 													</label>
 													<input type="file" ng2FileSelect [uploader]="uploader"/>
-													<input  id="photo" type="file" />
 													<button type="button" class="btn btn-success btn-s" [disabled]="imgStatus" (click)="upload()">
 														Upload
 													</button> <br>
@@ -71,9 +70,6 @@
                           Category
                         </label>
                         <select [(ngModel)]="category" name="category" class="custom-select">
-                          <option selected="">
-                            Choose category
-                          </option>
                           <option value="Life">
                             Life
                           </option>
@@ -115,7 +111,7 @@
 													<div class="col-lg-6">
 														<h4 style="color:red">{{throwStatus}}</h4>
 														<button (click)= "articleSave()" type="reset" class="btn btn-info">
-															Save
+															Draft
 														</button>
 														<button (click)= "articleSubmit()" type="submit" class="btn btn-primary"  >
 															Publish

@@ -122,6 +122,12 @@ upload(){
       status   : false,
 
     }
+
+    if(article.title == undefined){
+      this.throwStatus = "Please fill the title";
+      return false;
+    }
+
     this.authService.saveArticle(article).subscribe(data=>{
       if(data.success){
         console.log('article is successfully saved');

@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
-  <div class="m-subheader">
+<div class="container">
 
-  </div>
+    <div class="m-subheader ">
+
+    </div>
 
   <div class="row">
 
@@ -10,14 +11,50 @@
     <div *ngIf="!newUserStatus; then newUser else oldUser"></div>
 
     <ng-template #newUser>
-      <div class="col-md-8 m--margin-top-10 m--margin-left-40">
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title m-subheader__title--separator">
+                            General Widgets
+                        </h3>
+                        <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                            <li class="m-nav__item m-nav__item--home">
+                                <a href="#" class="m-nav__link m-nav__link--icon">
+                                    <i class="m-nav__link-icon la la-home"></i>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator">
+                                -
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="" class="m-nav__link">
+                                    <span class="m-nav__link-text">
+                                        Widgets
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator">
+                                -
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="" class="m-nav__link">
+                                    <span class="m-nav__link-text">
+                                        General Widgets
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+      <div class="col-md-8 m--margin-top-10">
         here will be random posts according to categories
       </div>
     </ng-template>
     
     <!-- Old User -->
     <ng-template #oldUser >
-      <div class="col-md-8 m--margin-top-10 m--margin-left-40">
+      <div class="col-md-12 m--margin-top-10">
           <div class="card-columns">
               <div *ngFor="let journal of journals">
                   
@@ -138,10 +175,6 @@
           </div>
       </div>
     </ng-template>
-    <div class="col-xl-3 m--margin-10">
-      <app-recommend-user></app-recommend-user>
-    </div>
-
   </div>
 
 </div>

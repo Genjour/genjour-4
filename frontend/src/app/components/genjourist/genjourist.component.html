@@ -40,7 +40,7 @@
                     </div>
                     <div class="col">
                         <div class="m-widget19__stats text-center">
-                            <h3 class="m--font-brand">
+                            <h3 class="m--font-brand" >
                                 {{supportingNumber}}  
                             </h3>
                             <span class="m-widget19__comment">
@@ -52,8 +52,8 @@
               </div>
               <div class="m-separator"></div>
               <button type="button" (click)="support(user?.genjouristId,genjouristData.genjouristId)" class="btn m-btn--square  btn-primary btn-block">
-                <div *ngIf="supportStatus">Support</div>
-                <div *ngIf="!supportStatus"> Stop Supporting</div>
+                <div *ngIf="!supportStatus">Support</div>
+                <div *ngIf="supportStatus"> Stop Supporting</div>
               </button>
               <div *ngIf = "!selfSupportAlert">You cannot support your self :-)</div>
               <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
@@ -213,7 +213,7 @@
                           <div class="m-widget5">
                             <div class="m-widget5__item" *ngFor="let journal of journals">
                               <div class="m-widget5__pic">
-                                <img class="m-widget7__img" src="assets/app/media/img/products/product6.jpg" alt="">
+                                <img class="m-widget7__img" src="{{journal.imgUrl}}" alt="">
                               </div>
                               <div class="m-widget5__content">
                                 <h4 class="m-widget5__title">

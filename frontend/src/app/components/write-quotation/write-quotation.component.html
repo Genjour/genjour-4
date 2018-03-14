@@ -48,9 +48,6 @@
                           Choose category
                         </label>
                         <select class="custom-select" [(ngModel)]="category" name="category">
-                          <option selected="">
-                            Options
-                          </option>
                           <option value="Life">
                             Life
                           </option>
@@ -82,7 +79,7 @@
 													<div class="col-lg-6">
 															<h4 style="color:red">{{throwStatus}}</h4>
 															<button (click)= "quotationSave()" type="reset" class="btn btn-info">
-																	Save
+																	Draft
 																</button>
 																<button (click)= "quotationSubmit()" type="submit" class="btn btn-primary"  >
 																	Publish

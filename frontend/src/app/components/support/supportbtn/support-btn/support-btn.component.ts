@@ -30,17 +30,17 @@ export class SupportBtnComponent implements OnInit {
   ngOnInit( ) {
 
     this.authService.userSubject.subscribe(data=>{
-      this.user = data;
-        console.log(data.supporting);
-        console.log("supporting id "+this.supportGenjouristId);
-        let arr = data.supporting;
-        let found = arr.find(found => found == this.supportGenjouristId);
-        console.log(found)
-        if(found != undefined){
-          this.supportStatus = false;
-        }else{
-          this.supportStatus = true;
-        }
+      // this.user = data;
+      //   console.log(data.supporting);
+      //   console.log("supporting id "+this.supportGenjouristId);
+      //   let arr = data.supporting;
+      //   let found = arr.find(found => found == this.supportGenjouristId);
+      //   console.log(found)
+      //   if(found != undefined){
+      //     this.supportStatus = false;
+      //   }else{
+      //     this.supportStatus = true;
+      //   }
     });
 
   }
@@ -69,10 +69,10 @@ export class SupportBtnComponent implements OnInit {
 
        //========================================= Supporting Code ============================================
 
-      this.supportService.supportingGenjourist(userId, supportGenjouristId).subscribe(data=>{
-        //this.supportingNumber = data.msg;
-        console.log(data.msg);
-      });
+      // this.supportService.supportingGenjourist(userId, supportGenjouristId).subscribe(data=>{
+      //   //this.supportingNumber = data.msg;
+      //   console.log(data.msg);
+      // });
 
 
 

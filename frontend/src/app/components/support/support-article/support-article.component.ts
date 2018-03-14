@@ -90,13 +90,13 @@ export class SupportArticleComponent implements OnInit {
 }
 
       facebookShare(journalId){
-        let facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u='+'http://localhost:4200/journal/'+journalId , 'facebook-popup', 'height=350,width=600');
+        let facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u='+'http://genjour.heroku.com/journal/'+journalId , 'facebook-popup', 'height=350,width=600');
          if(facebookWindow.focus) { facebookWindow.focus(); }
            return false;
       }
 
       twitterShare(journalId){
-        var twitterWindow = window.open('https://twitter.com/share?url='+'http://localhost:4200/journal/'+journalId, 'twitter-popup', 'height=350,width=600');
+        var twitterWindow = window.open('https://twitter.com/share?url='+'http://genjour.heroku.com/journal/'+journalId, 'twitter-popup', 'height=350,width=600');
          if(twitterWindow.focus) { twitterWindow.focus(); }
            return false; 
       }
@@ -106,14 +106,14 @@ export class SupportArticleComponent implements OnInit {
       }
 
       googlePlusShare(journalId){
-        var googleWindpw = window.open('https://plus.google.com/share?url='+'http://localhost:4200/journal/'+journalId, 'twitter-popup', 'height=550,width=400');
+        var googleWindpw = window.open('https://plus.google.com/share?url='+'http://genjour.heroku.com/journal/'+journalId, 'twitter-popup', 'height=550,width=400');
          if(googleWindpw.focus) { googleWindpw.focus(); }
            return false; 
       }
 
       // copyLink(journalId){
       //   console.log(journalId);
-      //   let link = 'http://localhost:4200/journal/'+journalId;
+      //   let link = 'http://genjour.heroku.com/journal/'+journalId;
       //   //link.select();
       //   //document.execCommand("copy")
       // }

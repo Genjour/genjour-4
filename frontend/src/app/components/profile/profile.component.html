@@ -211,11 +211,11 @@
                             <div class="m-widget5">
                               <div class="m-widget5__item" *ngFor="let journal of journals">
                                 <div class="m-widget5__pic">
-                                  <img class="m-widget7__img" src="assets/app/media/img//products/product6.jpg" alt="">
+                                  <img class="m-widget7__img" src="{{journal.imgUrl}}" alt="">
                                 </div>
                                 <div class="m-widget5__content">
                                    <h4 class="m-widget5__title">
-                                      <a [routerLink]="['/journal',journal.articleId]"> {{journal.title}} </a>
+                                      <a [routerLink]="['/journal',journal.journalId]"> {{journal.title}} </a>
                                   </h4>
                                   <span class="m-widget5__desc">
                                     {{journal.content | summary}}
@@ -228,10 +228,10 @@
                                 </div>
                                 <div class="m-widget5__stats1">
                                     <div>
-                                        <a [routerLink]="['/edit/article/',journal.articleId]" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a>
+                                        <a [routerLink]="['/edit/article/',journal.journalId]" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a>
                                     </div>
                                     <div>
-                                        <a (click)="deleteArticle(journal.articleId)" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill m--margin-top-10" title="Delete"><i class="la la-trash"></i></a>
+                                        <a (click)="deleteJournal(journal.journalId)" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill m--margin-top-10" title="Delete"><i class="la la-trash"></i></a>
                                     </div>
                                 </div>
                                 <div class="m-widget5__stats1">
@@ -312,7 +312,7 @@
                             <div class="m-widget5__item" *ngFor="let quotation of quotations">
                               <div class="m-widget5__content m-widget2__item m-widget2__item--primary">
                                 <span class="m-widget5__title">
-                                  {{quotation.quote}}
+                                  {{quotation.content}}
                                 </span>
                                 <div class="m-widget5__info">
                                   <span class="m-widget5__info-date m--font-info">
@@ -322,10 +322,10 @@
                               </div>
                               <div class="m-widget5__stats1">
                                   <div>
-                                      <a [routerLink]="['/edit/quotation/',quotation.quotationId]" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a>
+                                      <a [routerLink]="['/edit/quotation/',quotation.journalId]" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a>
                                   </div>
                                   <div>
-                                      <a (click)="deleteQuotation(quotation.quotationId)" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill m--margin-top-10" title="Delete"><i class="la la-trash"></i></a>
+                                      <a (click)="deleteJournal(quotation.journalId)" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill m--margin-top-10" title="Delete"><i class="la la-trash"></i></a>
                                   </div>
                               </div>
                               <div class="m-widget5__stats1">

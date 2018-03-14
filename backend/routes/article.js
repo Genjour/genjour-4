@@ -48,55 +48,10 @@ router.get('/articles/:category', (req,res)=>{
   });
 });
 
-router.get('/edit/article/:articleId', (req,res)=>{
-  Journal.findArticle(req.params.articleId, (err,data)=>{
-    if(err) throw err;
-    if(!data){
-      res.json({success:false, msg:"No data found"});
-    }else{
-      res.json(data);
-    }
-  });
-});
 
 
-router.delete('/delete/article/:articleId', function(req,res){
-  Journal.deleteArticle(req.params.articleId, (err,done)=>{
-      if(err) throw err;
-      if(!done){ 
-          res.json({success:false, msg:"Cannot delete"});
-      }else{
-          res.json({success:true, msg:"deleted"});
-      }
-  });
-});
 
-router.put('/update/article/:articleId', function(req,res){
 
-  const flag = {
-        category         : req.body.category,
-        title            : req.body.title,
-        content          : req.body.content,
-        tags             : req.body.tags,
-        status           : req.body.status,
-  }
-
-  Journal.findArticle(req.params.articleId, (err,article)=>{
-    if(err) throw err;
-    if(!article){
-      res.json({success:false, msg:'cannot find this article which you want to update'});
-    }else{
-      Journal.updateArticle(req.params.articleId, flag, (err,draftArticle)=>{
-        if(err) throw err;
-        if(!draftArticle){
-          res.json({success:false, msg:'cannot update'});
-        }else{
-          res.json({success:true, msg:'updation successful'});
-        }
-      });
-    }
-  });
-});
 
 
 router.get('/articles',   function(req,res){

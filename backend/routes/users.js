@@ -29,6 +29,7 @@ router.post('/register',(req,res,next)=>{
 		dob 			: req.body.dob,
 		profileImg 		: profileValue,
 		status			: true,
+		mobileNumber    : String,
 		createdOn 		: Date(),
 		
 
@@ -112,5 +113,21 @@ router.get('/search/user=:name', (req,res)=>{
 
 });
 
+router.put('/update/userInfo/:userId', (req,res)=>{
+	const userId = req.params.userId;
+	const data = {
+		name:req.body.name,
+		mobileNumber:req.body.mobileNumber
+	}
+	User.findUser(userId, (err,user)=>{
+		if(err) throw err;
+		if(!user) { res.json({success:false, msg:"User not found"})}
+		else{
+			User.findUserAndUpdateInfo(userId,data, (err,status)=>{
+				res.json({success:true, msg:"successfully updated"})
+			})
+		}
+	})
+});
 
 module.exports = router;

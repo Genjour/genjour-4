@@ -27,7 +27,7 @@
 													Article Title:
 												</label>
 												<div class="col-lg-6">
-													  <input class="form-control m-input" type="text" [(ngModel)]="draftData.title" name="title">
+													  <input class="form-control m-input" type="text" [(ngModel)]="draftData.title" name="title" >
 													<span class="m-form__help">
 														Please enter article title
 													</span>
@@ -63,6 +63,9 @@
 													<div *ngIf = "imgUrl">
 														<input hidden [disabled]="!xyz" [(ngModel)]="imgUrl" name="imgUrl"/> 
 													</div>
+												</div>
+												<div class="col-lg-4">
+													<img height="150" src="{{draftData.imgUrl}}" alt="">
 												</div>
 											</div>
                       <div class="form-group1 m-form__group row">
@@ -113,10 +116,10 @@
 													<div class="col-lg-2"></div>
 													<div class="col-lg-6">
 														<h4 style="color:red">{{throwStatus}}</h4>
-														<button (click)= "draft(draftData.articleId)" type="reset" class="btn btn-info">
+														<button (click)= "draft(draftData.journalId)" type="reset" class="btn btn-info">
 															Draft
 														</button>
-														<button (click)= "articleSubmit(draftData.articleId)" type="submit" class="btn btn-primary"  >
+														<button (click)= "articleSubmit(draftData.journalId)" type="submit" class="btn btn-primary"  >
 															Publish
 														</button>
 														<a [routerLink]="['/']" class="btn btn-danger"  >

@@ -68,6 +68,13 @@ export class WriteQuotationComponent implements OnInit {
       status    : false,
   
     }
+
+    if(quotation.quote == undefined)
+    {
+      this.throwStatus = "Please fill wrtie the quote";
+      return false;
+    }
+    
     this.auhtService.postQuotation(quotation).subscribe(data=>{
       if(data.success){
         console.log('quotation is posted');

@@ -46,6 +46,8 @@ router.get('/quotations',(req,res)=>{
   })
 })
 
+
+
 router.get('/quotations/:category', (req,res)=>{
     Quotation.findQuotationByCategory(req.params.category, (err,data)=>{
       if(err) throw err;

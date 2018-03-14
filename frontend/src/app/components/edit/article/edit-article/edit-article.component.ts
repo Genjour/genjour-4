@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenjouristService } from '../../../../services/genjourist.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { draftArticles } from '../../../models/draftArticles';
+import { draftJournal } from '../../../models/draftArticles';
 
 @Component({
   selector: 'app-edit-article',
@@ -12,21 +12,18 @@ export class EditArticleComponent implements OnInit {
 
   constructor( private genjouristService: GenjouristService, private route: ActivatedRoute, private router:Router) { }
 
-  draftData= new draftArticles();
-
-
-
+  draftData= new draftJournal();
 
   ngOnInit() {
 
-    this.genjouristService.getDraftArticles(this.route.snapshot.params.articleId).subscribe(data=>{
+    this.genjouristService.getDraftJournal(this.route.snapshot.params.articleId).subscribe(data=>{
         console.log(data);
         this.draftData = data;
     })
 
   }
 
-  draft(articleId){
+  draft(journalId){
     const article = {
       title    : this.draftData.title,
       tags     : this.draftData.tags,
@@ -35,7 +32,7 @@ export class EditArticleComponent implements OnInit {
       status   : false,
 
     }
-    this.genjouristService.draftArticles(articleId,article).subscribe(data=>{
+    this.genjouristService.updateJournal(journalId,article).subscribe(data=>{
       if(data.success){
         console.log('Yeah updated');
         this.router.navigate(['/genjourist']);
@@ -45,7 +42,7 @@ export class EditArticleComponent implements OnInit {
     })
   }
 
-  articleSubmit(articleId){
+  articleSubmit(journalId){
     const article = {
       title    : this.draftData.title,
       tags     : this.draftData.tags,
@@ -54,7 +51,7 @@ export class EditArticleComponent implements OnInit {
       status   : true,
     }
 
-    this.genjouristService.updateArticle(articleId,article).subscribe(data=>{
+    this.genjouristService.updateJournal(journalId,article).subscribe(data=>{
       if(data.success){
         console.log('Yeah updated');
         this.router.navigate(['/genjourist']);

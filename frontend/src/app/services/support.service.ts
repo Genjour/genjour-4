@@ -29,17 +29,10 @@ Url:url;
     supportGenjourist(userId, genjouristId){
       let headers = new Headers();
       headers.append('Content-Type','Application/json');
-      return this.http.post(url.supportGenjourist+'/'+userId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
+      return this.http.post(url.supportGenjourist+userId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
 
     }
 
-    supportingGenjourist(userId, genjouristId){
-      let headers = new Headers();
-      headers.append('Content-Type','Application/json');
-      const URL = `/supporting/genjourist/${userId}/${genjouristId}`;
-      return this.http.post(url.supportingGenjourist+userId+'/'+genjouristId,{headers:headers}).map(res=>res.json());
-
-    }
 
 
 

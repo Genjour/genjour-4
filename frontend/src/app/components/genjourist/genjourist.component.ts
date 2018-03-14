@@ -24,8 +24,8 @@ export class GenjouristComponent implements OnInit {
   currentUser: object;
   articleId: any;
   supportStatus : Boolean;
-  supporterNumber : Number;
-  supportingNumber : Number;
+  supporterNumber : any;
+  supportingNumber : any;
   selfSupportAlert : Boolean = true;
   supportersLists : any[] = [];
   supportingLists : any[] = [];
@@ -52,22 +52,23 @@ export class GenjouristComponent implements OnInit {
 
     this.genjouristService.genjouristProfile(this.route.snapshot.params.id).subscribe(genjourist=>{
       this.genjouristData = genjourist;
-      // console.log(this.genjouristData);
+      //console.log(this.genjouristData);
 
       //======================================================================================================
-      // ========================================= Support Status ============================================
+      //========================================== Support Status ============================================
       
-        let n = this.user.supporting;
-       if(n.includes(this.route.snapshot.params.id) == true){
-          this.supportStatus = false;
-        }else{
-          this.supportStatus = true;
-        }
+        this.genjouristService.checkSupportStatus(this.user.genjouristId,this.route.snapshot.params.id).subscribe(status=>{
+          if(status.success){
+            this.supportStatus = true;
+          }else{
+            this.supportStatus = false;
+          }
+        })
 
       //======================================================================================================
 
       if(this.supporterNumber == null){
-        this.supporterNumber=0;
+        this.supporterNumber = 0;
       }
 
       if(this.supportingNumber == null){
@@ -92,7 +93,7 @@ export class GenjouristComponent implements OnInit {
       this.genjouristService.getSupportingList(this.route.snapshot.params.id).subscribe(data=>{
         this.supportingLists = data;
         this.supportingNumber = data.length;
-        //console.log(this.supportingLists);
+        console.log(this.supportingLists);
       })
 
       this.genjouristService.getSupportersList(this.route.snapshot.params.id).subscribe(data=>{
@@ -124,29 +125,11 @@ export class GenjouristComponent implements OnInit {
       //============================================ Support Code ============================================
 
       this.supportService.supportGenjourist(userId, genjouristId).subscribe(data=>{
-        // this.supporterNumber = data.msg;
-           console.log(data.msg);
-
-
-        this.genjouristService.genjouristProfile(this.route.snapshot.params.id).subscribe(data=>{
-        console.log(data.supporters.length);
-        this.supporterNumber = data.supporters.length; 
-
-        
+        //console.log(data.msg);
+        this.genjouristService.getSupportersList(this.route.snapshot.params.id).subscribe(data=>{
+          this.supporterNumber = data.length;
         })
       });
-
-       //========================================= Supporting Code ============================================
-
-      this.supportService.supportingGenjourist(userId, genjouristId).subscribe(data=>{
-        //this.supportingNumber = data.msg;
-        console.log(data.msg);
-      });
-      this.genjouristService.genjouristProfile(this.route.snapshot.params.id).subscribe(data=>{
-        console.log(data.supporters.length);
-      this.supportingNumber = data.supporting.length;
-    });
-
 
     }
     else{

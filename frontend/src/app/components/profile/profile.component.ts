@@ -70,13 +70,17 @@ supportGenjouristId : String;
 
   } 
 
-  deleteArticle(articleId){
+  deleteJournal(articleId){
         if (confirm('Are you sure you want to delete this article?')) {
-          this.genjouristService.deleteArticle(articleId).subscribe(data=>{
+          this.genjouristService.deleteJournal(articleId).subscribe(data=>{
             console.log(data);
             this.profileService.profileArticles(this.user.genjouristId).subscribe(article=>{
               this.journals = article;
            });
+           this.profileService.profileQuotation(this.user.genjouristId).subscribe(quotation=>{
+            this.quotations = quotation;
+         });
+         
           });
       } else {
          console.log('cannot do anything');

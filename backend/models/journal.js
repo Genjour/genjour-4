@@ -38,6 +38,9 @@ module.exports.addJournal = function(journal, callback){
 module.exports.getJournal = function(callback){
     Journal.aggregate([
         {
+            $match : {status:true}
+        },
+        {
             $lookup: {
                from: "users",
                localField: "genjouristId",    // field in the orders collection
@@ -65,7 +68,7 @@ module.exports.getJournal = function(callback){
              date:1,
              title:1,
              tags:1,
-             genjourist:1,                      
+             genjourist:1,                   
              } 
         }
      ],callback)
@@ -119,14 +122,11 @@ module.exports.feedsArticle = function(array,callback){
     Journal.find({genjouristId:{$in : array}},callback).sort({date:-1});
 }
 
-module.exports.newUserArticles = function(category,callback){
 
-}
-
-module.exports.deleteArticle = function(journalId, callback){
-    Journal.remove({journalId:journalId},callback);
-}
-
-module.exports.updateArticle = function(journalId, article, callback){
+module.exports.updateJournal = function(journalId, article, callback){
     Journal.findOneAndUpdate({journalId:journalId}, article, callback );
+}
+
+module.exports.deleteJournal = function(journalId, callback){
+    Journal.remove({journalId:journalId},callback);
 }
