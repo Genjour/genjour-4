@@ -29,12 +29,12 @@ import { ProfileService } from './services/profile.service';
 import { SupportService } from './services/support.service';
 import { GenjouristService } from './services/genjourist.service';
 import { ArticleService } from './services/article.service';
-import { SocketService } from './services/socket/socket.service';
 import { CategoryService } from './services/category/category.service';
 import { ScriptLoaderService } from "./services/script-loader.service";
 import { FeedsService } from './services/feeds/feeds.service';
 import { QuotationsService } from './services/quotations.service';
 import { SearchService } from './services/search/search.service';
+import { CommentService } from './services/comment/comment.service';
 
 import { AuthGaurd } from './gaurds/auth.gaurd';
 import { ProtectedGaurd } from './gaurds/protected.gaurd';
@@ -56,6 +56,7 @@ import { Ng2CloudinaryModule } from './../../node_modules/ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ProfileImgPipe } from './directives/pipes/profile-img.pipe';
 import { TitleCasePipe } from '@angular/common';
+import { CommentComponent } from './components/comment/comment.component';
 
 
 const appRoutes: Routes = [
@@ -67,7 +68,7 @@ const appRoutes: Routes = [
   {path: 'genjourist/:id', component:GenjouristComponent},
   {path: 'genjourist', component: ProfileComponent, canActivate:[AuthGaurd] },
   {path: 'settings', component: SettingsComponent, canActivate:[AuthGaurd] },
-  {path: 'journal/:articleId', component:ArticleComponent},
+  {path: 'journal/:journalId', component:ArticleComponent},
   {path: 'write-article', component:WriteArticleComponent, canActivate:[AuthGaurd]},
   {path: 'write-quotation', component:WriteQuotationComponent, canActivate:[AuthGaurd]},
   {path: 'edit/article/:articleId', component:EditArticleComponent, canActivate:[AuthGaurd]},
@@ -101,6 +102,7 @@ const appRoutes: Routes = [
     ArticleRecommendationComponent,
     SearchComponent,
     ProfileImgPipe,
+    CommentComponent,
     
     
   ],
@@ -124,12 +126,12 @@ const appRoutes: Routes = [
     SupportService,
     GenjouristService,
     ArticleService,
-    SocketService,
     CategoryService,
     ScriptLoaderService,
     FeedsService,
     QuotationsService,
     SearchService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

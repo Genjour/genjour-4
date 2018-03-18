@@ -98,19 +98,6 @@
                   </a>
                 </li>
                 <li class="m-nav__item">
-                  <a  class="m-nav__link">
-                    <i class="m-nav__link-icon flaticon-chat-1"></i>
-                    <span class="m-nav_link-wrap">
-                      <span class="m-nav__link-text">
-                          Phone Number
-                        </span>
-                        <span class="m--pull-right p-details">
-                            +8989565623
-                        </span>
-                    </span>
-                  </a>
-                </li>
-                <li class="m-nav__item">
                   <a class="m-nav__link">
                     <i class="m-nav__link-icon flaticon-graphic-2"></i>
                     <span class="m-nav_link-wrap">
@@ -121,6 +108,19 @@
                               {{genjouristData?.email}}
                           </span>
                       </span>
+                  </a>
+                </li>
+                <li *ngIf="genjouristData?.mobileNumber" class="m-nav__item">
+                  <a  class="m-nav__link">
+                    <i class="m-nav__link-icon flaticon-chat-1"></i>
+                    <span class="m-nav_link-wrap">
+                      <span class="m-nav__link-text">
+                          Phone Number
+                        </span>
+                        <span class="m--pull-right p-details">
+                            {{genjouristData?.mobileNumber}}
+                        </span>
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -158,7 +158,7 @@
                     </ul>
                     <div class="tab-content">
                       <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                          <div class="m--pull-right">
+                          <!-- <div class="m--pull-right">
                               <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover" aria-expanded="true">
                                   <a href="#" class="m-portlet__nav-link m-dropdown__toggle dropdown-toggle btn btn--sm m-btn--pill btn-secondary m-btn m-btn--label-brand">
@@ -209,7 +209,7 @@
                                   </div>
                                 </li>
                               </ul>
-                          </div>
+                          </div> -->
                           <div class="m-widget5">
                             <div class="m-widget5__item" *ngFor="let journal of journals">
                               <div class="m-widget5__pic">
@@ -217,7 +217,7 @@
                               </div>
                               <div class="m-widget5__content">
                                 <h4 class="m-widget5__title">
-                                 <a [routerLink]="['/journal',journal.articleId]" > {{journal.title}} </a>
+                                 <a [routerLink]="['/journal',journal.journalId]" > {{journal.title}} </a>
                                 </h4>
                                 <span class="m-widget5__desc">
                                   {{journal.content | summary}}
@@ -250,7 +250,7 @@
                           </div>
                       </div>
                       <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                          <div class="m--pull-right">
+                          <!-- <div class="m--pull-right">
                               <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover" aria-expanded="true">
                                   <a href="#" class="m-portlet__nav-link m-dropdown__toggle dropdown-toggle btn btn--sm m-btn--pill btn-secondary m-btn m-btn--label-brand">
@@ -301,7 +301,7 @@
                                   </div>
                                 </li>
                               </ul>
-                          </div>
+                          </div> -->
                           <div class="m-widget5">
                             <div class="m-widget5__item" *ngFor="let quotation of quotations">
                               <div class="m-widget5__content m-widget2__item m-widget2__item--primary">
@@ -348,7 +348,7 @@
                                       </div>
                                       <div class="m-widget4__info">
                                         <span class="m-widget4__title">
-                                          <a [routerLink]="['/genjourist',supportersList.details.genjouristId]" (click)="refreshUser()">
+                                          <a [routerLink]="['/genjourist',supportersList?.details.genjouristId]" (click)="refreshUser()">
                                             {{supportersList.details.name}}
                                           </a>
                                         </span>
@@ -360,9 +360,7 @@
                                         </span>
                                       </div>
                                       <div class="m-widget4__ext">
-                                        <a href="#" class="m-btn m-btn--pill m-btn--hover-brand btn btn-sm btn-secondary">
-                                          Follow
-                                        </a>
+                                        <app-support-btn [supportGenjouristId]="supportersList?.details.genjouristId" [userId]="user.genjouristId" ></app-support-btn>
                                       </div>
                                     </div>
                                   </div>
@@ -378,7 +376,7 @@
                                       </div>
                                       <div class="m-widget4__info">
                                         <span class="m-widget4__title">
-                                          <a [routerLink]="['/genjourist',supportingList.details.genjouristId]" (click)="refreshUser()">
+                                          <a [routerLink]="['/genjourist',supportingList?.details.genjouristId]" (click)="refreshUser()">
                                             {{supportingList.details.name}}
                                           </a>
                                         </span>
@@ -390,9 +388,7 @@
                                         </span>
                                       </div>
                                       <div class="m-widget4__ext">
-                                        <a href="#" class="m-btn m-btn--pill m-btn--hover-brand btn btn-sm btn-secondary">
-                                          Follow
-                                        </a>
+                                        <app-support-btn [supportGenjouristId]="supportingList?.details.genjouristId" [userId]="user.genjouristId" ></app-support-btn>
                                       </div>
                                     </div>
                                   </div>

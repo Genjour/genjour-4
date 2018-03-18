@@ -15,12 +15,12 @@ export class SupportArticleComponent implements OnInit {
   @Input() journalId: String; 
   @Input() userId : String;
 
-
+  hidden=[];
   articles : Object;
   supporters : any[] = [];
   supporterNumber : any;
   supportStatus : Boolean;
-
+  commentBox : Boolean;
   constructor(
     private journalsService : JournalsService,
     private authService : AuthService,
@@ -87,6 +87,10 @@ export class SupportArticleComponent implements OnInit {
     }
 
   
+}
+
+toggleCommentBox(){
+  this.commentBox =! this.commentBox
 }
 
       facebookShare(journalId){

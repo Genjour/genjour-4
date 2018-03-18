@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SupportService } from '../../services/support.service';
-import { SocketService } from '../../services/socket/socket.service';
 import { user } from '../models/user';
 
 @Component({
@@ -38,7 +37,6 @@ export class GenjouristComponent implements OnInit {
     private authService: AuthService,
     private supportService: SupportService,
     private router: Router,
-    private socketService: SocketService,
   ) { }
 
   ngOnInit() {
@@ -46,6 +44,7 @@ export class GenjouristComponent implements OnInit {
     this.authService.userSubject.subscribe(
       user=> {
                 this.user = user;
+
                //console.log(this.user);       
 
           

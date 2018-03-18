@@ -31,7 +31,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
 
-    this.articleService.article(this.route.snapshot.params.articleId).subscribe(data=>{
+    this.articleService.article(this.route.snapshot.params.journalId).subscribe(data=>{
       this.articleData = data;
       console.log(this.articleData);
     })

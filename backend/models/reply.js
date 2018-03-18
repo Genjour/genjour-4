@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 
-var commentSchema = mongoose.Schema({
+var replySchema = mongoose.Schema({
 
     id               : String,
     commentId        : String,
@@ -16,23 +16,23 @@ var commentSchema = mongoose.Schema({
 
 });
 
-const Comment  = module.exports = mongoose.model('Comment',commentSchema);
+const Reply  = module.exports = mongoose.model('Reply',replySchema);
 
-module.exports.addComment = function(comment, callback){
-    comment.save(callback);
+module.exports.addComment = function(reply, callback){
+    reply.save(callback);
 } 
 
 
 module.exports.findComment = function(journalId, callback){
-    Comment.find({journalId:journalId}, callback).sort({date:-1});
+    Reply.find({journalId:journalId}, callback).sort({date:-1});
 }
 
 module.exports.deleteComment = function(commentId, callback){
-    Comment.remove({commentId:commentId},callback);
+    Reply.remove({commentId:commentId},callback);
 }
 
 module.exports.updateComent = function(commentId,data,callback){
-    Comment.findAndUpdate({commentId:commentId},data,callback);
+    Reply.findAndUpdate({commentId:commentId},data,callback);
 }
 
 

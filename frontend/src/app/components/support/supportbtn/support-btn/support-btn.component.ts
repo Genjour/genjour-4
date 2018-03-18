@@ -1,8 +1,10 @@
+import { GenjouristService } from './../../../../services/genjourist.service';
 import { user } from './../../../models/user';
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { SupportService } from '../../../../services/support.service';
 import { AuthService } from '../../../../services/auth.service';
+
 
 @Component({
   selector: 'app-support-btn',
@@ -25,23 +27,38 @@ export class SupportBtnComponent implements OnInit {
     private authService : AuthService,
     private router: Router,
     private supportService: SupportService,
+    private genjouristService: GenjouristService,
+
   ) { }
 
   ngOnInit( ) {
 
+    
+
+  }
+
+  ngAfterViewInit(){
     this.authService.userSubject.subscribe(data=>{
-      // this.user = data;
-      //   console.log(data.supporting);
-      //   console.log("supporting id "+this.supportGenjouristId);
-      //   let arr = data.supporting;
-      //   let found = arr.find(found => found == this.supportGenjouristId);
-      //   console.log(found)
-      //   if(found != undefined){
-      //     this.supportStatus = false;
-      //   }else{
-      //     this.supportStatus = true;
-      //   }
+      console.log(this.userId+" "+this.supportGenjouristId);
+
+
+      //======================================================================================================
+      //========================================== Support Status ============================================
+
+      this.genjouristService.checkSupportStatus(this.userId,this.supportGenjouristId).subscribe(status=>{
+        if(status.success){
+          this.supportStatus = true;
+          console.log(this.supportStatus);
+        }else{
+          this.supportStatus = false;
+          console.log(this.supportStatus);
+        }
+      })
+    //======================================================================================================
+
     });
+
+    
 
   }
 
@@ -50,7 +67,7 @@ export class SupportBtnComponent implements OnInit {
 
     if(this.authService.loggedIn()){
 
-
+      console.log(this.userId+" "+this.supportGenjouristId);
        // ========================================= Support Status ===========================================
 
       if(this.supportStatus === true){
@@ -66,15 +83,6 @@ export class SupportBtnComponent implements OnInit {
            console.log(data.msg);
 
       });
-
-       //========================================= Supporting Code ============================================
-
-      // this.supportService.supportingGenjourist(userId, supportGenjouristId).subscribe(data=>{
-      //   //this.supportingNumber = data.msg;
-      //   console.log(data.msg);
-      // });
-
-
 
     }
     else{

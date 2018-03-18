@@ -32,6 +32,7 @@ const quotation = require('./routes/quotation');
 const journal = require('./routes/journal');
 const genjourist = require('./routes/genjourist');
 const support = require('./routes/support');
+const comment = require('./routes/comment');
 
 // Cors Middleware
 app.use(cors());
@@ -64,6 +65,7 @@ require('./config/passport')(passport);
  app.use('/',journal);
  app.use('/',genjourist);
  app.use('/',support);
+ app.use('/',comment);
 
 //Index Route
 app.get('/',(req,res)=>{
@@ -75,39 +77,3 @@ const port = process.env.PORT || '3000';
 app.set('port', port);
 
 server.listen(port, () => console.log(`APIs are running on localhost:${port}`));
-
-io.on('connection', function (socket){
-
-	console.log('user is connected');
-	socket.emit('test1', {test:'hello test'});
-	socket.on('test2', (data)=>{
-		console.log(data);
-	});
-
-	// socket.on('getArticleIdForSupport',(articleId)=>{
-	// 	Article.findArticle(articleId,(err,data)=>{
-	// 		if(err) throw err;
-	// 		if(!data){
-	// 			io.emit('getArticleSupportNumber',{supporters:"Article not found"});
-	// 		}else{
-	// 			Article.updateSupporters(articleId,data.supporters.length,(err,data)=>{
-	// 				if(err) throw err;
-	// 				if(!data){
-	// 					console.log("cannot update");
-	// 				}else{
-	// 					console.log("update");
-	// 				}
-	// 			});
-	// 			socket.broadcast.emit('getArticleSupportNumber',data.supporters.length);
-	// 		}
-	// 	});
-	// });
-
-});
-
-//Server Start
-//  app.listen(http,() =>
-//  {
-//  	console.log('Server runnig on port '+port);
-//  });
-
