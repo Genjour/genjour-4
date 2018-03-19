@@ -27,7 +27,7 @@ router.get('/journal',(req,res)=>{
 
 router.get('/journal/:id',function(req,res){
   const journalId=req.params.id;
-    Journal.findJournalById(journalId, function(err, journal) {
+    Journal.findJournalByIdTrue(journalId, function(err, journal) {
         if (err) throw err;
         if(!journal){res.json({success:false, m0sg:"Cannot find journal"})}
         else{

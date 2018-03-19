@@ -78,7 +78,7 @@ module.exports.getJournal = function(callback){
 //========================= Find Article from Journal ==============================
 //=================================================================================
 
-module.exports.findJournalById = function(journalId, callback){
+module.exports.findJournalByIdTrue = function(journalId, callback){
     const query = {journalId: journalId}
     Journal.aggregate([
         {
