@@ -5,12 +5,12 @@ var mongoose = require('mongoose');
 var replySchema = mongoose.Schema({
 
     id               : String,
-    commentId        : String,
+    replyId          : String,
     genjouristId     : String,
     genjourist       : String,
     journalId        : String,
-    refrenceId       : String,
-    comment          : String,
+    parentCommentId  : String,
+    reply            : String,
     date             : String,
     status           : Boolean,
 
@@ -18,21 +18,21 @@ var replySchema = mongoose.Schema({
 
 const Reply  = module.exports = mongoose.model('Reply',replySchema);
 
-module.exports.addComment = function(reply, callback){
+module.exports.addReply = function(reply, callback){
     reply.save(callback);
 } 
 
 
-module.exports.findComment = function(journalId, callback){
-    Reply.find({journalId:journalId}, callback).sort({date:-1});
+module.exports.findReply = function(parentCommentId, callback){
+    Reply.find({parentCommentId:parentCommentId}, callback).sort({date:-1});
 }
 
-module.exports.deleteComment = function(commentId, callback){
-    Reply.remove({commentId:commentId},callback);
+module.exports.deleteReply = function(replyId, callback){
+    Reply.remove({replyId:replyId},callback);
 }
 
-module.exports.updateComent = function(commentId,data,callback){
-    Reply.findAndUpdate({commentId:commentId},data,callback);
+module.exports.updateReply = function(replyId,data,callback){
+    Reply.findAndUpdate({replyId:replyId},data,callback);
 }
 
 

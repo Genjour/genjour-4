@@ -7,3 +7,9 @@ a:active{
     text-decoration: none;
 }
 
+.card-columns {
+
+    column-count: 4;
+    column-gap: 1.25rem;
+  }
+

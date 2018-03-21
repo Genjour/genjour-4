@@ -24,60 +24,104 @@
                     <div class="card">
                         <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
                             <div class="m-portlet__head m-portlet__head--fit">
-                            <div class="m-portlet__head-caption">
-                                <div class="m-portlet__head-action">
-                                <a [routerLink]="['/category',journal?.category]">
-                                <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
-                                    {{journal?.category}}
-                                </button>
-                                </a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="m-portlet__body">
-                            <div class="m-widget19">
-                                <a [routerLink]="['/journal',journal?.journalId]">
-                                    <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height:-286px;">
-                                    <img src= "{{journal?.imgUrl}}" alt="">
-                                    <h3 class="m-widget19__title m--font-light">
-                                        {{journal?.title}}
-                                    </h3>
-                                    <div class="m-widget19__shadow"></div>
-                                    </div>
-                                </a>
-                                    <div class="m-widget19__content">
-                                    <div class="m-widget19__header">
-                                        <div class="m-widget19__user-img">
-                                        <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.details.profileImg}}" alt=""></a>
-                                        </div>
-                                        <div class="m-widget19__info">
-                                        <span class="m-widget19__username">
-                                            <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.genjourist}}</a>
-                                        </span>
-                                        <br>
-                                        <span class="m-widget19__time">
-                                            {{journal?.date | date:'medium' }}
-                                        </span>
-                                        </div>
-                                    </div>
-                                    <a [routerLink]="['/journal',journal?.journalId]">
-                                        <div class="m-widget19__body m-nav__link-text">
-                                            <div [innerHTML]=" journal?.content | summary "></div>
-                                        </div>
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-action">
+                                    <a [routerLink]="['/category',journal?.category]">
+                                    <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
+                                        {{journal?.category}}
+                                    </button>
                                     </a>
                                     </div>
-                                
-                                <div class="m-widget19__action">
-                                    <div class="m--margin-top-5 m--margin-bottom-5 m--margin-right-15">
-                                    <div>
-                                        <app-support-article [journalId]="journal.journalId" [userId]="user?.genjouristId">
-                                        
-                                        </app-support-article>   
-                                    </div>
-                                    </div>
                                 </div>
-
+                                <div class="m-portlet__head-tools">
+                                        <ul class="m-portlet__nav">
+                                            <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="click" aria-expanded="true">
+                                                <a href="#" class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill   m-dropdown__toggle">
+                                                  <i class="la la-ellipsis-v"></i>
+                                                </a>
+                                                <div class="m-dropdown__wrapper">
+                                                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                                  <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                      <div class="m-dropdown__content">
+                                                        <ul class="m-nav">
+                                                            <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                              <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                <span class="m-nav__link-text">
+                                                                  Edit
+                                                                </span>
+                                                              </div>
+                                                            </li>
+                                                            <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                              <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                                                <i class="m-nav__link-icon fa fa-trash"></i>
+                                                                <span class="m-nav__link-text">
+                                                                  Delete
+                                                                </span>
+                                                              </div>
+                                                            </li>
+                                                            <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                                                <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                    <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                    <span class="m-nav__link-text">
+                                                                    Report
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                        </ul>
+                                </div>
                             </div>
+                            <div class="m-portlet__body">
+                                <div class="m-widget19">
+                                    <a [routerLink]="['/journal',journal?.journalId]">
+                                        <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height:-286px;">
+                                        <img src= "{{journal?.imgUrl}}" alt="">
+                                        <h3 class="m-widget19__title m--font-light">
+                                            {{journal?.title}}
+                                        </h3>
+                                        <div class="m-widget19__shadow"></div>
+                                        </div>
+                                    </a>
+                                        <div class="m-widget19__content">
+                                        <div class="m-widget19__header">
+                                            <div class="m-widget19__user-img">
+                                            <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.details.profileImg}}" alt=""></a>
+                                            </div>
+                                            <div class="m-widget19__info">
+                                            <span class="m-widget19__username">
+                                                <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.genjourist}}</a>
+                                            </span>
+                                            <br>
+                                            <span class="m-widget19__time">
+                                                {{journal?.date | date:'medium' }}
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <a [routerLink]="['/journal',journal?.journalId]">
+                                            <div class="m-widget19__body m-nav__link-text">
+                                                <div [innerHTML]=" journal?.content | summary "></div>
+                                            </div>
+                                        </a>
+                                        </div>
+                                    
+                                    <div class="m-widget19__action">
+                                        <div class="m--margin-top-5 m--margin-bottom-5 m--margin-right-15">
+                                        <div>
+                                            <app-support-article [journalId]="journal.journalId" [userId]="user?.genjouristId">
+                                            
+                                            </app-support-article>   
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -89,15 +133,59 @@
                         <div class="m-portlet m-portlet--bordered-semi">
                             <div class="m-portlet__head">
                                 <div class="m-portlet__head-caption">
-                                <div class="m-portlet__head-title">
-                                    <h3 class="m-portlet__head-text">
-                                        <a [routerLink]="['/category',journal?.category]">
-                                        <button type="button" class="btn btn-sm m-btn--pill  btn-info">
-                                            {{journal?.category}}
-                                        </button>
-                                        </a>
-                                    </h3>
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            <a [routerLink]="['/category',journal?.category]">
+                                            <button type="button" class="btn btn-sm m-btn--pill  btn-info">
+                                                {{journal?.category}}
+                                            </button>
+                                            </a>
+                                        </h3>
+                                    </div>
                                 </div>
+                                <div class="m-portlet__head-tools">
+                                        <ul class="m-portlet__nav">
+                                            <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="click" aria-expanded="true">
+                                                <a href="#" class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill   m-dropdown__toggle">
+                                                <i class="la la-ellipsis-v"></i>
+                                                </a>
+                                                <div class="m-dropdown__wrapper">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                    <div class="m-dropdown__content">
+                                                            <ul class="m-nav">
+                                                                <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                                    <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                    <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                    <span class="m-nav__link-text">
+                                                                        Edit
+                                                                    </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                                    <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                                                    <i class="m-nav__link-icon fa fa-trash"></i>
+                                                                    <span class="m-nav__link-text">
+                                                                        Delete
+                                                                    </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                                                    <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                        <span class="m-nav__link-text">
+                                                                        Report
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                 </div>
                             </div>
                             <div class="m-portlet__body">

@@ -24,7 +24,7 @@ module.exports.addComment = function(comment, callback){
 
 
 module.exports.findComment = function(journalId, callback){
-    Comment.find({journalId:journalId}, callback).sort({date:-1});
+    Comment.find({journalId:journalId}, callback).sort({$natural:-1});
 }
 
 module.exports.deleteComment = function(commentId, callback){

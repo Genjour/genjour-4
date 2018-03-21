@@ -1,87 +1,288 @@
 <app-navbar></app-navbar>
+<div  *ngIf="user" class="profileContainer">
+  <div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader">
 
-<div class="m-subheader">
-
-</div>
-<div *ngIf="user" class="m-content m--margin-20">
-  <div class="row">
-    <div class="col-xl-12 col-lg-12">
-
-      <div class="m-portlet m-portlet--full-height ">
-          <div class="m-portlet__head">
-              <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                  <h3 class="m-portlet__head-text">
-                    Settings 
-                  </h3>
+    </div>
+    <!-- END: Subheader -->
+    <div class="m-content m--margin-top-15 m--margin-25">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4">
+          <div class="m-portlet m-portlet--full-height  ">
+            <div class="m-portlet__body">
+              <div class="m-card-profile">
+                <div class="m-card-profile__title m--hide">
+                  Profile
+                </div>
+                <div class="edit_profile_pic">
+                    <i class="m-nav__link-icon fa fa-pencil m--pull-right"></i>
+                </div>
+                <div class="m-card-profile__pic">
+                  <div class="m-card-profile__pic-wrapper">
+                    <img src="{{user.profileImg}}" alt="">
+                  </div>
+                </div>
+                <div class="m-card-profile__details">
+                  <span class="m-card-profile__name">
+                    Genjourist {{user.name}}
+                  </span>
+                </div>
+                  <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="m-widget19__stats text-center">
+                            <h3 class="m--font-brand">
+                              {{supportersNumber}}
+                            </h3>
+                            <span class="m-widget19__comment">
+                              Supporters
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="m-widget19__stats text-center">
+                            <h3 class="m--font-brand">
+                                {{supportingNumber}}
+                              </h3>
+                            <span class="m-widget19__comment">
+                              Supporting
+                            </span>
+                        </div>
+                    </div>                   
                 </div>
               </div>
+              <div class="m-separator"></div>
+              <a [routerLink] = "['/genjourist']" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+                  Back to profile
+              </a>
+              <a [routerLink] = "['/genjourist']" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+                Back to profile
+              </a>
+              <div class="m-separator"></div>
+              <span class="m-widget1__desc">{{user.bio}}</span>
+              <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+                <li class="m-nav__separator m-nav__separator--fit"></li>
+                <li class="m-nav__section m--hide">
+                  <span class="m-nav__section-text">
+                    Section
+                  </span>
+                </li>
+                <li class="m-nav__item">
+                  <a class="m-nav__link">
+                    <i class="m-nav__link-icon flaticon-calendar-2"></i>
+                    <span class="m-nav__link-title">
+                      <span class="m-nav__link-wrap">
+                        <span class="m-nav__link-text">
+                          Age
+                        </span>
+                        <span class="m-nav__link-badge">
+                          <span class="m-badge m-badge--success m-badge--wide">
+                            {{user.dob | ageCategory }}
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                <li class="m-nav__item">
+                  <a class="m-nav__link">
+                    <i class="m-nav__link-icon flaticon-user"></i>
+                    <span class="m-nav__link-title">
+                      <span class="m-nav__link-wrap">
+                        <span class="m-nav__link-text">
+                          Gender
+                        </span>
+                        <span class="m-nav__link-badge">
+                          <span class="m-badge m-badge--info m-badge--wide">
+                            {{user.gender}}
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                <li  class="m-nav__item">
+                  <a class="m-nav__link">
+                    <i class="m-nav__link-icon flaticon-chat-1"></i>
+                    <span class="m-nav_link-wrap">
+                        <span class="m-nav__link-text">
+                            Email
+                          </span>
+                          <span class="m--pull-right p-details">
+                              {{user.email}}
+                          </span>
+                      </span>
+                  </a>
+                </li>
+                <li  class="m-nav__item">
+                  <a  class="m-nav__link">
+                    <i class="m-nav__link-icon la la-phone"></i>
+                    <span class="m-nav_link-wrap">
+                      <span class="m-nav__link-text">
+                          Phone Number
+                        </span>
+                        <span class="m--pull-right p-details">
+                            {{user.mobileNumber}}
+                        </span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </div>
-
-        <form class="m-form m-form--fit m-form--label-align-right">
-          <div class="m-portlet__body">
-              <div class="form-group m-form__group row">
-                  <label for="example-text-input" class="col-3 col-form-label">
-                    Profile Image
-                  </label>
-                      <div class="col-6 col-xs-12 col-sm-12" style="text-align:center;">
-                        <img height="150" src="{{user.profileImg}}" alt="profile pic">
-                        <br>
-                        <input type="file" ng2FileSelect [uploader]="uploader" class="m--margin-10">
-                        <button class="btn btn-accent m-btn" (click)=upload()>Upload</button>
+          </div>
+        </div>
+          <div class="col-xl-9 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
+              <div class="tab-content">
+                <div class="tab-pane active" id="m_user_profile_tab_1">
+                  <form class="m-form m-form--fit m-form--label-align-right">
+                    <div class="m-portlet__body">
+                      <div class="form-group m-form__group row">
+                        <div class="col-10 ml-auto">
+                          <h3 class="m-form__section">
+                            Personal Details
+                          </h3>
+                        </div>
                       </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Full Name
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" [(ngModel)]="name" name="name" value="{{user.name}}">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Gender
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="CTO">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Company Name
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="Keenthemes">
+                          <span class="m-form__help">
+                            If you want your invoices addressed to a company. Leave blank to use your full name.
+                          </span>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Phone No.
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="+456669067890">
+                        </div>
+                      </div>
+                      <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                      <div class="form-group m-form__group row">
+                        <div class="col-10 ml-auto">
+                          <h3 class="m-form__section">
+                            2. Address
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Address
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="L-12-20 Vertex, Cybersquare">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          City
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="San Francisco">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          State
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="California">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Postcode
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="45000">
+                        </div>
+                      </div>
+                      <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                      <div class="form-group m-form__group row">
+                        <div class="col-10 ml-auto">
+                          <h3 class="m-form__section">
+                            3. Social Links
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Linkedin
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="www.linkedin.com/Mark.Andre">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Facebook
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="www.facebook.com/Mark.Andre">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Twitter
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="www.twitter.com/Mark.Andre">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label for="example-text-input" class="col-2 col-form-label">
+                          Instagram
+                        </label>
+                        <div class="col-7">
+                          <input class="form-control m-input" type="text" value="www.instagram.com/Mark.Andre">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                      <div class="m-form__actions">
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-7">
+                            <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">
+                              Save changes
+                            </button>
+                            &nbsp;&nbsp;
+                            <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-            <div class="form-group m-form__group row">
-              <label for="example-text-input" class="col-3 col-form-label">
-                Full Name
-              </label>
-              <div class="col-6">
-                <input class="form-control m-input" type="text" [(ngModel)]="name" name="name" value=" {{user.name}} ">
-              </div>
-            </div>
-            <div class="form-group m-form__group row">
-              <label for="example-text-input" class="col-3 col-form-label">
-                Username
-              </label>
-              <div class="col-6">
-                <input class="form-control m-input" disabled type="text" value="{{user.username}}">
-              </div>
-            </div>
-            <div class="form-group m-form__group row">
-              <label for="example-text-input" class="col-3 col-form-label">
-                Email
-              </label>
-              <div class="col-6">
-                <input class="form-control m-input" disabled type="email" name="email" value="{{user.email}}">
-              </div>
-            </div>
-            <div class="form-group m-form__group row">
-              <label for="example-text-input" class="col-3 col-form-label">
-                Phone No.
-              </label>
-              <div class="col-6">
-                <input class="form-control m-input" type="text" [(ngModel)]="mobileNumber" name="mobileNumber" value="{{user?.mobileNumber}}">
+                <div class="tab-pane active" id="m_user_profile_tab_2"></div>
               </div>
             </div>
           </div>
-          <div class="m-portlet__foot m-portlet__foot--fit">
-            <div class="m-form__actions">
-              <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
-                  <button (click)="save()" class="btn btn-accent m-btn m-btn--air m-btn--custom">
-                    Save changes
-                  </button>
-                  &nbsp;&nbsp;
-                  <button [routerLink]="['/']" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>

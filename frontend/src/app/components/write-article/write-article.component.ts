@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ElementRef  } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
-import { ScriptLoaderService } from '../../services/script-loader.service';
+// import { ScriptLoaderService } from '../../services/script-loader.service';
 
 import {CloudinaryOptions, CloudinaryUploader} from 'ng2-cloudinary';
 
@@ -26,7 +26,7 @@ export class WriteArticleComponent implements OnInit {
     private router : Router,
     private postService : PostService,
     private el : ElementRef ,
-    private script: ScriptLoaderService,
+    // private script: ScriptLoaderService,
        
   ) { 
     //Override onSuccessItem function to record cloudinary response data
@@ -54,12 +54,10 @@ export class WriteArticleComponent implements OnInit {
     
   }
 
-  ngAfterViewInit() {
-    this.script.load('.m-grid__item.m-grid__item--fluid.m-wrapper',
-        'assets/demo/default/custom/components/forms/widgets/summernote.js');
-        
-
-}
+//   ngAfterViewInit() {
+//     this.script.load('.m-grid__item.m-grid__item--fluid.m-wrapper',
+//         'assets/demo/default/custom/components/forms/widgets/summernote.js');
+// }
 
 upload(){
 

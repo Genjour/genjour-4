@@ -4,6 +4,7 @@ const User = require('../models/user');
 const uniqid     = require('uniqid');
 const Journal = require('../models/journal');
 const Comment = require('../models/comment');
+const Reply = require('../models/reply');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
@@ -37,7 +38,7 @@ router.post('/add/comment',(req,res)=>{
     });
 });
 
-router.put('update/comment/:commentId', (req,res)=>{
+router.put('/update/comment/:commentId', (req,res)=>{
     Comment.updateComment(req.params.commentId,data,(err,status)=>{
         if(err) throw err;
         else{
@@ -47,11 +48,51 @@ router.put('update/comment/:commentId', (req,res)=>{
     }); 
 });
 
-router.post('delete/comment/:commentId', (req,res)=>{
+router.delete('/delete/comment/:commentId', (req,res)=>{
     Comment.deleteComment(req.params.commentId,(err,status)=>{
         if(err) throw err;
         else{
             res.json({success:true, msg:"comment has been deleted"});
+        }
+    });
+});
+
+
+router.get('/replies/:parentCommentId', (req,res)=>{
+    Reply.findReply(req.params.parentCommentId,(err,replies)=>{
+        if(err) throw err;
+        if(!replies){res.json({success:false, msg:"No replies"});}
+        else{
+            res.json(replies);
+        }
+    })
+})
+
+router.post('/add/reply',(req,res)=>{
+    const flag = new Reply({
+
+    replyId          : uniqid('gmplc'),
+    genjouristId     : req.body.genjouristId,
+    genjourist       : req.body.genjourist,
+    journalId        : req.body.journalId,
+    parentCommentId  : req.body.parentCommentId,
+    reply            : req.body.reply,
+    date             : Date(),
+    status           : true,
+    })
+    Reply.addReply(flag,(err,status)=>{
+        if(err) throw err;
+        else{
+            res.json({success:true, msg:"successfully reply"})
+        }
+    })
+})
+
+router.delete('/delete/reply/:replyId', (req,res)=>{
+    Comment.deleteComment(req.params.replyId,(err,status)=>{
+        if(err) throw err;
+        else{
+            res.json({success:true, msg:"reply has been deleted"});
         }
     });
 });

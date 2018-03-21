@@ -31,6 +31,8 @@ router.post('/register',(req,res,next)=>{
 		status			: true,
 		mobileNumber    : String,
 		createdOn 		: Date(),
+		mobileStatus	: false,
+		emailStatus		: false
 		
 
 	});

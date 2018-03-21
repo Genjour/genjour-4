@@ -14,6 +14,21 @@ router.get('/genjourist/:id',function(req,res){
 });
 
 
+//=============================================================================
+//============================== JOURNALS BY GENJOURIST =======================
+//=============================================================================
+
+router.get('/genjourist/journals/:userId', function(req,res){
+    Journal.getJournalByGenjourist(req.params.userId, function(err,journals){
+        if(err) throw err;
+        else{
+
+            res.json(journals);
+        }
+        
+    });
+});
+
 router.get('/genjourist/article/:id', function(req,res){
     Journal.find({'genjouristId':req.params.id}, function(err,genjouristArticles){
         if(err) throw err;

@@ -10,3 +10,17 @@ a, a:link, a:visited, a:hover {
     text-decoration: none;
     color:#333439;
 }
+
+.m-card-profile .m-card-profile__pic .m-card-profile__pic-wrapper:hover {
+    border: 3px solid #b3b3b3;
+}
+
+
+ .edit_profile_pic i{
+    cursor: pointer;
+    padding : 2px;
+    cursor: pointer;
+    color:rgb(124, 124, 124);
+    border: 1px solid rgb(124,124,124);
+    border-radius:  4px;
+}

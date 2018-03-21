@@ -17,7 +17,9 @@ const  UserSchema = mongoose.Schema({
   createdOn        : String,
   status           : Boolean,
   mobileNumber     : String,
-  
+  bio              : String,
+  mobileStatus     : Boolean,
+  emailStatus      : Boolean
   
 });
 

@@ -13,7 +13,7 @@ import { ArticleService } from '../../services/article.service';
 })
 export class ArticleComponent implements OnInit {
 
-  articleData: Object;
+  articleData: any[]=[];
   articleId: String;
   userId: String;
 

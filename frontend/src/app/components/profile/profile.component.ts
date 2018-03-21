@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 user : any;
 userId:String;
 journals : Object;
+articles: Object;
 quotations :Object;
 supportersLists : any[] = [];
 supportingLists : any[] = [];
@@ -23,6 +24,11 @@ supportersNumber : number;
 profileImg:String;
 supportersListsStatus:String;
 supportGenjouristId : String;
+profileEditStatus:boolean = false;
+bioStatus:boolean = false;
+profileImgStatus:boolean = false;
+genderStatus:boolean = false;
+editMode : boolean = false;
 
   constructor(
     private authService : AuthService,
@@ -38,8 +44,13 @@ supportGenjouristId : String;
       data=> {
                 this.user = data;
 
+                this.profileService.profileJournals(this.user.genjouristId).subscribe(journals=>{
+                  this.journals = journals;
+                })
+
                 this.profileService.profileArticles(this.user.genjouristId).subscribe(article=>{
-                   this.journals = article;
+                   this.articles = article;
+                   console.log(article)
                 });
                 this.profileService.profileQuotation(this.user.genjouristId).subscribe(quotation=>{
                   this.quotations = quotation;
@@ -68,7 +79,29 @@ supportGenjouristId : String;
               })
           })
 
-  } 
+  }
+  
+  
+  onSelectEditButton(){
+    
+    this.profileEditStatus = true;
+    this.bioStatus = true;
+    this.genderStatus = true;
+    this.editMode = true;
+    console.log("edit");
+
+  }
+
+  onSaveProfile(){
+    this.profileEditStatus = false;
+    this.bioStatus = false;
+    this.editMode = false;
+    this.genderStatus = false;
+    console.log("save");
+
+  }
+
+
 
   deleteJournal(articleId){
         if (confirm('Are you sure you want to delete this article?')) {

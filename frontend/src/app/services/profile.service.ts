@@ -22,4 +22,8 @@ Url:url;
     .map(response=>response.json())
 }
 
+profileJournals(genjouristId){
+  return this.http.get(url.profileJournals+genjouristId).map(res=>res.json());
+}
+
 }

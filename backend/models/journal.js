@@ -130,3 +130,42 @@ module.exports.updateJournal = function(journalId, article, callback){
 module.exports.deleteJournal = function(journalId, callback){
     Journal.remove({journalId:journalId},callback);
 }
+
+
+
+module.exports.getJournalByGenjourist = function(userId,callback){
+    Journal.aggregate([
+        {
+            $match : {genjouristId:userId}
+        },
+        {
+            $lookup: {
+               from: "users",
+               localField: "genjouristId",    // field in the orders collection
+               foreignField: "genjouristId",  // field in the items collection
+               as: "details"
+            }
+         },
+         {
+             $unwind:"$details"
+         },
+         { $project: { 
+             genjouristId: "$genjouristId",
+             profileImg:"$details.profileImg",
+             gender:"$details.gender",
+             email:"$details.email",
+             dob:"$details.dob",
+             genjourist:"$details.name",
+             journalId:1,         
+             content:1,
+             category:1, 
+             imgUrl:1,
+             status:1,
+             type:1,
+             date:1,
+             title:1,
+             tags:1,
+             } 
+        }
+     ],callback)
+}
