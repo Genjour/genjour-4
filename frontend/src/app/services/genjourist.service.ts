@@ -24,6 +24,10 @@ export class GenjouristService {
       return this.http.get(url.quotation+genjouristId).map(response=>response.json());
   }
 
+  getGenjouristJournals(genjouristId){
+    return this.http.get(url.getGenjouristJournals+genjouristId).map(response=>response.json());
+  }
+
 
   getSupportingList(userId){
     return this.http.get(url.getSupportingList+userId).map(res=>res.json());
@@ -54,15 +58,11 @@ export class GenjouristService {
     return this.http.get(url.recommendedUser+userId).map(res=>res.json());
   }
 
-  changeProfileImage(genjouristId,imgAddress){
-    return this.http.put(url.changeProfileImage+genjouristId,imgAddress).map(res=>res.json());
-  }
+
 
   checkSupportStatus(userId,genjouristId){
     return this.http.get(url.checkSupportStatus+userId+'/'+genjouristId).map(res=>res.json());
   }
 
-  findUserAndUpdateInfo(userId,data){
-    return this.http.put(url.findUserAndUpdateInfo+userId, data).map(res=>res.json());
-  }
+
 }

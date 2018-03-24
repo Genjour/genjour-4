@@ -26,4 +26,16 @@ profileJournals(genjouristId){
   return this.http.get(url.profileJournals+genjouristId).map(res=>res.json());
 }
 
+  findUserAndUpdateInfo(userId,data){
+    return this.http.put(url.findUserAndUpdateInfo+userId, data).map(res=>res.json());
+  }
+
+  changeProfileImage(genjouristId,data){
+    return this.http.put(url.changeProfileImage+genjouristId,data).map(res=>res.json());
+  }
+
+  findUserAndUpdateProfilePic(userId,data){
+    return this.http.put(url.findUserAndUpdateProfilePic+userId, data).map(res=>res.json());
+  }
+
 }

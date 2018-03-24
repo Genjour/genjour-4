@@ -41,38 +41,22 @@ export class SettingsComponent implements OnInit {
           })
   }
 
-  upload(){
+  // upload(){
 
-    this.uploader.uploadAll();
-    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-    let res: any = JSON.parse(response);
-    console.log(res);
-    this.profileImg=res.url;
-    this.genjouristService.changeProfileImage(this.user.genjouristId,res.url).subscribe(data=>{
-      if(data.sucess){
-        console.log('successfully uploaded')
-      }else{
-        console.log('something is wrong')
-      }
-    })
-    }
-  }
+  //   this.uploader.uploadAll();
+  //   this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+  //   let res: any = JSON.parse(response);
+  //   console.log(res);
+  //   this.profileImg=res.url;
+  //   this.genjouristService.changeProfileImage(this.user.genjouristId,res.url).subscribe(data=>{
+  //     if(data.sucess){
+  //       console.log('successfully uploaded')
+  //     }else{
+  //       console.log('something is wrong')
+  //     }
+  //   })
+  //   }
+  // }
 
-  save(){
-    
-    let a ={
-      name:this.name,
-      mobileNumber:this.mobileNumber
-    }
-
-    console.log(a);
-    this.genjouristService.findUserAndUpdateInfo(this.user.genjouristId,a).subscribe(data=>{
-      if(data.success){
-        console.log(data.msg);
-      }else{
-        console.log(data.msg);
-      }
-    })
-  }
 
 }

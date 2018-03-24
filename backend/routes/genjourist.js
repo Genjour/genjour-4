@@ -29,6 +29,16 @@ router.get('/genjourist/journals/:userId', function(req,res){
     });
 });
 
+router.get('/genjourist/getGenjouristJournals/journals/:genjouristId', function(req,res){
+    Journal.getJournalByGenjourist(req.params.genjouristId, function(err,journals){
+        if(err) throw err;
+        else{
+            journals = journals.filter(x=> x.status == true)
+            res.json(journals);
+        }
+    })
+})
+
 router.get('/genjourist/article/:id', function(req,res){
     Journal.find({'genjouristId':req.params.id}, function(err,genjouristArticles){
         if(err) throw err;

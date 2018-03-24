@@ -17,7 +17,7 @@ import { user } from '../models/user';
 export class GenjouristComponent implements OnInit {
 
   genjouristData : genjouristData // genjourist profile which user is seeing
-  journals: Object;
+  journals: any[]=[];
   quotations :Object;
   user : user;
   currentUser: object;
@@ -76,13 +76,18 @@ export class GenjouristComponent implements OnInit {
       
     })
 
-    this.genjouristService.articles(this.route.snapshot.params.id).subscribe(article=>{
-    this.journals = article.filter( x=> x.status == true );
+    this.genjouristService.getGenjouristJournals(this.route.snapshot.params.id).subscribe(journal=>{
+      this.journals = journal;
+      //console.log(journal)
     })
 
-    this.genjouristService.quotation(this.route.snapshot.params.id).subscribe(quotation=>{
-      this.quotations = quotation.filter( x=> x.status == true);
-    })
+    // this.genjouristService.articles(this.route.snapshot.params.id).subscribe(article=>{
+    // this.journals = article.filter( x=> x.status == true );
+    // })
+
+    // this.genjouristService.quotation(this.route.snapshot.params.id).subscribe(quotation=>{
+    //   this.quotations = quotation.filter( x=> x.status == true);
+    // })
 
   });
 
@@ -92,7 +97,7 @@ export class GenjouristComponent implements OnInit {
       this.genjouristService.getSupportingList(this.route.snapshot.params.id).subscribe(data=>{
         this.supportingLists = data;
         this.supportingNumber = data.length;
-        console.log(this.supportingLists);
+        //console.log(this.supportingLists);
       })
 
       this.genjouristService.getSupportersList(this.route.snapshot.params.id).subscribe(data=>{

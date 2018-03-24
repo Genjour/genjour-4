@@ -1,10 +1,10 @@
+import { BookmarkComponent } from './components/panelComponents/bookmark/bookmark.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { BaseRequestOptions, HttpModule } from "@angular/http";
 import { MockBackend } from "@angular/http/testing";
-import "froala-editor/js/froala_editor.pkgd.min.js";
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,7 +18,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { JournalsComponent } from './components/journals/journals.component';
 import { GenjouristComponent } from './components/genjourist/genjourist.component';
 import { SupportArticleComponent } from './components/support/support-article/support-article.component';
-import { SupportQuotationComponent } from './components/support/support-quotation/support-quotation.component';
 import { CategoryComponent } from './components/category/category.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -58,6 +57,9 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ProfileImgPipe } from './directives/pipes/profile-img.pipe';
 import { TitleCasePipe } from '@angular/common';
 import { CommentComponent } from './components/comment/comment.component';
+import { SupportJournalComponent } from './components/panelComponents/supportJournal/support-journal.component';
+import { PovComponent } from './components/panelComponents/pov/pov.component';
+import { ReplicateComponent } from './components/panelComponents/replicate/replicate.component';
 
 
 const appRoutes: Routes = [
@@ -92,7 +94,6 @@ const appRoutes: Routes = [
     SummaryPipe,
     GenjouristComponent,
     SupportArticleComponent,
-    SupportQuotationComponent,
     CategoryComponent,
     SettingsComponent,
     AgeCategoryPipe,
@@ -104,8 +105,10 @@ const appRoutes: Routes = [
     SearchComponent,
     ProfileImgPipe,
     CommentComponent,
-    
-    
+    SupportJournalComponent,
+    ReplicateComponent,
+    PovComponent,
+    BookmarkComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,8 +118,7 @@ const appRoutes: Routes = [
     InfiniteScrollModule,
     Ng2CloudinaryModule,
     FileUploadModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    ImageCropperModule
   ],
   providers: [
     ValidateService,

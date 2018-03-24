@@ -1,3 +1,4 @@
+import { JournalsService } from './../../services/journals.service';
 import { Component, OnInit } from '@angular/core';
 import { GenjouristService } from '../../services/genjourist.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +15,7 @@ import { ArticleService } from '../../services/article.service';
 export class ArticleComponent implements OnInit {
 
   articleData: any[]=[];
+  suggestedJournals: any[] = [];
   articleId: String;
   userId: String;
 
@@ -24,7 +26,8 @@ export class ArticleComponent implements OnInit {
     private authService: AuthService,
     private supportService: SupportService,
     private router: Router,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private journalsService :JournalsService
   ) { }
 
   //articleId:any = this.route.snapshot.params.articleId;
@@ -34,6 +37,10 @@ export class ArticleComponent implements OnInit {
     this.articleService.article(this.route.snapshot.params.journalId).subscribe(data=>{
       this.articleData = data;
       console.log(this.articleData);
+    })
+
+    this.journalsService.getJournal().subscribe(data=>{
+      this.suggestedJournals =  data.filter(x=>x.type == 1);
     })
 
   }

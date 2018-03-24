@@ -88,20 +88,24 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req,res,n
 	res.json({user : req.user});
 });
 
-router.put('/genjourist/profileImage/:genjouristId',(req,res)=>{
+router.put('/update/genjourist/profileImage/:genjouristId',(req,res)=>{
+		const data = {
+			profileImg : req.body.profileImg
+		}
 	User.findUser(req.params.genjouristId,(err,doc)=>{
 		if(err) throw err;
 		if(!doc) {res.json({success:false, msg:'User not found'})}
 		else{
-			User.changeProfileImg(req.params.genjouristId, req.body.imgAddress, (err,doc)=>{
+			
+			User.changeProfileImg(req.params.genjouristId, data.profileImg, (err,doc)=>{
 				if(err) throw err;
 				else{
 					res.json({success:true, msg:'Successfully change and uploaded'});
 				}
-			})
+			});
 		}
-	})
-})
+	});
+});
 
 router.get('/search/user=:name', (req,res)=>{
 	const name = req.params.name;
@@ -119,7 +123,8 @@ router.put('/update/userInfo/:userId', (req,res)=>{
 	const userId = req.params.userId;
 	const data = {
 		name:req.body.name,
-		mobileNumber:req.body.mobileNumber
+		gender:req.body.gender,
+		bio:req.body.bio
 	}
 	User.findUser(userId, (err,user)=>{
 		if(err) throw err;
@@ -127,9 +132,25 @@ router.put('/update/userInfo/:userId', (req,res)=>{
 		else{
 			User.findUserAndUpdateInfo(userId,data, (err,status)=>{
 				res.json({success:true, msg:"successfully updated"})
-			})
+			});
 		}
-	})
+	});
 });
 
+router.put('/update/userInfo/findUserAndUpdateProfilePic/:userId',(req,res)=>{
+	const userId = req.params.userId;
+	const data = {
+		profileImg:req.body.profileImg
+	}
+	User.findUser(userId, (err,user)=>{
+		if(err) throw err;
+		if(!user) { res.json({success:false, msg:"User not found"})}
+		else{
+			User.findUserAndUpdateInfo(userId,data, (err,status)=>{
+				res.json({success:true, msg:"successfully updated"})
+			});
+		}
+	});
+
+});
 module.exports = router;

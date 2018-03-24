@@ -26,9 +26,13 @@ router.get('/journal',(req,res)=>{
 
 
 router.get('/journal/:id',function(req,res){
-    Journal.findOne({ 'journalId' : req.params.id }, function(err, article) {
+  const journalId=req.params.id;
+    Journal.findJournalById(journalId, function(err, journal) {
         if (err) throw err;
-        res.json(article);
+        if(!journal){res.json({success:false, m0sg:"Cannot find journal"})}
+        else{
+          res.json(journal[0]);
+        }
     });
 });
 

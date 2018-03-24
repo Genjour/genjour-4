@@ -78,9 +78,46 @@ module.exports.getJournal = function(callback){
 //========================= Find Article from Journal ==============================
 //=================================================================================
 
-module.exports.findJournal = function(journalId, callback){
+module.exports.findJournalById = function(journalId, callback){
     const query = {journalId: journalId}
-    Journal.findOne(query, callback);
+    Journal.aggregate([
+        {
+            $match : 
+                { "journalId":{ $eq:journalId }, "status":{ $eq:true }   } 
+                
+                     
+        },
+        {
+            $lookup: {
+               from: "users",
+               localField: "genjouristId",    // field in the orders collection
+               foreignField: "genjouristId",  // field in the items collection
+               as: "details"
+            }
+         },
+         {
+             $unwind:"$details"
+         },
+         { $project: { 
+             genjouristId: "$genjouristId",
+             journalId:1,         
+             content:1,
+             category:1, 
+             imgUrl:1,
+             status:1,
+             type:1,
+             date:1,
+             title:1,
+             tags:1,
+             genjourist:1, 
+             email:"$details.email",
+             gender:"$details.gender",
+             dob:"$details.dob",
+             profileImg:"$details.profileImg",
+             createdOn:"$details.createdOn"                  
+             } 
+        },
+     ],callback)
 }
 
 //=================================================================================

@@ -30,16 +30,16 @@
                           <div class="m-dropdown__body">
                           <div class="m-dropdown__content">
                               <ul class="m-nav">
-                              <li class="m-nav__item">
-                                  <a href="" class="m-nav__link">
+                              <li style="cursor: pointer;" class="m-nav__item" (click)="removeProfilePic(user.genjouristId)" >
+                                  <a class="m-nav__link">
                                   <i class="m-nav__link-icon flaticon-circle"></i>
                                   <span class="m-nav__link-text">
                                       Remove
                                   </span>
                                   </a>
                               </li>
-                              <li class="m-nav__item">
-                                <a href="" class="m-nav__link">
+                              <li style="cursor: pointer;" (click)="openModal()" class="m-nav__item">
+                                <a class="m-nav__link">
                                 <i class="m-nav__link-icon la	la-cloud-upload"></i>
                                 <span class="m-nav__link-text">
                                     Upload
@@ -47,8 +47,8 @@
                                 </a>
                             </li>
                               <li class="m-nav__separator m-nav__separator--fit"></li>
-                              <li class="m-nav__item">
-                                  <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                              <li style="cursor: pointer;" class="m-nav__item">
+                                  <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
                                   Cancel
                                   </a>
                               </li>
@@ -63,10 +63,16 @@
 
                 </div>
                 <div class="m-card-profile__details">
-                    <span class="m-card-profile__name">
+                    <span *ngIf="!nameStatus" class="m-card-profile__name">
                       Genjourist {{user.name}}
                     </span>
-                  </div>
+                    <div *ngIf="nameStatus" class="form-group m-form__group">
+                      <input type="text" [(ngModel)]="user.name" name="name" class="form-control m-input" placeholder="Enter full name">
+                      <span class="m-form__help">
+                        Please enter your full name
+                      </span>
+                    </div>
+                </div>
                   <br>
                 <div class="row">
                     <div class="col">
@@ -101,7 +107,7 @@
               </span>
               <div class="m-separator"></div>
               <span *ngIf="!bioStatus" class="m-widget1__desc">{{user.bio}}</span>
-              <textarea style="border:1px red solid;" *ngIf="bioStatus" [(ngModel)]="user.bio" class="form-control m-input m-input--air" name="bio" rows="6"></textarea>
+              <textarea style="border:1px red solid;" *ngIf="bioStatus" [(ngModel)]="user.bio" class="form-control m-input m-input--air" name="bio" rows="6" placeholder="Add bio" ></textarea>
               <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
                 <li class="m-nav__separator m-nav__separator--fit"></li>
                 <li class="m-nav__section m--hide">
@@ -141,7 +147,7 @@
                         </span>
                       </span>
                     </span>
-                    <select *ngIf="genderStatus" class="form-control m-input m-input--solid" id="exampleSelect1">
+                    <select *ngIf="genderStatus" [(ngModel)]="user.gender" name="gender" class="form-control m-input m-input--solid" id="exampleSelect1">
                       <option>Male</option>
                       <option>Female</option>
                       <option>Others</option>
@@ -396,6 +402,42 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf = "imgUploaderModal" class="modal fade show" id="m_modal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="file" ng2FileSelect [uploader]="uploader" (change)="fileChangeEvent($event)" />
+
+          <image-cropper
+              style="max-height:300px"
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1 / 1"
+              [resizeToWidth]="128"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (loadImageFailed)="loadImageFailed()"
+              
+          ></image-cropper>
+          <img [src]="croppedImage"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">
+          Close
+        </button>
+        <button *ngIf="!imgSaving" type="button" (click)="upload()" class="btn btn-primary">
+          Save changes
+        </button>
+        <button *ngIf="imgSaving"type="button" (click)="upload()" class="btn btn-primary m-loader m-loader--light m-loader--right">
+          Saving
+        </button>
       </div>
     </div>
   </div>

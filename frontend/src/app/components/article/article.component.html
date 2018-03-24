@@ -1,69 +1,153 @@
 <app-navbar></app-navbar>
 <div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-scroll-top--shown">
     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ">
-      <div class="m-grid__item m-grid__item--fluid m-wrapper">
-        <!-- BEGIN: Subheader -->
-        <div class="row">
-              <div class="col-md-9 col-xs-12 m-subheader m--padding-top-50 m--padding-left-50">
-                  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
-                      <div class="m-portlet__head m-portlet__head--fit">
-                        <div class="m-portlet__head-caption">
-                          <div class="m-portlet__head-action">
-                            <button [routerLink]="['/category',articleData?.category]" type="button" class="btn btn-sm m-btn--pill  btn-brand">
-                              {{articleData?.category}}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="m-portlet__body">
-                        <div class="m-widget19">    
-                              <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height: 286px">
-                                <img src="{{articleData?.imgUrl}}" alt="">
-                                <h3 class="m-widget19__title m--font-light">
-                                  {{articleData?.title}}
+      <div class="m-grid__item m-grid__item--fluid m-wrapper m--padding-40">
+
+          <div class="row">
+            <div class="col-xl-8 col-lg-7">
+              <div class="m-portlet m-portlet--bordered-semi">
+                <div class="m-portlet__body">
+                    <div class="m--margin-10 m--margin-padding-25 text-center">
+                        <img class="img-fluid" [src]="articleData?.imgUrl" alt="Image">
+                    </div>
+                </div>
+              </div>
+
+                <div class="m-portlet m-portlet--bordered-semi">
+                    <div class="m-portlet__body">
+                      <div class="m-widget19">    
+                            <div class="d-flex align-items-center">
+                              <div class="mr-auto">
+                                <h3 class="m-subheader__title ">
+                                    {{articleData?.title}}
                                 </h3>
-                                <div class="m-widget19__shadow"></div>
                               </div>
-      
-                              <div class="m-widget19__content">
+                              <div>
+                                <button [routerLink]="['/category',articleData?.category]" type="button" class="btn btn-sm m-btn--pill btn-brand m--margin-bottom-10">
+                                  {{articleData?.category}}
+                                </button>
+                              </div>
+                            </div>
+                            <div>
+                              {{articleData.tags}}
+                            </div>
+                            <div class="m-widget19__content">
                                 <div class="m-widget19__header">
-                                  <div class="m-widget19__user-img">
-                                    <a [routerLink]="['/genjourist',articleData?.genjouristId]"><img class="m-widget19__img" src="assets/app/media/img//users/user1.jpg" alt=""></a>
+                                    <div style="cursor: pointer;" class="m-widget19__user-img" [routerLink]="['/genjourist',articleData?.genjouristId]">
+                                      <img class="m-widget19__img" [src]="articleData.profileImg" alt="">
+                                    </div>
+                                    <div class="m-widget19__info">
+                                      <span style="cursor: pointer;" class="m-widget19__username" [routerLink]="['/genjourist',articleData?.genjouristId]">
+                                          {{articleData?.genjourist}}
+                                      </span>
+                                      <br>
+                                      <span class="m-widget19__time m-badge m-badge--danger m-badge--wide" style="color:white;">
+                                          14-30
+                                      </span>
+                                    </div>
+                                    <div class="m-widget19__stats">
+                                      <span class="m-widget19__number m--font-brand m--margin-right-20  m--padding-5">
+                                        500K
+                                      </span>
+                                      <span class="m-widget19__comment m--margin-right-20">
+                                        <app-support-journal></app-support-journal>
+                                      </span>
+                                    </div>
+                                    <div class="m-widget19__stats">
+                                        <span class="m-widget19__number m--font-brand m--margin-right-20  m--padding-5">
+                                          1.1K
+                                        </span>
+                                        <span class="m-widget19__comment m--margin-right-20">
+                                          <app-replicate></app-replicate>
+                                        </span>
+                                    </div>
+                                    <div class="m-widget19__stats">
+                                        <span class="m-widget19__number m--font-brand m--margin-right-20  m--padding-5">
+                                          700
+                                        </span>
+                                        <span class="m-widget19__comment m--margin-right-20 ">
+                                          <app-pov></app-pov>
+                                        </span>
+                                    </div>
+                                    <div class="m-widget19__stats">
+                                        <span class="m-widget19__number m--font-brand m--padding-5">
+                                          1mn
+                                        </span>
+                                        <span class="m-widget19__comment">
+                                          <app-bookmark></app-bookmark>
+                                        </span>
+                                    </div>
                                   </div>
-                                  <div class="m-widget19__info">
-                                    <span class="m-widget19__username">
-                                       <a [routerLink]="['/genjourist',articleData?.genjouristId]">{{articleData?.genjourist}}</a>
-                                    </span>
-                                    <br>
-                                    <span class="m-badge m-badge--danger m-badge--wide">
-                                        14-30
-                                    </span>
-                                  </div>
-
-                                </div>
-                                  <div class="row">
-                                      <!-- <app-support-article [articleId]="articleData?.articleId" [userId]="articleData?.genjouristId" ></app-support-article>   -->
-                                  </div>
-                                <div class="">
-                                  
-                                      <div [innerHtml]="articleData.content"></div>
-                                     <!-- {{articleData?.content}} -->
-                                  
-                                </div>
                                 <div class="row">
-                                  <app-comment></app-comment>
+                                    <!-- <app-support-article [articleId]="articleData?.articleId" [userId]="articleData?.genjouristId" ></app-support-article>   -->
                                 </div>
+                              <div class="">
+                                
+                                    <div [innerHtml]="articleData.content"></div>
+                                   <!-- {{articleData?.content}} -->
+                                
                               </div>
-                        </div>
+                            </div>
                       </div>
-                    </div>           
+                    </div>
+                  </div>     
+                  <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
+                    <div class="m-portel__body">
+                        <div class="m-widget19">
+                            <app-comment></app-comment>
+                        </div>
+                    </div>
+                    
+                  </div>      
+            </div>
+            <div class="col-xl-4 col-lg-5">
+              <div class="m-portlet m-portlet--rounded" *ngFor="let suggestedJournal of suggestedJournals">
+                      <div class="m-portlet__body">
+                          <div class="m-widget5">
+                              <div class="m-widget5__item">
+                                  <div class="m-widget5__pic">
+                                    <img class="m-widget7__img" [src]="suggestedJournal.imgUrl" alt="">
+                                  </div>
+                                  <div class="m-widget5__content">
+                                      <span class="m-nav__link-badge" [routerLink]="['/category',articleData?.category]">
+                                        <span class="m-badge m-badge--brand m-badge--wide">
+                                            {{suggestedJournal.category}}
+                                        </span>
+                                    </span>
+                                    <p class="lead">
+                                        {{suggestedJournal.title}}
+                                    </p>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
               </div>
-              <div class="col-md-3 m--padding-10">
-                <app-sidenav></app-sidenav>
+              <div class="m-portlet m-portlet--rounded">
+                  <div class="m-portlet">
+                      <div class="m-portlet__body">
+                          <div class="m-widget5">
+                              <div class="m-widget5__item">
+                                  <div class="m-widget5__pic">
+                                    <img class="m-widget7__img" src="assets/app/media/img//products/product6.jpg" alt="">
+                                  </div>
+                                  <div class="m-widget5__content">
+                                      <span class="m-nav__link-badge" [routerLink]="['/category',articleData?.category]">
+                                        <span class="m-badge m-badge--brand m-badge--wide">
+                                            Life
+                                        </span>
+                                    </span>
+                                    <p class="lead">
+                                        Make Metronic Great  Again.Lorem Ipsum Amet
+                                    </p>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-        </div>
+            </div>
+          </div>
 
-
+          </div>
       </div>
-    </div>
 </div>
