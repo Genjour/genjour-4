@@ -28,9 +28,9 @@
                                 </button>
                               </div>
                             </div>
-                            <div>
-                              {{articleData.tags}}
-                            </div>
+                            <span class="btn m-btn--pill btn-secondary btn-sm m--margin-left-10" *ngFor="let tag of articleData.tags">
+                              {{tag}}
+                            </span>
                             <div class="m-widget19__content">
                                 <div class="m-widget19__header">
                                     <div style="cursor: pointer;" class="m-widget19__user-img" [routerLink]="['/genjourist',articleData?.genjouristId]">

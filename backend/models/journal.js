@@ -12,7 +12,7 @@ var journalSchema = mongoose.Schema({
         title            : String,
         content          : String,
         date             : String,
-        tags             : String,
+        tags             : Array,
         imgUrl           : String,
         supportersNumber : Number,
         repilicateNumber : Number,
