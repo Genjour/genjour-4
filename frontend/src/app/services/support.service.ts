@@ -34,6 +34,10 @@ Url:url;
     }
 
 
+    getJournalSupportersCount(journalId){
+      return this.http.get(url.getJournalSupportersCount+journalId)
+    }
+
 
 
   }

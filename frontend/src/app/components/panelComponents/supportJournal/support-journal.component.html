@@ -1,5 +1,10 @@
-<span (click)="support(journalId,userId)">
-    <span *ngIf="!supportStatus"><i class="m-menu__link-icon fa fa-thumbs-o-up"></i></span> 
-    <span *ngIf="supportStatus"><i class="m-menu__link-icon fa 	fa-thumbs-up"></i></span>
-    {{supporterNumber}}    
+<span class="m-widget19__number m--font-brand m--margin-right-20  m--padding-5">
+    500K
+</span>
+<span class="m-widget19__comment m--margin-right-20">
+    <span class="supportBtn" (click)="support(journalId,userId)">
+        <span *ngIf="!supportStatus"><i class="m-menu__link-icon fa fa-thumbs-o-up"></i></span> 
+        <span *ngIf="supportStatus"><i class="m-menu__link-icon fa 	fa-thumbs-up"></i></span>
+        {{supporterNumber}}    
+    </span>  
 </span>

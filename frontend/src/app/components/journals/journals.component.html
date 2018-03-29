@@ -192,7 +192,7 @@
                                 <!--begin::Widget 7-->
                                 <div class="m-widget7 m-widget7--skin-dark">
                                 <div class="m-widget7__desc">
-                                        <blockquote class="blockquote">{{journal.content}} </blockquote>
+                                        <blockquote style="cursor: pointer;" [routerLink]="['journal',journal.journalId]" class="blockquote">{{journal.content}} </blockquote>
                                 </div>
                                 <div class="m-widget7__user">
                                     <div class="m-widget7__user-img">
@@ -218,7 +218,7 @@
                                 </div>
                                 <!--end::Widget 7-->
                             </div>
-                            </div>
+                        </div>
                     </div> 
                 </ng-template>
 

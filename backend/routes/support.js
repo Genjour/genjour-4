@@ -65,47 +65,42 @@ const uniqueId   = require('unique-id-generator');
 
 router.get('/journal/supportersList/:journalId', function(req,res){
     var journalId = req.params.journalId;
-    Journal.findJournal(journalId, function(err,journal){
-        if(err) throw err;
-        if(!journal){
-            return res.json({success:false, msg:'journal id is not valid'});
-        }
-        else{
 
-                SupportJournal.getSupporters(journalId, (err,docs)=>{
-                    if (err) throw err;
-                    else{
-                        //console.log(docs);
-                        return res.json(docs);
-                    }
-                })
+        SupportJournal.getSupporters(journalId, (err,docs)=>{
+            if (err) throw err;
+            if(!docs){
+                res.json({success:false, msg:"cannot find"})
+            }
+            else{
+                //console.log(docs);
+                return res.json(docs);
             }
         })
+            
+
     });
 
 
 
 //================================================================================================
-//---------------------------------- Total Supports on Article -----------------------------------
+//-------------------------------- SUPPORTERS COUNT ON JOURNAL -----------------------------------
 //================================================================================================
 
-router.get('/support/:articleId',function(req,res){
-    const articleId = req.params.articleId;
+router.get('/getSupportersCount/journal/:journalId',function(req,res){
+    const journalId = req.params.journalId;
     const genjouristId = req.params.genjouristId;
 
-        Journal.findJournal(articleId, (err,article)=>{
-        if(err) throw err;
-        if(!article){
-            return res.json({success:false, msg:"article not found"});
-        }
-        else 
-            {
-                const supportersNumber = article.supporters.length;
-                console.log(supportersNumber);
-                res.json({success:true, msg:supportersNumber});
-            } 
+                SupportJournal.numberOfSupporters(journalId, (err,doc)=>{
+                    if(err) throw err;
+                    if(!doc){
+                        res.json({success:false,msg:"cant find the journal"})
+                    }
+                    else{
+                        res.json(doc);
+                    }
+                })
+
     })
 
-})
 
 module.exports = router;

@@ -13,3 +13,18 @@
     width: 5.5rem;
     border-radius: 50%;
 }
+
+.m-widget7 .m-widget7__desc {
+    text-align: center;
+    margin-top: 7rem;
+    margin-left: 7rem;
+    margin-right: 7rem;
+    font-size: 1.3rem;
+}
+
+
+@media (max-width:768px){
+    .m--padding-40 {
+        padding: 10px !important;
+    }
+} 

@@ -79,3 +79,7 @@ a, a:link, a:active, a:hover, a:visited {
 .m-portlet .m-portlet__body {
   padding: 0rem 2.2rem;
 }
+
+input:focus, blockquote:focus {
+  outline: none;
+}

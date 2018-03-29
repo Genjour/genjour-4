@@ -50,13 +50,11 @@ module.exports.getSupporters = function(journalId, callback){
         { $project : 
 
             { 
-                details: {
-                    createdOn:1,
-                    dob:1,
-                    email:1,
-                    gender:1,
-                    profileImg:1
-                 },
+                createdOn:"$details.createdOn",
+                dob:"$details.dob",
+                email:"$details.email",
+                gender:"$details.gender",
+                profileImg:"$details.profileImg",
                 genjouristId : "$supportId",
                 _id:0
             } 
@@ -66,5 +64,5 @@ module.exports.getSupporters = function(journalId, callback){
 
 
 module.exports.numberOfSupporters = function(journalId,callback){
-    SupportJournal.find({journalId:journalId},callback);
+    SupportJournal.count({journalId:journalId},callback);
 }
