@@ -51,13 +51,8 @@ module.exports.getJournal = function(callback){
          {
              $unwind:"$details"
          },
-         { $project: { details: {
-            createdOn:1,
-            dob:1,
-            email:1,
-            gender:1,
-            profileImg:1
-         },
+         { $project: { 
+             
              genjouristId: "$genjouristId",
              journalId:1,         
              content:1,
@@ -68,10 +63,25 @@ module.exports.getJournal = function(callback){
              date:1,
              title:1,
              tags:1,
-             genjourist:1,                   
+             name:"$details.name",
+             createdOn:"$details.createdOn",
+             dob:"$details.dob",
+             email:"$details.email",
+             gender:"$details.gender",
+             profileImg:"$details.profileImg"                   
              } 
         }
      ],callback)
+}
+
+//=================================================================================
+//========================= CHECK JOURNAL EXISTS OR NOT ===========================
+//=================================================================================
+
+
+module.exports.findJournal = function(journalId, callback){
+    const query = {journalId: journalId}
+    Journal.findOne(query, callback);
 }
 
 //=================================================================================
@@ -109,7 +119,7 @@ module.exports.findJournalByIdTrue = function(journalId, callback){
              date:1,
              title:1,
              tags:1,
-             genjourist:1, 
+             name:"$details.name", 
              email:"$details.email",
              gender:"$details.gender",
              dob:"$details.dob",

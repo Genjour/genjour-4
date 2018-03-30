@@ -15,26 +15,34 @@ export class SupportJournalComponent implements OnInit {
   @Input() userId: String;
 
   user:user;
+  supportStatus: boolean;
+  supportersNumber:String;
+
 
   constructor(
     private authService: AuthService,
     private supportService: SupportService,
     private router : Router
   ) { }
-  supportStatus: boolean;
-  supporterNumber:String;
+  
+  
 
   ngOnInit() {
     
-    console.log(this.journalId);console.log(this.journalId);
+
     this.authService.userSubject.subscribe(data=>{
     this.user = data;   
-
     })
-
+    console.log(this.userId);
     this.supportService.getJournalSupportersCount(this.journalId).subscribe(data=>{
       console.log(data);
+      if(data.false){
+        this.supportersNumber = "0";
+      }else{
+        this.supportersNumber = data;
+      }
     })
+
 
 
   }
@@ -49,15 +57,25 @@ export class SupportJournalComponent implements OnInit {
       }else{
         this.supportStatus=true;
       }
-  //----------------------------------- end button animatation--------------------------------
+    //----------------------------------- end button animatation--------------------------------
+
       this.supportService.supportJournal(journalId, userId).subscribe(data=>{
         //console.log(data);
+        this.supportService.getJournalSupportersCount(this.journalId).subscribe(data=>{
+          //console.log(data);
+          this.supportersNumber = data;
+        })
         this.supportService.journalSupporters(this.journalId).subscribe(data=>{
           //console.log(data);
-          this.supporterNumber = data.length;
+          if(data.false){
+            this.supportersNumber = "0";
+          }else{
+            this.supportersNumber = data;
+          }
         })
+
       });
-      
+
       
     }
     else{

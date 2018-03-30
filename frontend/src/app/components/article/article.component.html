@@ -86,7 +86,7 @@
                                           </div>
                                           <div class="m-widget19__info">
                                             <span style="cursor: pointer;" class="m-widget19__username" [routerLink]="['/genjourist',articleData?.genjouristId]">
-                                                {{articleData?.genjourist}}
+                                                {{articleData?.name}}
                                             </span>
                                             <br>
                                             <span class="m-widget19__time m-badge m-badge--danger m-badge--wide" style="color:white;">
@@ -106,14 +106,9 @@
                                               <app-bookmark></app-bookmark>
                                           </div>
                                         </div>
-                                      <div class="row">
-                                          <!-- <app-support-article [articleId]="articleData?.articleId" [userId]="articleData?.genjouristId" ></app-support-article>   -->
-                                      </div>
                                     <div class="lead">
-                                      
                                           <div [innerHtml]="articleData.content"></div>
                                          <!-- {{articleData?.content}} -->
-                                      
                                     </div>
                                   </div>
                             </div>
@@ -185,20 +180,6 @@
                                   <blockquote style="cursor: pointer;" class="blockquote">{{articleData.content}} </blockquote>
                           </div>
                           <div class="m-widget7__user">
-                              <div class="m-widget7__user-img">
-                              <img class="m-widget7__img" src="{{articleData?.profileImg}}" alt="">
-                              </div>
-                              <div class="m-widget7__info">
-                              <a [routerLink]="['/genjourist',articleData?.genjouristId]" >
-                                  <span class="m-widget7__username">
-                                      {{articleData?.genjourist}}
-                                  </span>
-                              </a>
-                              <br>
-                              <span class="m-widget7__time">
-                                  {{articleData?.date | date:'medium' }}
-                              </span>
-                              </div>
                           </div>
                           </div>
                           <!--end::Widget 7-->
@@ -226,7 +207,7 @@
                                     </div>
                                     <div class="m-widget19__info">
                                       <span style="cursor: pointer;" class="m-widget19__username" [routerLink]="['/genjourist',articleData?.genjouristId]">
-                                          {{articleData?.genjourist}}
+                                          {{articleData?.name}}
                                       </span>
                                       <br>
                                       <span class="m-widget19__time m-badge m-badge--danger m-badge--wide" style="color:white;">

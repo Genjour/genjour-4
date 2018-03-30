@@ -97,4 +97,18 @@ router.delete('/delete/reply/:replyId', (req,res)=>{
     });
 });
 
+router.get('/comment/count/journal/:journalId',(req,res)=>{
+    console.log(req.params.journalId)
+    Comment.getCommentCount(req.params.journalId,(err,count)=>{
+        
+        if(err) throw err;
+        if(!count){
+            res.json({status:false, msg:"Problem in counting the comments"});
+        }
+        else{
+            res.json(count);
+        }
+    })
+})
+
 module.exports = router;

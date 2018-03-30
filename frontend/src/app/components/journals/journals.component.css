@@ -4,6 +4,13 @@ a, a:link, a:active, a:hover, a:visited {
   text-decoration: none;
 }
 
+.m-portlet {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(113, 106, 202, 0.08); 
+  -moz-box-shadow: 0px 0px 0px 0px rgba(113, 106, 202, 0.08);
+   box-shadow: 0px 0px 0px 0px rgba(113, 106, 202, 0.08); 
+   background-color: #ffffffd4;
+}
+
 .m-scroll-bottom {
     width: 40px;
     height: 40px;

@@ -26,11 +26,11 @@
                             <div class="m-portlet__head m-portlet__head--fit">
                                 <div class="m-portlet__head-caption">
                                     <div class="m-portlet__head-action">
-                                    <a [routerLink]="['/category',journal?.category]">
-                                    <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
-                                        {{journal?.category}}
-                                    </button>
-                                    </a>
+                                        <a [routerLink]="['/category',journal?.category]">
+                                            <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
+                                                {{journal?.category}}
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="m-portlet__head-tools">
@@ -92,11 +92,11 @@
                                         <div class="m-widget19__content">
                                         <div class="m-widget19__header">
                                             <div class="m-widget19__user-img">
-                                            <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.details.profileImg}}" alt=""></a>
+                                            <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.profileImg}}" alt=""></a>
                                             </div>
                                             <div class="m-widget19__info">
                                             <span class="m-widget19__username">
-                                                <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.genjourist}}</a>
+                                                <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.name}}</a>
                                             </span>
                                             <br>
                                             <span class="m-widget19__time">
@@ -196,12 +196,12 @@
                                 </div>
                                 <div class="m-widget7__user">
                                     <div class="m-widget7__user-img">
-                                    <img class="m-widget7__img" src="{{journal.details.profileImg}}" alt="">
+                                    <img class="m-widget7__img" src="{{journal.profileImg}}" alt="">
                                     </div>
                                     <div class="m-widget7__info">
                                     <a [routerLink]="['/genjourist',journal.genjouristId]" >
                                         <span class="m-widget7__username">
-                                            {{journal.genjourist}}
+                                            {{journal.name}}
                                         </span>
                                     </a>
                                     <br>
