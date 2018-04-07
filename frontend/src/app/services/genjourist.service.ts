@@ -64,5 +64,13 @@ export class GenjouristService {
     return this.http.get(url.checkSupportStatus+userId+'/'+genjouristId).map(res=>res.json());
   }
 
+  checkBookmarkStatus(journalId, userId){
+    return this.http.get(url.checkBookmarkStatus+journalId+'/'+userId).map(res=>res.json());
+  }
+
+  bookmarkJournal(data){
+    return this.http.post(url.bookmarkJournal,data).map(res=>res.json())
+  }
+
 
 }

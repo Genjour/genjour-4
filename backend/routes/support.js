@@ -90,15 +90,24 @@ router.get('/getSupportersCount/journal/:journalId',function(req,res){
     const journalId = req.params.journalId;
     const genjouristId = req.params.genjouristId;
 
-                SupportJournal.numberOfSupporters(journalId, (err,doc)=>{
-                    if(err) throw err;
-                    if(!doc){
-                        res.json({success:false,msg:"cant find the journal"})
-                    }
-                    else{
-                        res.json(doc);
-                    }
-                })
+    Journal.findJournal(journalId, (err,journal)=>{
+        if(err) throw err;
+        if(!journal){
+            return res.json({success:false, msg:"Journal not found"});
+        }
+        else {
+            SupportJournal.numberOfSupporters(journalId, (err,doc)=>{
+                if(err) throw err;
+                if(!doc){
+                    res.json(0);
+                }
+                else{
+                    res.json(doc);
+                }
+            })
+        }
+    })
+                
 
     })
 

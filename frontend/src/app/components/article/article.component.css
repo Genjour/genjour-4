@@ -28,3 +28,34 @@
         padding: 10px !important;
     }
 } 
+
+
+
+
+.socicon-whatsapp{
+    background-color: #34af23;
+    padding: 8px 10px 5px 11px;   
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-facebook{
+    background-color: #3b5998;
+    padding: 8px 10px 5px 11px;   
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-twitter{
+    background-color: #00aced;
+    padding: 8px 10px 5px 11px;   
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-googleplus{
+    background-color: #d34836;
+    padding: 8px 10px 5px 11px;   
+    border-radius: 50%;
+    color: white;
+}

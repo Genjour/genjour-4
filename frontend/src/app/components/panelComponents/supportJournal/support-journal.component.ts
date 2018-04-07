@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
-import { user } from './../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { SupportService } from '../../../services/support.service';
+import { user } from './../../models/user';
 
 @Component({
   selector: 'app-support-journal',
@@ -13,6 +13,7 @@ export class SupportJournalComponent implements OnInit {
 
   @Input() journalId: String;
   @Input() userId: String;
+
 
   user:user;
   supportStatus: boolean;
@@ -29,18 +30,9 @@ export class SupportJournalComponent implements OnInit {
 
   ngOnInit() {
     
-
-    this.authService.userSubject.subscribe(data=>{
-    this.user = data;   
-    })
-    console.log(this.userId);
     this.supportService.getJournalSupportersCount(this.journalId).subscribe(data=>{
+      this.supportersNumber = data;
       console.log(data);
-      if(data.false){
-        this.supportersNumber = "0";
-      }else{
-        this.supportersNumber = data;
-      }
     })
 
 
@@ -66,12 +58,7 @@ export class SupportJournalComponent implements OnInit {
           this.supportersNumber = data;
         })
         this.supportService.journalSupporters(this.journalId).subscribe(data=>{
-          //console.log(data);
-          if(data.false){
-            this.supportersNumber = "0";
-          }else{
-            this.supportersNumber = data;
-          }
+          console.log(data);
         })
 
       });

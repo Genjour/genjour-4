@@ -6,17 +6,21 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class JournalsService {
-Url:url;
+Url: url;
   constructor(
     private http: Http,
   ) { }
 
-  getJournal(){
-    return this.http.get(url.getJournal).map(res=>res.json());
+  getJournal() {
+    return this.http.get(url.getJournal).map(res => res.json());
   }
 
-  getJournalById(journalId){
-    return this.http.get(url.getJournalById+journalId).map(res=>res.json());
+  getJournalById(journalId) {
+    return this.http.get(url.getJournalById + journalId).map(res => res.json());
+  }
+
+  getBookmarkCount(journalId) {
+    return this.http.get(url.getBookmarkCount + journalId).map(res => res.json());
   }
 
 }

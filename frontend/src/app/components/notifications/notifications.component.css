@@ -1,0 +1,17 @@
+.m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-text {
+  font-size: 1.7rem;
+  font-weight: 900;
+  padding-left: 20px;
+}
+
+.notification_panel {
+  margin-top: 65px;
+}
+
+
+@media (max-width:768px) {
+  .notification_panel {
+    margin-top: 105px;
+  }
+}
+

@@ -60,6 +60,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { SupportJournalComponent } from './components/panelComponents/supportJournal/support-journal.component';
 import { PovComponent } from './components/panelComponents/pov/pov.component';
 import { ReplicateComponent } from './components/panelComponents/replicate/replicate.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { BookmarksComponent } from './components/bookmarks/bookmarks.component';
 
 
 const appRoutes: Routes = [
@@ -67,6 +69,7 @@ const appRoutes: Routes = [
   {path: 'login', component:LoginComponent, canActivate:[ProtectedGaurd]},
   {path: 'register', component:RegisterComponent, canActivate:[ProtectedGaurd]},
   {path: 'feeds', component:FeedsComponent, canActivate:[AuthGaurd] },
+  {path: 'notifications', component:NotificationsComponent, canActivate:[AuthGaurd] },
   {path: 'category/:categoryName', component:CategoryComponent},
   {path: 'genjourist/:id', component:GenjouristComponent},
   {path: 'genjourist', component: ProfileComponent, canActivate:[AuthGaurd] },
@@ -109,6 +112,8 @@ const appRoutes: Routes = [
     ReplicateComponent,
     PovComponent,
     BookmarkComponent,
+    NotificationsComponent,
+    BookmarksComponent,
   ],
   imports: [
     BrowserModule,

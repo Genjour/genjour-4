@@ -1,12 +1,12 @@
-import { user } from './../models/user';
-import { JournalsService } from './../../services/journals.service';
 import { Component, OnInit } from '@angular/core';
-import { GenjouristService } from '../../services/genjourist.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { JournalsService } from './../../services/journals.service';
 import { SupportService } from '../../services/support.service';
 import { ArticleService } from '../../services/article.service';
+import { GenjouristService } from '../../services/genjourist.service';
+import { user } from './../models/user';
 
 @Component({
   selector: 'app-article',
@@ -16,11 +16,12 @@ import { ArticleService } from '../../services/article.service';
 export class ArticleComponent implements OnInit {
 
   user:user;
+  userId:String;
   articleData: any[]=[];
   suggestedJournals: any[] = [];
   articleId: String;
-  userId: String;
-  journalId:String;
+  socialIconsStatus:boolean = false;
+  // journaId:String = this.route.snapshot.params.journalId;
 
   constructor(
     private genjouristService: GenjouristService,
@@ -30,26 +31,35 @@ export class ArticleComponent implements OnInit {
     private router: Router,
     private articleService: ArticleService,
     private journalsService :JournalsService
-  ) { }
+  ) { 
 
-  //articleId:any = this.route.snapshot.params.articleId;
+    this.authService.userSubject.subscribe(data=>{
+      this.user = data;
+    })
+
+  }
+
 
   ngOnInit() {
 
-    this.authService.userSubject.subscribe(data=>{
-      this.user =data;
-    })
 
     this.articleService.article(this.route.snapshot.params.journalId).subscribe(data=>{
       this.articleData = data;
-      console.log(this.articleData);
     })
+    
 
     this.journalsService.getJournal().subscribe(data=>{
       this.suggestedJournals =  data.filter(x=>x.type == 1);
-      console.log(this.suggestedJournals)
+      //console.log(this.suggestedJournals)
     })
 
+    
+
+  }
+
+  onClickSocialIcon(){
+    console.log(status)
+    this.socialIconsStatus = !this.socialIconsStatus;
   }
 
 }

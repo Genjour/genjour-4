@@ -7,7 +7,6 @@ var replySchema = mongoose.Schema({
     id               : String,
     replyId          : String,
     genjouristId     : String,
-    genjourist       : String,
     journalId        : String,
     parentCommentId  : String,
     reply            : String,

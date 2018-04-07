@@ -94,20 +94,36 @@
                                             </span>
                                           </div>
                                           <div class="m-widget19__stats">
-                                              <app-support-journal [journalId]="articleData.journalId"  [userId]="user?.genjouristId"></app-support-journal>
+                                              <app-support-journal [journalId]="articleData?.journalId" [userId]="user?.genjouristId" ></app-support-journal>
                                           </div>
                                           <div class="m-widget19__stats">
-                                              <app-replicate></app-replicate>
+                                              <app-replicate (toggleSocialIcons)="onClickSocialIcon($event)"></app-replicate>
                                           </div>
                                           <div class="m-widget19__stats">
                                               <app-pov></app-pov>
                                           </div>
                                           <div class="m-widget19__stats">
-                                              <app-bookmark></app-bookmark>
+                                              <app-bookmark [journalId]="articleData?.journalId"  [userId]="user?.genjouristId" ></app-bookmark>
                                           </div>
                                         </div>
+                                        <div *ngIf="socialIconsStatus" class="replicate_icons m--margin-top-25 m--margin-bottom-25">
+                                            <div class="m-stack m-stack--ver m-stack--general">
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a>
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                                                </div>
+                                            </div>   
+                                        </div>
                                     <div class="lead">
-                                          <div [innerHtml]="articleData.content"></div>
+                                          <div [innerHtml]="articleData?.content"></div>
                                          <!-- {{articleData?.content}} -->
                                     </div>
                                   </div>
@@ -215,20 +231,36 @@
                                       </span>
                                     </div>
                                     <div class="m-widget19__stats">
-                                        <app-support-journal [journalId]="articleData.journalId"  [userId]="user?.genjouristId"></app-support-journal>
+                                        <app-support-journal [journalId]="journalId"  [userId]="user?.genjouristId" ></app-support-journal>
                                     </div>
                                     <div class="m-widget19__stats">
-                                        <app-replicate></app-replicate>
+                                        <app-replicate (toggleSocialIcons)="onClickSocialIcon($event)" ></app-replicate>
                                     </div>
                                     <div class="m-widget19__stats">
                                         <app-pov></app-pov>
                                     </div>
                                     <div class="m-widget19__stats">
-                                        <app-bookmark></app-bookmark>
+                                        <app-bookmark [journalId]="articleData?.journalId" [userId]="user?.genjouristId"></app-bookmark>
                                     </div>
                                   </div>
                             </div>
                       </div>
+                      <div *ngIf="socialIconsStatus" class="replicate_icons m--margin-top-15">
+                        <div class="m-stack m-stack--ver m-stack--general">
+                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                    <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a>
+                            </div>
+                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                    <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                            </div>
+                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                    <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                            </div>
+                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                    <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                            </div>
+                        </div>   
+                    </div>
                     </div>
                   </div> 
                   <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
@@ -251,11 +283,11 @@
                                   <div class="m-widget5__content">
                                       <span class="m-nav__link-badge" style="cursor: pointer;" [routerLink]="['/category',suggestedJournal?.category]">
                                         <span class="m-badge m-badge--brand m-badge--wide">
-                                            {{suggestedJournal.category}}
+                                            {{suggestedJournal?.category}}
                                         </span>
                                     </span>
                                     <p style="cursor:pointer;" [routerLink]="['/journal',suggestedJournal?.journalId]" class="lead">
-                                        {{suggestedJournal.title}}
+                                        {{suggestedJournal?.title}}
                                     </p>
                                   </div>
                                 </div>

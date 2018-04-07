@@ -73,7 +73,6 @@ router.post('/add/reply',(req,res)=>{
 
     replyId          : uniqid('gmplc'),
     genjouristId     : req.body.genjouristId,
-    genjourist       : req.body.genjourist,
     journalId        : req.body.journalId,
     parentCommentId  : req.body.parentCommentId,
     reply            : req.body.reply,

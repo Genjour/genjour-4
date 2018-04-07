@@ -18,6 +18,10 @@ export class AuthService {
     private http:Http, 
   ) { }
 
+  userDataBridge(data){
+    this.userSubject.next(data);
+  }
+
 
 
   registerUser(user){
@@ -70,9 +74,6 @@ export class AuthService {
     .map(res=>res.json());
   }
 
-  userDataBridge(data){
-    this.userSubject.next(data);
-  }
 
   storeUserData(token,user){
     localStorage.setItem('id_token',token);

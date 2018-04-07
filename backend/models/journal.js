@@ -7,7 +7,6 @@ var journalSchema = mongoose.Schema({
         id               : String,
         journalId        : String,
         genjouristId     : String,
-        genjourist       : String,
         category         : String,
         title            : String,
         content          : String,

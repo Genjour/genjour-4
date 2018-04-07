@@ -13,7 +13,6 @@ router.post('/journal/add/article',  passport.authenticate('jwt', {session:false
   let newArticle = new Journal({
       journalId     : uniqid(),
       genjouristId  : req.user.genjouristId,
-      genjourist    : req.user.username,
       category      : req.body.category,
       title         : req.body.title,
       content       : req.body.content,

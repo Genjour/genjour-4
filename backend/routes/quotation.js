@@ -14,7 +14,6 @@ router.post('/journal/add/quotation', passport.authenticate('jwt', {session:fals
   let newQuotation = new Journal({
       journalId   : uniqid(),
       genjouristId  : req.user.genjouristId,
-      genjourist    : req.user.name,
       category      : req.body.category,
       content       : req.body.quote,
       tags          : req.body.tags,

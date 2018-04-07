@@ -1,6 +1,7 @@
 <span class="m-widget19__number m--font-brand m--padding-5">
-    1mn
+    {{bookmarkCount}}
 </span>
-<span class="m-widget19__comment">
-    <span data-toggle="modal" data-target="#m_modal_4"> <i class="m-menu__link-icon fa fa-bookmark-o"> </i> </span> 
+<span (click)="bookmarkJournal(journalId,userId)" class="m-widget19__comment">
+    <span *ngIf="!bookmarkStatus"> <i class="m-menu__link-icon fa fa-bookmark-o"> </i> </span> 
+    <span *ngIf="bookmarkStatus"> <i class="m-menu__link-icon fa fa-bookmark"> </i> </span> 
 </span>
