@@ -22,8 +22,6 @@ export class AuthService {
     this.userSubject.next(data);
   }
 
-
-
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','Application/json');

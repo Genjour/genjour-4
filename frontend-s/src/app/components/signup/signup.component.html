@@ -1,0 +1,173 @@
+  <div class="m-grid m-grid--hor m-grid--root m-page">
+  <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--singin" id="m_login">
+    <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+      <div class="m-stack m-stack--hor m-stack--desktop">
+        <div class="m-stack__item m-stack__item--fluid">
+          <div class="m-login__wrapper">
+            <div class="m-login__logo">
+              <a  [routerLink]="['/']">
+                <img src="assets/img/genjour.png" height="110">
+              </a>
+            </div>
+            <div class="m-signup">
+              <div class="m-login__head">
+                <h3 class="m-login__title">
+                  Sign Up
+                </h3>
+                <div class="m-login__desc">
+                  Enter your details to create your account:
+                </div>
+              </div>
+              <div *ngIf=loading class="m-loader m-loader--brand" style="width: 30px; text-align: center;"></div>
+              <form [formGroup]="form" class="m-login__form m-form" (ngSubmit)="onSubmit(form.value)">
+                <div class="m-form__group">
+                  <input 
+                    class="form-control m-input" 
+                    formControlName="fullname" 
+                    type="text" 
+                    placeholder="Full Name" 
+                  >
+                <div *ngIf="fullname.touched && fullname.invalid" >
+                  <div *ngIf="fullname.errors.required" class="form-control-feedback" style="color: #f4516c">
+                      Full name is required.
+                  </div>
+                  <div *ngIf="fullname.errors.minlength" class="form-control-feedback" style="color: #f4516c">
+                      Full Name Should be Mininum of {{name.errors.minlength.requiredLength}} Characters.
+                  </div>
+                  <div *ngIf="fullname.errors.pattern" class="form-control-feedback" style="color: #f4516c">
+                      Enter Valid Name.
+                  </div>
+                </div>
+                </div>
+                
+                <div class="m-form__group">
+                  <input 
+                    class="form-control m-input" 
+                    formControlName="email" 
+                    type="email" 
+                    placeholder="Email" 
+                  >
+                  <div style="color:#f4516c" *ngIf="email.errors && email.errors.emailTaken">
+                      <div><span style="color:#f4516c">This email is already registered!</span></div> 
+                  </div>
+                  <div *ngIf="email.touched && email.invalid" >
+                    <div *ngIf="email.errors.required" class="form-control-feedback" style="color: #f4516c">
+                        Email is required.
+                    </div>
+                    <div *ngIf="email.errors.email" class="form-control-feedback" style="color: #f4516c">
+                        Enter Valid Name.
+                    </div>
+                  </div>
+                </div>
+                <div class="m-form__group">
+                  <input 
+                    class="form-control m-input" 
+                    formControlName="username" 
+                    type="text" 
+                    placeholder="Username"
+                  >
+                  <div  *ngIf="username.status === 'PENDING'">
+                      <div class="m-loader m-loader--brand" style="width: 25px; display: inline-block;"></div> Checking...
+                  </div>
+                  <div style="color:#f4516c" *ngIf="username.errors && username.errors.usernameTaken">
+                    <span style="color:#f4516c">This username is already taken!</span>
+                  </div> 
+                  <div style="color:#f4516c" *ngIf="loader"><div class="m-loader m-loader--brand" style="width: 25px; display: inline-block;"></div>Checking for Uniqueness...</div>
+                   <div style="color:#f4516c" *ngIf="username.touched && username.invalid"  role="alert">
+                   <div style="color:#f4516c" *ngIf="username.errors.required"><strong>Username Is Required</strong> </div>
+  
+                   <div style="color:#f4516c" *ngIf="username.errors.cannotContainSpace"><strong>Username Username Cannot Contain Blank Space</strong> </div>
+                   <div style="color:#f4516c" *ngIf="username.errors.pattern"><strong>Username should be between 5-10 characters and Cannot Contain Blank Spaces</strong> </div>
+             
+                   <div style="color:#f4516c" *ngIf="username.errors.shouldBeUnique"><strong>Username Already Taken</strong> </div>
+                   </div>
+                </div>
+                <div class="m-form__group">
+                  <input 
+                    class="form-control m-input m-login__form-input--last" 
+                    formControlName="password"
+                    type="password" 
+                    placeholder="Password" 
+                  >
+                </div>
+                <div class="m-form__group">
+                  <div class="m-radio-inline">
+                      <label class="m-radio m-radio--solid">
+                        <input type="radio" formControlName="gender" name="gender" checked value="male">
+                        Male
+                        <span></span>
+                      </label>
+                      <label class="m-radio m-radio--solid">
+                        <input type="radio" formControlName="gender" name="gender"  value="female">
+                        Female
+                        <span></span>
+                      </label>
+                      <label class="m-radio m-radio--solid">
+                        <input type="radio" formControlName="gender" name="gender" value="other">
+                        Other
+                        <span></span>
+                      </label>
+                  </div>
+                  
+                </div>
+                <div class="m-login__head" style="text-align:center;">
+                  <div class="m-login__desc">Birth Date</div>
+                  <input class="form-control m-input" formControlName="dob" type="date" name="dob" >
+                  <div style="color:#f4516c" *ngIf="dob.touched && dob.invalid"  role="alert">
+                      <div style="color:#f4516c" *ngIf="dob.errors.required"><strong>Birth Date Is Required</strong> </div>
+                  </div>
+                </div>
+                <div class="row m-form__group m-login__form-sub">
+                  <div class="col m--align-left">
+                    <label class="m-checkbox m-checkbox--focus">
+                      <input formControlName="tAndC" type="checkbox" name="agree">
+
+                      I Agree the
+                      <a href="#" class="m-link m-link--focus">
+                        terms and conditions
+                      </a>
+                      .
+                      <span></span>
+                    </label>
+                    <span class="m-form__help"></span>
+                  </div>
+                  
+                </div>
+                <div class="m-login__form-action">
+                    
+                    <input  class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" type="submit" value="Sign Up">
+                    <div class="m-loader m-loader--brand" style="width: 30px; display: inline-block;"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="m-stack__item m-stack__item--center">
+          <div class="m-login__account">
+            <span class="m-login__account-msg">
+              Already have account
+            </span>
+            &nbsp;&nbsp;
+            <a [routerLink]="['/login']" id="m_login_signup" class="m-link m-link--focus m-login__account-link">
+              Sign In
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-image: url(../../../assets/app/media/img//bg/bg-4.jpg)">
+      <div class="m-grid__item m-grid__item--middle">
+        <h3 class="m-login__welcome">
+            Genjour <br> <del>Social</del> Societal Network
+        </h3>
+        <p class="m-login__msg">
+            Meet people with similar ideologies and beliefs. <br>
+            Let's make a better society to live in.Lets talk out our true emotions. <br>
+            Connect better and let's bridge the gap between the opinions by writing in the Generations' Journal.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

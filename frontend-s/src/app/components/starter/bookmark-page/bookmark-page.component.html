@@ -1,0 +1,293 @@
+<div style="background-color: #f2f3f8">
+  <div class="container">
+      <div class="card-columns">
+          <div *ngFor="let journal of journals ">
+              
+              <div *ngIf="journal.type == 1; then article else quotation" ></div>
+
+              <ng-template #article >
+                  <div class="card">
+                      <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
+                          <div class="m-portlet__head m-portlet__head--fit">
+                              <div class="m-portlet__head-caption">
+                                  <div class="m-portlet__head-action">
+                                      <a [routerLink]="['/category',journal?.category]">
+                                          <button type="button" class="btn btn-sm m-btn--pill  btn-brand">
+                                              {{journal?.category}}
+                                          </button>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="m-portlet__head-tools">
+                                      <ul class="m-portlet__nav">
+                                          <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"appDropdown aria-expanded="true">
+                                              <div style="cursor: pointer;" class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle " >
+                                                <i class="la la-ellipsis-v"></i>
+                                              </div>
+                                              <div class="m-dropdown__wrapper">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                                <div class="m-dropdown__inner">
+                                                  <div class="m-dropdown__body">
+                                                    <div class="m-dropdown__content">
+                                                      <ul class="m-nav">
+                                                          <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                            <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                              <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                              <span class="m-nav__link-text">
+                                                                Edit
+                                                              </span>
+                                                            </div>
+                                                          </li>
+                                                          <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                            <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                                              <i class="m-nav__link-icon fa fa-trash"></i>
+                                                              <span class="m-nav__link-text">
+                                                                Delete
+                                                              </span>
+                                                            </div>
+                                                          </li>
+                                                          <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                                              <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                  <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                  <span class="m-nav__link-text">
+                                                                  Report
+                                                                  </span>
+                                                              </div>
+                                                          </li>
+                                                      </ul>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </li>
+                                      </ul>
+                              </div>
+                          </div>
+                          <div class="m-portlet__body">
+                              <div class="m-widget19">
+                                  <a [routerLink]="['/journal',journal?.journalId]">
+                                      <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height:-286px;">
+                                      <img src= "{{journal?.imgUrl}}" alt="">
+                                      <h3 class="m-widget19__title m--font-light">
+                                          {{journal?.title}}
+                                      </h3>
+                                      <div class="m-widget19__shadow"></div>
+                                      </div>
+                                  </a>
+                                      <div class="m-widget19__content">
+                                      <div class="m-widget19__header">
+                                          <div class="m-widget19__user-img">
+                                          <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.profileImg}}" alt=""></a>
+                                          </div>
+                                          <div class="m-widget19__info">
+                                          <span class="m-widget19__username">
+                                              <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.name}}</a>
+                                          </span>
+                                          <br>
+                                          <span class="m-widget19__time">
+                                              {{journal?.date | date:'medium' }}
+                                          </span>
+                                          </div>
+                                      </div>
+                                      <a [routerLink]="['/journal',journal?.journalId]">
+                                          <div class="m-widget19__body m-nav__link-text">
+                                              <div [innerHTML]=" journal?.content | summaryHundered "></div>
+                                          </div>
+                                      </a>
+                                      </div>
+                                  
+                                  <div class="m-widget19__action">
+                                      <div class="m--margin-top-5 m--margin-bottom-5 m--margin-right-15">
+                                      <div>
+                                        <div class="m-stack m-stack--ver m-stack--general">
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                                <app-support-journal  [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal>
+                                            </div>
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                                <span (click)="hideme = !hideme" > <i class="m-menu__link-icon fa fa-eye"> </i> </span> 
+                                            </div>
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                                    <span (click)="hideReplicate = !hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
+                                            </div>
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                                <app-bookmark [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-bookmark> 
+                                            </div>
+                                        </div>
+                                        <div [hidden]="!hideReplicate" class="replicate_icons m--margin-top-15">
+                                            <div class="m-stack m-stack--ver m-stack--general">
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <!-- <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a> -->
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                                                </div>
+                                                <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                        <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                                                </div>
+                                            </div>   
+                                        </div>
+                                        <div class="m--margin-top-20">
+                                            <form [hidden]="!hideme" #commentBoxInput="ngForm" >
+                                                <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">	
+                                                    <div class="m-messenger__form">
+                                                        <div class="m-messenger__form-controls">
+                                                            <input  type="text" name="commentInput" [(ngModel)]="commentInput"  placeholder="Your point of view..." class="m-messenger__form-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                      </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div> 
+                      </div>
+                  </div>
+                  
+              </ng-template>
+
+              <ng-template #quotation >
+                  <div class="card">
+                      <div class="m-portlet m-portlet--bordered-semi">
+                          <div class="m-portlet__head">
+                              <div class="m-portlet__head-caption">
+                                  <div class="m-portlet__head-title">
+                                      <h3 class="m-portlet__head-text">
+                                          <a [routerLink]="['/category',journal?.category]">
+                                          <button type="button" class="btn btn-sm m-btn--pill  btn-info">
+                                              {{journal?.category}}
+                                          </button>
+                                          </a>
+                                      </h3>
+                                  </div>
+                              </div>
+                              <div class="m-portlet__head-tools">
+                                      <ul class="m-portlet__nav">
+                                          <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" appDropdown aria-expanded="true">
+                                              <div class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill   m-dropdown__toggle">
+                                              <i class="la la-ellipsis-v"></i>
+                                              </div>
+                                              <div class="m-dropdown__wrapper">
+                                              <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                              <div class="m-dropdown__inner">
+                                                  <div class="m-dropdown__body">
+                                                  <div class="m-dropdown__content">
+                                                          <ul class="m-nav">
+                                                              <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                  <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                  <span class="m-nav__link-text">
+                                                                      Edit
+                                                                  </span>
+                                                                  </div>
+                                                              </li>
+                                                              <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                                                  <i class="m-nav__link-icon fa fa-trash"></i>
+                                                                  <span class="m-nav__link-text">
+                                                                      Delete
+                                                                  </span>
+                                                                  </div>
+                                                              </li>
+                                                              <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                      <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                      <span class="m-nav__link-text">
+                                                                      Report
+                                                                      </span>
+                                                                  </div>
+                                                              </li>
+                                                          </ul>
+                                                  </div>
+                                                  </div>
+                                              </div>
+                                              </div>
+                                          </li>
+                                      </ul>
+                              </div>
+                          </div>
+                          <div class="m-portlet__body">
+                              <!--begin::Widget 7-->
+                              <div class="m-widget7 m-widget7--skin-dark">
+                              <div class="m-widget7__desc">
+                                      <blockquote style="cursor: pointer;" [routerLink]="['journal',journal.journalId]" class="blockquote">{{journal.content}} </blockquote>
+                              </div>
+                              <div class="m-widget7__user">
+                                  <div class="m-widget7__user-img">
+                                  <img class="m-widget7__img" src="{{journal.profileImg}}" alt="">
+                                  </div>
+                                  <div class="m-widget7__info">
+                                  <a [routerLink]="['/genjourist',journal.genjouristId]" >
+                                      <span class="m-widget7__username">
+                                          {{journal.name}}
+                                      </span>
+                                  </a>
+                                  <br>
+                                  <span class="m-widget7__time">
+                                      {{journal?.date | date:'medium' }}
+                                  </span>
+                                  </div>
+                              </div>
+                              <div class="m-widget7__button">
+                                <div class="m-stack m-stack--ver m-stack--general">
+                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                        <app-support-journal  [journalId]="journal?.journalId" [userId]="user?.genjouristId" ></app-support-journal>
+                                    </div>
+                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                        <app-comments (emitter)="receiveDataFromChild($event)"></app-comments> 
+                                    </div>
+                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                            <span (click)="hideReplicate = !hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
+                                    </div>
+                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                        <app-bookmark></app-bookmark> 
+                                    </div>
+                                </div>
+                                <div [hidden]="!hideReplicate" class="replicate_icons m--margin-top-15">
+                                    <div class="m-stack m-stack--ver m-stack--general">
+                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                <!-- <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a> -->
+                                        </div>
+                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                                        </div>
+                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                                        </div>
+                                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                                                <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div class="m--margin-top-20">
+                                    <form *ngIf="showCommentBox" #commentBoxInput="ngForm" >
+                                        <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">	
+                                            <div class="m-messenger__form">
+                                                <div class="m-messenger__form-controls">
+                                                    <input  type="text" name="commentInput" [(ngModel)]="commentInput"  placeholder="Your point of view..." class="m-messenger__form-input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>  
+                              </div>
+                              </div>
+                              <!--end::Widget 7-->
+                          </div>
+                      </div>
+                  </div> 
+              </ng-template>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+

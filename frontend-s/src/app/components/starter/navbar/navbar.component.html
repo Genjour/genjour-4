@@ -1,0 +1,164 @@
+<header class="m-grid__item m-header">
+  <div class="m-stack m-stack--ver m-stack--desktop-and-tablet m-stack--demo">
+    <div id="block_mobile_view" class="m-stack__item m-stack__item--center m-stack__item--middle" style="width: 150px;">
+      <a routerLink="/" class="m-brand__logo-wrapper">
+        <img alt="" height="45" src="assets/img/logo-dark.png" />
+      </a>
+    </div>
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+      <div class="m-stack m-stack--ver m-stack--general">
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--left">
+          <input type="search" name="search" id="searchInput" placeholder="Search">
+          <!-- <i class="searchIcon fa fa-search"></i> -->
+        </div>
+        <div class="m-stack__item m-stack__item--center m-stack__item--right" style="width: 60px;">
+          <span id="block_desktop_view" class="m-topbar__userpic">
+            <img height="40px" src="{{user?.profileImg}}" class="m--img-rounded m--marginless m--img-centered" alt="" />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+      <div class="m-stack m-stack--ver m-stack--general">
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle"  style="cursor: pointer;"> 
+          <i *ngIf ="action == 'global'" (click)=toggle1() class="la la-globe"></i>
+          <i *ngIf ="action == 'circle'" (click)=toggle2() class="la la-circle"></i>
+        </div>
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle">
+          <!-- <i class="la la-pencil"></i> -->
+          <div class="m--margin-top-5 m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width" appDropdown
+            data-dropdown-toggle="click" data-dropdown-persistent="true">
+            <span style="cursor: pointer;" class="m-nav__link m-dropdown__toggle">
+              <i class="la la-pencil"></i>
+            </span>
+            <div class="m-dropdown__wrapper">
+              <div class="m-dropdown__inner">
+                <div class="m-dropdown__body m-dropdown__body--paddingless">
+                  <div class="m-dropdown__content">
+                    <div class="m-scrollable" data-scrollable="false" data-max-height="380" data-mobile-max-height="200">
+                      <div class="m-nav-grid m-nav-grid--skin-light">
+                        <div class="m-nav-grid__row">
+                          <a routerLink="['/write-article']" class="m-nav-grid__item">
+                            <i class="m-nav-grid__icon flaticon-file"></i>
+                            <span class="m-nav-grid__text">
+                              Article
+                            </span>
+                          </a>
+                          <a routerLink="['/write-quotation']" class="m-nav-grid__item">
+                            <i class="m-nav-grid__icon la	la-quote-left m--margin-bottom-15"></i>
+                            <span class="m-nav-grid__text">
+                              Quotation
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="authService.loggedIn()" class="m-stack__item m-stack__item--center m-stack__item--middle">
+          <i style="cursor: pointer;" routerLink="/notifications" class="la la-bell"></i>
+        </div>
+        <div id="block_mobile_view" *ngIf="authService.loggedIn()" class="m-stack__item m-stack__item--center m-stack__item--middle">
+          <div class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" appDropdown>
+            <span style="cursor: pointer;" class="m-nav__link m-dropdown__toggle">
+              <span class="m-topbar__userpic">
+                <img height="40px" src="{{user?.profileImg}}" class="m--img-rounded m--marginless m--img-centered" alt="" />
+              </span>
+            </span>
+            <div class="m-dropdown__wrapper">
+              <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+              <div class="m-dropdown__inner">
+                <div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+                  <div class="m-card-user m-card-user--skin-dark">
+                    <div class="m-card-user__pic">
+                      <img src="{{user?.profileImg}}" class="m--img-rounded m--marginless" alt="" />
+                    </div>
+                    <div class="m-card-user__details">
+                      <span class="m-card-user__name m--font-weight-500">
+                        {{user?.name}}
+                      </span>
+                      <div class="m-card-user__email m--font-weight-300 m-link">
+                        {{user?.email}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-dropdown__body">
+                  <div class="m-dropdown__content">
+                    <ul class="m-nav m-nav--skin-light">
+                      <li class="m-nav__section m--hide">
+                        <span class="m-nav__section-text">
+                          Section
+                        </span>
+                      </li>
+                      <li class="m-nav__item">
+                        <a routerLink="['/genjourist',user?.genjouristId]" class="m-nav__link">
+                          <i class="m-nav__link-icon flaticon-profile-1"></i>
+                          <span class="m-nav__link-title">
+                            <span class="m-nav__link-wrap">
+                              <span class="m-nav__link-text">
+                                My Profile
+                              </span>
+                              <span class="m-nav__link-badge">
+                                <span class="m-badge m-badge--success">
+                                  2
+                                </span>
+                              </span>
+                            </span>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="m-nav__separator m-nav__separator--fit"></li>
+                      <li class="m-nav__item">
+                        <a (click)="logout()" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                          <i class="m-nav__link-icon la la-lock"></i> Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!authService.loggedIn()" class="m-stack__item m-stack__item--center m-stack__item--middle">
+          <a routerLink="/login" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">
+            <span>
+              <i class="m-nav__link-icon la la-key"></i> Login
+            </span>
+          </a>
+        </div>
+        <div *ngIf="!authService.loggedIn()" class="m-stack__item m-stack__item--center m-stack__item--middle">
+          <a routerLink="/signup" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">
+            <span>
+              <i class="m-nav__link-icon la la-pencil-square"></i> Sign Up
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<ul class="m-nav-sticky" style="margin-top: 30px;">
+  <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Bookmarks">
+    <a routerLink="/bookmarks">
+      <i class="fa fa-bookmark"></i>
+    </a>
+  </li>
+  <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Drafts">
+    <a routerLink="/drafts">
+      <i class="fa fa-edit"></i>
+    </a>
+  </li>
+  <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Know More">
+    <a routerLink="/know-more">
+      <i class="fa fa-question-circle"></i>
+    </a>
+  </li>
+</ul>

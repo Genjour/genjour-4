@@ -1,0 +1,4 @@
+<span style="cursor: pointer;" (click)="support(journalId,userId)">
+  <span *ngIf="!supportJournal"><i class="m-menu__link-icon fa fa-thumbs-o-up"></i></span> 
+  <span *ngIf="supportJournal"> <i class="m-menu__link-icon fa fa-thumbs-up">  </i></span> {{supporterNumber}}
+</span>

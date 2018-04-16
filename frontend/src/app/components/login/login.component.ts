@@ -1,4 +1,4 @@
-import { ValidateService } from './../../services/validate.service';
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ checkStatus: String;
   constructor(
     private authService : AuthService,
     private router : Router,
-    private validateService :ValidateService
+
   ) { }
 
   ngOnInit() {

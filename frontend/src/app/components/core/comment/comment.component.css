@@ -1,0 +1,121 @@
+.m-messenger__message-pic {
+  display: table-cell;
+  vertical-align: top;
+  width: 40px;
+  padding: 6px 10px 0 0; 
+}
+.m-messenger__message-pic img {
+  max-width: 40px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  margin: 0 !important; 
+}
+
+
+.comment__seperator {
+  border-bottom: 2px solid #f4f5f8;
+}
+
+.m-widget3__item .m-widget3__body .m-widget3__text {
+  color: #0a0a0a;
+  background-color: transparent;
+}
+
+
+.m-portlet__head-tools .nav .nav-item{
+  color: #898b96;
+  cursor: pointer;
+}
+
+.m-portlet__head-tools .nav .nav-item:hover{
+  color:#716ACA;
+}
+
+
+.comment_dialog{
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+}
+input 				{
+  background: transparent;
+  font-size:18px;
+  padding:0.625em  0.625em 0.625em 0.3125em;
+  display:block;
+  width:18.75em;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus {
+  outline:none;
+}
+
+/* LABEL ======================================= */
+label {
+  font-family:'Arial';
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:0.3125em;
+  top:0.625em;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  left: -2px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{
+  position:relative;
+  display:block;
+}
+
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+

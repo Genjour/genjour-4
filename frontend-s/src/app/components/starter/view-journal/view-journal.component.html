@@ -1,0 +1,350 @@
+<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-scroll-top--shown">
+  <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ">
+    <div class="m-grid__item m-grid__item--fluid m-wrapper m--padding-40">
+
+
+      <div *ngIf="journal.type==1 then article else quotation"></div>
+
+      <ng-template #article>
+        <div class="row">
+          <div class="col-xl-8 col-lg-7">
+            <div class="m-portlet m-portlet--bordered-semi">
+              <!-- <div class="m-portlet__head">
+                              <div class="m-portlet__head-tools">
+                                      <ul class="m-portlet__nav">
+                                          <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="click" aria-expanded="true">
+                                              <a href="#" class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill   m-dropdown__toggle">
+                                              <i class="la la-ellipsis-v"></i>
+                                              </a>
+                                              <div class="m-dropdown__wrapper">
+                                              <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                              <div class="m-dropdown__inner">
+                                                  <div class="m-dropdown__body">
+                                                  <div class="m-dropdown__content">
+                                                          <ul class="m-nav">
+                                                              <li *ngIf="journal?.genjouristId === user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                  <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                  <span class="m-nav__link-text">
+                                                                      Edit
+                                                                  </span>
+                                                                  </div>
+                                                              </li>
+                                                              <li *ngIf="journal?.genjouristId === user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                                                  <i class="m-nav__link-icon fa fa-trash"></i>
+                                                                  <span class="m-nav__link-text">
+                                                                      Delete
+                                                                  </span>
+                                                                  </div>
+                                                              </li>
+                                                              <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                                                  <div style="cursor: pointer;"  (click)="fun()" class="m-nav__link">
+                                                                      <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                                                      <span class="m-nav__link-text">
+                                                                      Report
+                                                                      </span>
+                                                                  </div>
+                                                              </li>
+                                                          </ul>
+                                                  </div>
+                                                  </div>
+                                              </div>
+                                              </div>
+                                          </li>
+                                      </ul>
+                              </div>
+                          </div> -->
+              <div class="m-portlet__body">
+                <div class="m--margin-10 m--margin-padding-25 text-center">
+                  <img class="img-fluid" [src]="journal?.imgUrl" alt="Image">
+                </div>
+              </div>
+            </div>
+
+            <div class="m-portlet m-portlet--bordered-semi">
+              <div class="m-portlet__body">
+                <div class="m-widget19">
+                  <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                      <h3 class="m-subheader__title ">
+                        {{journal?.title}}
+                      </h3>
+                    </div>
+                    <div>
+                      <button [routerLink]="['/category',journal?.category]" type="button" class="btn btn-sm m-btn--pill btn-brand m--margin-bottom-10">
+                        {{journal?.category}}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="m-widget19__content">
+                    <div class="m-widget19__header primary_info">
+                      <div class="m-widget19__info">
+                        <span style="cursor: pointer;" class="btn m-btn--pill btn-secondary btn-sm m--margin-left-10" *ngFor="let tag of journal.tags">
+                          {{tag}}
+                        </span>
+                        <br>
+
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-support-journal-secondary [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-comments-secondary></app-comments-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-replicate-secondary (toggleSocialIcons)="onClickSocialIcon($event)"></app-replicate-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-bookmark-secondary [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-bookmark-secondary>
+                      </div>
+                    </div>
+                    <div *ngIf="socialIconsStatus" class="replicate_icons m--margin-top-25 m--margin-bottom-25">
+                      <div class="m-stack m-stack--ver m-stack--general">
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}">
+                            <i class="socicon-whatsapp"></i>
+                          </a>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="m-widget19__content">
+                    <div class="m-widget19__header">
+                      <div style="cursor: pointer;" class="m-widget19__user-img" [routerLink]="['/genjourist',journal?.genjouristId]">
+                        <img class="m-widget19__img" [src]="journal?.profileImg" alt="">
+                      </div>
+                      <div class="m-widget19__info">
+                        <span style="cursor: pointer;" class="m-widget19__username" [routerLink]="['/genjourist',journal?.genjouristId]">
+                          {{journal?.name}}
+                        </span>
+                        <br>
+                        <span class="m-widget19__time m-badge m-badge--danger m-badge--wide" style="color:white;">
+                          14-30
+                        </span>
+                      </div>
+
+                    </div>
+                    <div *ngIf="socialIconsStatus" class="replicate_icons m--margin-top-25 m--margin-bottom-25">
+                      <div class="m-stack m-stack--ver m-stack--general">
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}">
+                            <i class="socicon-whatsapp"></i>
+                          </a>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                        </div>
+                        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                          <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lead">
+                      <div [innerHtml]="journal?.content"></div>
+                      <!-- {{journal?.content}} -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="comment_box">
+              <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
+                <div class="m-portel__body">
+                  <div class="m-widget19">
+                    view comments
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="m-portlet m-portlet--rounded" *ngFor="let suggestedJournal of suggestedJournals">
+              <div class="m-portlet__body">
+                <div class="m-widget5">
+                  <div class="m-widget5__item">
+                    <div class="m-widget5__pic">
+                      <img class="m-widget7__img" [routerLink]="['/journal',suggestedJournal?.journalId]" [src]="suggestedJournal.imgUrl" alt="">
+                    </div>
+                    <div class="m-widget5__content">
+
+                      <div class="article_title" style="cursor:pointer;" [routerLink]="['/journal',suggestedJournal?.journalId]">
+                        {{suggestedJournal?.title | summaryFifty}}
+                      </div>
+                      <div>
+                        <b style="font-weight: 400;">{{suggestedJournal?.name}}</b>
+                      </div>
+                      <div>
+                        5K Supporters
+                      </div>
+                      <span class="m-nav__link-badge" style="cursor: pointer;" [routerLink]="['/category',suggestedJournal?.category]">
+                        <span class="m-badge m-badge--brand m-badge--wide">
+                          {{suggestedJournal?.category}}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #quotation>
+        <div class="row" style="background-color: white; border-radius: 25px; height: 600px;">
+          <div class="col-md-6">
+            <div class="m-portlet m-portlet--bordered-semi">
+              <div class="m-portlet__head">
+                <div class="m-portlet__head-tools">
+                  <ul class="m-portlet__nav">
+                    <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                      data-dropdown-toggle="click" aria-expanded="true">
+                      <a href="#" class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill   m-dropdown__toggle">
+                        <i class="la la-ellipsis-v"></i>
+                      </a>
+                      <div class="m-dropdown__wrapper">
+                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                        <div class="m-dropdown__inner">
+                          <div class="m-dropdown__body">
+                            <div class="m-dropdown__content">
+                              <ul class="m-nav">
+                                <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                  <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                    <span class="m-nav__link-text">
+                                      Edit
+                                    </span>
+                                  </div>
+                                </li>
+                                <li *ngIf="journal?.genjouristId == user?.genjouristId" class="m-nav__item">
+                                  <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                    <i class="m-nav__link-icon fa fa-trash"></i>
+                                    <span class="m-nav__link-text">
+                                      Delete
+                                    </span>
+                                  </div>
+                                </li>
+                                <li *ngIf="journal?.genjouristId != user?.genjouristId" class="m-nav__item">
+                                  <div style="cursor: pointer;" (click)="fun()" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-edit-1"></i>
+                                    <span class="m-nav__link-text">
+                                      Report
+                                    </span>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="m-portlet__body">
+                <!--begin::Widget 7-->
+                <div class="m-widget7 m-widget7--skin-dark">
+                  <div class="m-widget7__desc">
+                    <blockquote style="cursor: pointer;" class="blockquote">{{journal.content}} </blockquote>
+                  </div>
+                  <div class="m-widget7__user">
+                  </div>
+                </div>
+                <!--end::Widget 7-->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="m-portlet m-portlet--bordered-semi">
+              <div class="m-portlet__body">
+                <div class="m-widget19">
+                  <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                      <span class="btn m-btn--pill btn-secondary btn-sm m--margin-left-10" *ngFor="let tag of journal.tags">
+                        {{tag}}
+                      </span>
+                    </div>
+                    <div>
+                      <button [routerLink]="['/category',journal?.category]" type="button" class="btn btn-sm m-btn--pill btn-brand m--margin-bottom-10">
+                        {{journal?.category}}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="m-widget19__content">
+                    <div class="m-widget19__header primary_info">
+                      <div style="cursor: pointer;" class="m-widget19__user-img" [routerLink]="['/genjourist',journal?.genjouristId]">
+                        <img class="m-widget19__img" [src]="journal?.profileImg" alt="">
+                      </div>
+                      <div class="m-widget19__info">
+                        <span style="cursor: pointer;" class="m-widget19__username" [routerLink]="['/genjourist',journal?.genjouristId]">
+                          {{journal?.name}}
+                        </span>
+                        <br>
+                        <span class="m-widget19__time m-badge m-badge--danger m-badge--wide" style="color:white;">
+                          14-30
+                        </span>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-support-journal-secondary [journalId]="journalId?.journalId" [userId]="user?.genjouristId"></app-support-journal-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-comments-secondary></app-comments-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-replicate-secondary (toggleSocialIcons)="onClickSocialIcon($event)"></app-replicate-secondary>
+                      </div>
+                      <div class="m-widget19__stats">
+                        <app-bookmark-secondary [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-bookmark-secondary>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="socialIconsStatus" class="replicate_icons m--margin-top-15">
+                  <div class="m-stack m-stack--ver m-stack--general">
+                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                      <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}">
+                        <i class="socicon-whatsapp"></i>
+                      </a>
+                    </div>
+                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                      <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+                    </div>
+                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                      <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+                    </div>
+                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                      <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
+              <div class="m-portel__body">
+                <div class="m-widget19">
+                  view comment
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+

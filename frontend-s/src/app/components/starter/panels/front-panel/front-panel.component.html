@@ -1,0 +1,46 @@
+
+<div class="m-stack m-stack--ver m-stack--general">
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+        <span (click)="support(journalId,userId)">
+            <span *ngIf="!supportStatus"><i class="m-menu__link-icon fa fa-thumbs-o-up"></i></span> 
+            <span *ngIf="supportStatus"><i class="m-menu__link-icon fa fa-thumbs-up"></i></span>
+            {{supporterNumber}}    
+        </span>
+    </div>
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+        <span (click)="hideme = !hideme" > <i class="m-menu__link-icon fa fa-eye"> </i> </span> 
+    </div>
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+            <span (click)="hideReplicate = !hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
+    </div>
+    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+        <span data-toggle="modal"> <i class="m-menu__link-icon fa fa-bookmark-o"> </i> </span> 
+    </div>
+</div>
+<div [hidden]="!hideReplicate" class="replicate_icons m--margin-top-15">
+    <div class="m-stack m-stack--ver m-stack--general">
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a>
+        </div>
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
+        </div>
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                <i (click)="twitterShare(articleId)" class="socicon-twitter"></i>
+        </div>
+        <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
+                <i (click)="googlePlusShare(articleId)" class="socicon-googleplus"></i>
+        </div>
+    </div>   
+</div>
+<div class="m--margin-top-20">
+    <form [hidden]="!hideme" #commentBoxInput="ngForm" >
+        <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">	
+            <div class="m-messenger__form">
+                <div class="m-messenger__form-controls">
+                    <input  type="text" name="commentInput" [(ngModel)]="commentInput"  placeholder="Your point of view..." class="m-messenger__form-input">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

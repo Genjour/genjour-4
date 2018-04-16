@@ -7,7 +7,6 @@ const SupportJournal    = require('../models/supportJournal');
 const jwt        = require('jsonwebtoken');
 const config     = require('../config/database');
 const uniqueId   = require('unique-id-generator');
-//const io		 = require('socket.io');
 
 
 //=============================================================================
@@ -53,7 +52,7 @@ const uniqueId   = require('unique-id-generator');
                     })
     
                 } 
-        })
+    })
 
     
     });
@@ -110,6 +109,20 @@ router.get('/getSupportersCount/journal/:journalId',function(req,res){
                 
 
     })
+
+    router.post('/checkJournalSupportstatus',(req,res)=>{
+        const journalId = req.body.journalId;
+        const supportId = req.body.currentId;
+
+        SupportJournal.checkJournalSupportstatus(journalId, supportId, (err,status)=>{
+            if(err) throw err;
+            if(!status){
+                res.json({success:false});
+            }else{
+                res.json({success:true});
+            }
+        });
+    });
 
 
 module.exports = router;

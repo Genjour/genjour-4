@@ -15,6 +15,16 @@ router.get('/genjourist/:id', function (req, res) {
     });
 });
 
+// router.get('/genjourist/:username', function (req, res) {
+//     const a = req.params.username;
+//     console.log(a);
+//     User.getUserByUsername(req.params.username, function (err, genjourist) {
+//         if (err) throw err;
+//         res.json(genjourist);
+//     });
+// });
+
+
 
 //=============================================================================
 //============================== JOURNALS BY GENJOURIST =======================
@@ -228,22 +238,25 @@ router.get('/bookmark/status/journal/:journalId/:userId', (req, res) => {
 })
 
 
-router.post('/bookmark/journal', function (req, res) {
-    var userId = req.body.genjouristId;
+router.post('/bookmarkJournal', function (req, res) {
+    var userId = req.body.userId;
+    console.log(userId)
     var journalId = req.body.journalId;
 
     let newBookmark = new Bookmark({
         bookmarkId: uniqid('b7d4s5wa4'),
-        genjouristId: req.body.genjouristId,
+        genjouristId: req.body.userId,
         journalId: req.body.journalId,
         bookmarkDate: Date(),
         status: true,
     });
 
-    Bookmark.checkExistingBookmark(journalId, userId, function (err, docs) {
-        if (err) throw err;
-        if (!docs) {
+    Bookmark.getBookmarkCount(journalId,userId, (err,count)=>{
+        if(err) throw err;
+        console.log(count);
+        if(count == 0){
             Bookmark.addBookmark(newBookmark, function (err, docss) {
+                
                 if (err) throw err;
                 else {
                     res.json({
@@ -252,21 +265,18 @@ router.post('/bookmark/journal', function (req, res) {
                     })
                 }
             })
-
-        } else {
+        }else if(count>0){
             Bookmark.deleteBookmark(journalId, userId, function (err, docs){
                 if (err) throw err;
                 else {
                     res.json({
-                        success: true,
+                        success: false,
                         msg: "Bookmark deleted"
                     })
                 }
-            })
-
+            });
         }
-    })
-
+    });
 
 });
 
@@ -274,6 +284,13 @@ router.get('/bookmark/journal/count/:journalId',function (req, res) {
     Bookmark.getBookmarkCount(req.params.journalId, function(err, count) {
         if(err) throw err;
         res.json(count);
+    });
+});
+
+router.get('/getBookmarkByGenjouristId/:genjouristId',function (req, res) {
+    Bookmark.getBookmarkByGenjouristId(req.params.genjouristId, function(err, docs) {
+        if(err) throw err;
+        res.json(docs);
     });
 });
 

@@ -153,4 +153,14 @@ router.put('/update/userInfo/findUserAndUpdateProfilePic/:userId',(req,res)=>{
 	});
 
 });
+
+router.get('/allUsers', (req,res)=>{
+	User.getUsers((err, users)=>{
+		if(err){
+		  throw err;
+		}
+	
+		res.json(users);
+	  });
+});
 module.exports = router;

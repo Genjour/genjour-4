@@ -72,8 +72,7 @@ app.get('/',(req,res)=>{
 	res.send('Invalid Endpoint');
 });
 
-
+module.exports = app;
 const port = process.env.PORT || '3000';
 app.set('port', port);
-
-server.listen(port, () => console.log(`APIs are running on localhost:${port}`));
+require('./socket/socket')(port,app)

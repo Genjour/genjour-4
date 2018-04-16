@@ -1,0 +1,59 @@
+span{
+    cursor:pointer;
+}
+
+.m-stack__item:hover{
+    
+}
+
+a, a:active, a:link, a:visited{
+    color: #575962;
+    text-decoration: none;
+}
+
+.m-messenger .m-messenger__form .m-messenger__form-controls .m-messenger__form-input {
+    width: 100%;
+    padding: 10px 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border-radius: 4px;
+}
+
+
+.socicon-whatsapp{
+    background-color: #34af23;
+    padding: 8px 10px 5px 11px; 
+    height: 25px;
+    width:  25px;
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-facebook{
+    background-color: #3b5998;
+    padding: 8px 10px 5px 11px; 
+    height: 25px;
+    width:  25px;
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-twitter{
+    background-color: #00aced;
+    padding: 8px 10px 5px 11px; 
+    height: 25px;
+    width:  25px;
+    border-radius: 50%;
+    color: white;
+}
+
+.socicon-googleplus{
+    background-color: #d34836;
+    padding: 8px 10px 5px 11px; 
+    height: 25px;
+    width:  25px;
+    border-radius: 50%;
+    color: white;
+}

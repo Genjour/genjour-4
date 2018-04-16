@@ -66,3 +66,7 @@ module.exports.getSupporters = function(journalId, callback){
 module.exports.numberOfSupporters = function(journalId,callback){
     SupportJournal.count({journalId:journalId},callback);
 }
+
+module.exports.checkJournalSupportstatus = function(journalId,userId,callback){
+    SupportJournal.count({journalId:journalId, supportId:userId},callback);
+}

@@ -1,0 +1,20 @@
+<div class="m-stack m-stack--ver m-stack--general m--margin-right-20">
+  <div class="m-stack__item m-stack__item--center m-stack__item--middle" style="width: 20px;">
+    <span class="m-widget19__comment">
+      <span class="supportBtn" (click)="support(journalId,userId)">
+        <span *ngIf="!supportStatus">
+          <i style="font-size: 1.5rem" class="m-menu__link-icon fa fa-thumbs-o-up"></i>
+        </span>
+        <span *ngIf="supportStatus">
+          <i style="font-size: 1.5rem" class="m-menu__link-icon fa 	fa-thumbs-up"></i>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="m-stack__item m-stack__item--center m-stack__item--middle" style="width: 20px;">
+    <span class="m-widget19__number" style="margin-bottom:0rem">
+      {{supporterNumber}}
+    </span>
+  </div>
+</div>
+
