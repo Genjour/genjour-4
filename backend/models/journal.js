@@ -218,3 +218,87 @@ module.exports.getJournalByGenjourist = function(userId,callback){
         }
      ],callback)
 }
+
+
+module.exports.getUserJournals = function(genjourist,callback){
+    Journal.aggregate([
+        {
+            $match : {  
+                        $and:[
+                            {genjourist:genjourist},
+                            {status:true}
+                        ]
+                        
+                    }
+        },
+        {
+            $lookup: {
+               from: "users",
+               localField: "genjouristId",    // field in the orders collection
+               foreignField: "genjouristId",  // field in the items collection
+               as: "details"
+            }
+         },
+         {
+             $unwind:"$details"
+         },
+         { $project: { 
+             genjouristId: "$genjouristId",
+             profileImg:"$details.profileImg",
+             gender:"$details.gender",
+             email:"$details.email",
+             dob:"$details.dob",
+             genjourist:"$details.name",
+             username:"$details.username",
+             journalId:1,         
+             content:1,
+             category:1, 
+             imgUrl:1,
+             status:1,
+             type:1,
+             date:1,
+             title:1,
+             tags:1,
+             } 
+        }
+     ],callback)
+}
+
+
+module.exports.getOwnJournals = function(genjourist,callback){
+    Journal.aggregate([
+        {
+            $match : {genjourist:genjourist}
+        },
+        {
+            $lookup: {
+               from: "users",
+               localField: "genjouristId",    // field in the orders collection
+               foreignField: "genjouristId",  // field in the items collection
+               as: "details"
+            }
+         },
+         {
+             $unwind:"$details"
+         },
+         { $project: { 
+             genjouristId: "$genjouristId",
+             profileImg:"$details.profileImg",
+             gender:"$details.gender",
+             email:"$details.email",
+             dob:"$details.dob",
+             genjourist:"$details.name",
+             username:"$details.username",
+             journalId:1,         
+             content:1,
+             category:1, 
+             imgUrl:1,
+             status:1,
+             type:1,
+             date:1,
+             title:1,
+             tags:1,
+             } 
+        }
+     ],callback)
+}

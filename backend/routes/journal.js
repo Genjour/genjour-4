@@ -153,6 +153,34 @@ router.get('/journals/:category', (req,res)=>{
     });
   });
 
+//=============================================================================
+//========================== ALL JOURNALS OF USER  ============================
+//=============================================================================
+
+
+router.get('/getUserJournals/:genjourist', (req,res)=>{
+  Journal.getUserJournals(req.params.genjourist, (err,data)=>{
+    if(err) throw err;
+    if(!data){
+      res.json({success:false, msg:"No data found"});
+    }else{
+      res.json(data);
+    }
+  });
+});
+
+
+
+router.get('/getOwnrJournals/:genjourist', (req,res)=>{
+  Journal.getOwnJournals(req.params.genjourist, (err,data)=>{
+    if(err) throw err;
+    if(!data){
+      res.json({success:false, msg:"No data found"});
+    }else{
+      res.json(data);
+    }
+  });
+});
 
 
 module.exports = router;

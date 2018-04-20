@@ -164,7 +164,9 @@
               <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
                 <div class="m-portel__body">
                   <div class="m-widget19">
-                    view comments
+                      <app-write-comments></app-write-comments>
+                      
+                      <app-view-comments [journalId] = "journal?.journalId" ></app-view-comments>
                   </div>
                 </div>
               </div>
@@ -298,7 +300,7 @@
                         </span>
                       </div>
                       <div class="m-widget19__stats">
-                        <app-support-journal-secondary [journalId]="journalId?.journalId" [userId]="user?.genjouristId"></app-support-journal-secondary>
+                        <app-support-journal-secondary [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal-secondary>
                       </div>
                       <div class="m-widget19__stats">
                         <app-comments-secondary></app-comments-secondary>
@@ -335,7 +337,8 @@
             <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
               <div class="m-portel__body">
                 <div class="m-widget19">
-                  view comment
+                  <app-write-comments></app-write-comments>
+                  <app-view-comments [journalId] = "journal?.journalId"></app-view-comments>
                 </div>
               </div>
             </div>

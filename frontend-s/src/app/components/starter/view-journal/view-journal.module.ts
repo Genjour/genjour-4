@@ -8,6 +8,8 @@ import { SupportJournalSecondaryModule } from '../modules/support-journal-second
 import { ReplicateSecondaryModule } from '../modules/replicate-secondary/replicate-secondary.module';
 import { CommentsSecondaryModule } from '../modules/comments-secondary/comments-secondary.module';
 import { BookmarkSecondaryModule } from '../modules/bookmark-secondary/bookmark-secondary.module';
+import { ViewCommentsModule } from '../modules/view-comments/view-comments.module';
+import { WriteCommentsModule } from './../modules/write-comments/write-comments.module';
 
 const routes: Routes =[
     {
@@ -25,7 +27,9 @@ const routes: Routes =[
         ReplicateSecondaryModule,
         CommentsSecondaryModule,
         BookmarkSecondaryModule,
-        SummaryFiftyModule
+        SummaryFiftyModule,
+        WriteCommentsModule,
+        ViewCommentsModule
     ],
     declarations:[
         ViewJournalComponent,

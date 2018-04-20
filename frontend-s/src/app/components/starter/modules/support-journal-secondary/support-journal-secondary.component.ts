@@ -1,5 +1,5 @@
 import { AuthService } from './../../../../services/user_auth/auth.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SupportJournalService } from '../../../../services/support-journal/support-journal.service';
 import { Router } from '@angular/router';
 import * as io from "socket.io-client";
@@ -9,7 +9,7 @@ import * as io from "socket.io-client";
   templateUrl: './support-journal-secondary.component.html',
   styleUrls: ['./support-journal-secondary.component.css']
 })
-export class SupportJournalSecondaryComponent implements OnInit {
+export class SupportJournalSecondaryComponent implements OnInit, OnChanges {
 
 
   @Input() journalId :String;
@@ -27,27 +27,29 @@ export class SupportJournalSecondaryComponent implements OnInit {
       private authService: AuthService,
       private router: Router
     ) { }
-  
+  ngOnChanges(){
+    this.supportJournalService.getSupportersCount(this.journalId).subscribe(data=>{
+      //console.log(data);
+      this.supporterNumber = data;
+    })
+    const flag = {
+      journalId: this.journalId,
+      currentId: this.currentId
+    }
+    this.supportJournalService.checkJournalSupportstatus(flag).subscribe(data=>{
+      if(data.success){
+        this.supportJournal = true;
+      }else{
+        this.supportJournal = false;
+      }
+    })
+  }
     ngOnInit() {
   
       this.currentId=JSON.parse(localStorage.getItem('id'))
       this.socket = io.connect(this.url);
-      this.supportJournalService.getSupportersCount(this.journalId).subscribe(data=>{
-        //console.log(data);
-        this.supporterNumber = data;
-      })
   
-      const flag = {
-        journalId: this.journalId,
-        currentId: this.currentId
-      }
-      this.supportJournalService.checkJournalSupportstatus(flag).subscribe(data=>{
-        if(data.success){
-          this.supportJournal = true;
-        }else{
-          this.supportJournal = false;
-        }
-      })
+
     }
   
     support(journalId,userId){

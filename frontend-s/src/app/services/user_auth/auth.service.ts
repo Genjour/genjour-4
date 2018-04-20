@@ -88,4 +88,17 @@ checkEmailNotTaken(email: string) {
       this.user = null;
       localStorage.clear();
       }
+
+
+      getGenjouristByUsername(username){
+          return this.http.get(EndPoint.getGenjouristByUsername+username).map(res=>res.json());
+      }
+
+      getUserJournals(username){
+          return this.http.get(EndPoint.getUserJournals+username).map(res=>res.json());
+      }
+
+      getOwnJournals(username){
+        return this.http.get(EndPoint.getUserJournals+username).map(res=>res.json());
+    }
 }

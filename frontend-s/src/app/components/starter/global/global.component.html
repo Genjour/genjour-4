@@ -77,11 +77,11 @@
                                       <div class="m-widget19__content">
                                       <div class="m-widget19__header">
                                           <div class="m-widget19__user-img">
-                                          <a [routerLink]="['/genjourist',journal?.genjouristId]"><img class="m-widget19__img" src="{{journal.profileImg}}" alt=""></a>
+                                          <a [routerLink]="['/genjourist',journal?.username]"><img class="m-widget19__img" src="{{journal.profileImg}}" alt=""></a>
                                           </div>
                                           <div class="m-widget19__info">
                                           <span class="m-widget19__username">
-                                              <a [routerLink]="['/genjourist',journal?.genjouristId]">{{journal?.name}}</a>
+                                              <a [routerLink]="['/genjourist',journal?.username]">{{journal?.name}}</a>
                                           </span>
                                           <br>
                                           <span class="m-widget19__time">
@@ -222,7 +222,7 @@
                                   <img class="m-widget7__img" src="{{journal.profileImg}}" alt="">
                                   </div>
                                   <div class="m-widget7__info">
-                                  <a [routerLink]="['/genjourist',journal.genjouristId]" >
+                                  <a [routerLink]="['/genjourist',journal.username]" >
                                       <span class="m-widget7__username">
                                           {{journal.name}}
                                       </span>

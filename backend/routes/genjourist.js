@@ -15,14 +15,14 @@ router.get('/genjourist/:id', function (req, res) {
     });
 });
 
-// router.get('/genjourist/:username', function (req, res) {
-//     const a = req.params.username;
-//     console.log(a);
-//     User.getUserByUsername(req.params.username, function (err, genjourist) {
-//         if (err) throw err;
-//         res.json(genjourist);
-//     });
-// });
+router.get('/getGenjouristByUsername/:username', function (req, res) {
+    const a = req.params.username;
+    console.log(a);
+    User.getUserByUsername(req.params.username, function (err, genjourist) {
+        if (err) throw err;
+        res.json(genjourist);
+    });
+});
 
 
 
@@ -272,8 +272,9 @@ router.post('/bookmarkJournal', function (req, res) {
                     res.json({
                         success: false,
                         msg: "Bookmark deleted"
-                    })
+                    });
                 }
+                
             });
         }
     });

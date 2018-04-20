@@ -16,6 +16,7 @@ export class SupportJournalService {
   }
 
   getSupportersCount(journalId){
+    //console.log(journalId)
     return this.http.get(EndPoint.getSupportersCount+journalId).map(res=>res.json());
   }
   

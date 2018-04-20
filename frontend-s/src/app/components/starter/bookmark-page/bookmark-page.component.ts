@@ -20,13 +20,12 @@ user:User;
 
   ngOnInit() {
 
-    this.authService.userSubject.subscribe(x=>{
-      this.user= x;
-      this.bookmarkService.getBookmarkByGenjouristId(x.genjouristId).subscribe(data=>{
+      let genjouristId = JSON.parse(localStorage.getItem('id'))
+      this.bookmarkService.getBookmarkByGenjouristId(genjouristId).subscribe(data=>{
         this.journals = data;
         console.log(data)
       })
-    })
+
 
   }
 
