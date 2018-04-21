@@ -10,7 +10,7 @@ export class BookmarkService {
   ) { }
 
   checkBookmark(journalId,currentId){
-    
+    return this.http.get(EndPoint.checkBookmark+journalId+'/'+currentId).map(res=>res.json());
   }
 
   bookmark(flag){

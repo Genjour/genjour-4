@@ -142,7 +142,7 @@ router.get('/edit/journal/:journalId', (req,res)=>{
 //========================== JOURNALS BY CATEGORY =============================
 //=============================================================================
 
-router.get('/journals/:category', (req,res)=>{
+router.get('/getJournalsByCategory/:category', (req,res)=>{
     Journal.findJournalByCategory(req.params.category, (err,data)=>{
       if(err) throw err;
       if(!data){

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DataService } from './services/shared/dataService.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { EndPoint } from '../../shared/global';
 
@@ -11,6 +11,12 @@ export class CommentsService {
 
   getCommentsByJournalId(journalId){
     return this.http.get(EndPoint.getCommentByJournalId+journalId).map(res=>res.json())
+  }
+
+  commentAddEmit(flag:any,socket:any){
+    
+    socket.emit('commentAdded', flag);
+    console.log(flag)
   }
 
 }

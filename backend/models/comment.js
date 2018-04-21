@@ -23,7 +23,44 @@ module.exports.addComment = function(comment, callback){
 
 
 module.exports.findComment = function(journalId, callback){
-    Comment.find({journalId:journalId}, callback).sort({$natural:-1});
+    Comment.aggregate([
+        {
+            $match:{journalId:journalId}
+        },
+        {
+            $lookup:{
+                        from:"users",
+                        localField:"genjouristId",
+                        foreignField: "genjouristId",  // field in the items collection
+                        as: "details"
+                    }
+        },
+        {
+            $unwind:"$details"
+        },
+        {
+            $project: { 
+                 
+                 genjouristId: "$genjouristId",
+                 commentId:1,
+                 comment:1,
+                 date:1,
+                 refrenceId:1,
+                 name:"$details.name",
+                 username:"$details.username",
+                 createdOn:"$details.createdOn",
+                 dob:"$details.dob",
+                 email:"$details.email",
+                 gender:"$details.gender",
+                 profileImg:"$details.profileImg"                   
+                 } 
+        },
+        {
+            $sort:{
+                "date":-1
+            }
+        }
+    ],callback);
 }
 
 module.exports.deleteComment = function(commentId, callback){
@@ -39,4 +76,44 @@ module.exports.getCommentCount = function(journalId,callback){
 }
 
 
+module.exports.getCommentById = function(commentId,callback){
+    Comment.aggregate([
+        {
+            $match:{commentId:commentId}
+        },
+        {
+            $lookup:{
+                        from:"users",
+                        localField:"genjouristId",
+                        foreignField: "genjouristId",  // field in the items collection
+                        as: "details"
+                    }
+        },
+        {
+            $unwind:"$details"
+        },
+        {
+            $project: { 
+                 
+                 genjouristId: "$genjouristId",
+                 commentId:1,
+                 comment:1,
+                 date:1,
+                 refrenceId:1,
+                 name:"$details.name",
+                 username:"$details.username",
+                 createdOn:"$details.createdOn",
+                 dob:"$details.dob",
+                 email:"$details.email",
+                 gender:"$details.gender",
+                 profileImg:"$details.profileImg"                   
+                 } 
+        },
+        {
+            $sort:{
+                "date":-1
+            }
+        }
+    ],callback)
 
+}

@@ -136,8 +136,44 @@ module.exports.findJournalByIdTrue = function(journalId, callback){
 //=================================================================================
 
 module.exports.findJournalByCategory = function(category, callback){
-    const query = {category:category}
-    Journal.find(query,callback);
+    Journal.aggregate([
+        {
+            $match : { category:category  } 
+                
+                     
+        },
+        {
+            $lookup: {
+               from: "users",
+               localField: "genjouristId",    // field in the orders collection
+               foreignField: "genjouristId",  // field in the items collection
+               as: "details"
+            }
+         },
+         {
+             $unwind:"$details"
+         },
+         { $project: { 
+             genjouristId: "$genjouristId",
+             journalId:1,         
+             content:1,
+             category:1, 
+             imgUrl:1,
+             status:1,
+             type:1,
+             date:1,
+             title:1,
+             tags:1,
+             name:"$details.name", 
+             username:"$details.username",
+             email:"$details.email",
+             gender:"$details.gender",
+             dob:"$details.dob",
+             profileImg:"$details.profileImg",
+             createdOn:"$details.createdOn"                  
+             } 
+        },
+     ],callback)
 }
 
 //=================================================================================

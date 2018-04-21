@@ -1,48 +1,34 @@
-article
 <div class="m-widget2">
     <div class="m-widget2__item m-widget2__item--primary" *ngFor="let comment of comments">
         <div class="m-widget2__checkbox">
-                <img height="50px" [src]="user?.profileImg">
+                <img style="border-radius: 50%;" height="50px" [src]="comment?.profileImg">
         </div>
         <div class="m-widget2__desc">
+            <div class="lead">
+                {{comment.name}} 
+            </div>
             <span class="m-widget2__text">
                 {{comment.comment}}
             </span>
             <br>
             <span class="m-widget2__user-name">
-                <a href="#" class="m-widget2__link">
-                    By Bob
-                </a>
+                 <span class="m-widget2__link">
+                        {{comment.date | timeAgo}}
+                </span>
             </span>
         </div>
         <div class="m-widget2__actions">
             <div class="m-widget2__actions-nav">
-                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover" aria-expanded="true">
-                    <a href="#" class="m-dropdown__toggle">
+                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" appDropdown>
+                    <span class="m-dropdown__toggle">
                         <i class="la la-ellipsis-h"></i>
-                    </a>
+                    </span>
                     <div class="m-dropdown__wrapper">
                         <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 14.7032px;"></span>
                         <div class="m-dropdown__inner">
                             <div class="m-dropdown__body">
                                 <div class="m-dropdown__content">
                                     <ul class="m-nav">
-                                        <li class="m-nav__item">
-                                            <a href="" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-share"></i>
-                                                <span class="m-nav__link-text">
-                                                    Activity
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="m-nav__item">
-                                            <a href="" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                <span class="m-nav__link-text">
-                                                    Messages
-                                                </span>
-                                            </a>
-                                        </li>
                                         <li class="m-nav__item">
                                             <a href="" class="m-nav__link">
                                                 <i class="m-nav__link-icon flaticon-info"></i>

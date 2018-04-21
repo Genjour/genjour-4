@@ -3,6 +3,7 @@ import { AuthService } from './../../../../services/user_auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentsService } from '../../../../services/comments/comments.service';
+import * as io from "socket.io-client";
 
 @Component({
   selector: 'app-view-comments',
@@ -14,6 +15,9 @@ export class ViewCommentsComponent implements OnInit {
 @Input() journalId : String;
 user:User;
 comments:any[]=[];
+private url = 'http://localhost:3000';
+private socket;
+
   constructor(
     private commentsService : CommentsService,
     private route : ActivatedRoute,
@@ -24,9 +28,16 @@ comments:any[]=[];
     this.authService.userSubject.subscribe(data=>{
       this.user = data;
     })
+
+    this.socket = io.connect(this.url);
+    this.socket.on('commentAddEmit', (data) => {
+         this.comments.push(data[0]);   
+     });
+    
+
     this.commentsService.getCommentsByJournalId(this.route.snapshot.params.journalId).subscribe(data=>{
       this.comments = data;
-      console.log(this.comments);
+      //console.log(this.comments);
 
     })
 

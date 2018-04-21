@@ -23,4 +23,8 @@ Endpoint: EndPoint;
     return this.http.get(EndPoint.getBookmarkCount + journalId).map(res => res.json());
   }
 
+  getJournalsByCategory(category){
+    return this.http.get(EndPoint.getJournalsByCategory+category).map(res => res.json());
+  }
+
 }

@@ -104,19 +104,19 @@
                                                 <app-support-journal  [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal>
                                             </div>
                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                                                <span (click)="journal.hideme = !journal.hideme" > <i class="m-menu__link-icon fa fa-eye"> </i> </span> 
+                                                <span (click)="hideme = !hideme" > <i class="m-menu__link-icon fa fa-eye"> </i> </span> 
                                             </div>
                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                                                    <span (click)="journal.hideReplicate = !journal.hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
+                                                    <span (click)="hideReplicate = !hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
                                             </div>
                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
                                                 <app-bookmark [journalId]="journal?.journalId"></app-bookmark> 
                                             </div>
                                         </div>
-                                        <div [hidden]="!journal.hideReplicate" class="replicate_icons m--margin-top-15">
+                                        <div [hidden]="!hideReplicate" class="replicate_icons m--margin-top-15">
                                             <div class="m-stack m-stack--ver m-stack--general">
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
-                                                    <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a>
+                                                        <!-- <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a> -->
                                                 </div>
                                                 <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
                                                         <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
@@ -130,11 +130,10 @@
                                             </div>   
                                         </div>
                                         <div class="m--margin-top-20">
-                                            <form [hidden]="!journal.hideme" #commentBoxInput="ngForm" >
+                                            <form [hidden]="!hideme" #commentBoxInput="ngForm" >
                                                 <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">	
                                                     <div class="m-messenger__form">
                                                         <div class="m-messenger__form-controls">
-                                                                <span> <img height="40px" [src]="user?.profileImg"> </span>
                                                             <input  type="text" name="commentInput" [(ngModel)]="commentInput"  placeholder="Your point of view..." class="m-messenger__form-input">
                                                         </div>
                                                     </div>
@@ -239,20 +238,20 @@
                                     <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
                                         <app-support-journal  [journalId]="journal?.journalId" [userId]="user?.genjouristId" ></app-support-journal>
                                     </div>
-                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">  
-                                        <span (click)="journal.hideme = !journal.hideme" > <i class="m-menu__link-icon fa fa-eye"> </i> </span>
+                                    <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
+                                        <app-comments (emitter)="receiveDataFromChild($event)"></app-comments> 
                                     </div>
                                     <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                                            <span (click)="journal.hideReplicate = !journal.hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
+                                            <span (click)="hideReplicate = !hideReplicate"><i class="m-menu__link-icon flaticon-network"> </i> </span> 
                                     </div>
                                     <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
                                         <app-bookmark></app-bookmark> 
                                     </div>
                                 </div>
-                                <div [hidden]="!journal.hideReplicate" class="replicate_icons m--margin-top-15">
+                                <div [hidden]="!hideReplicate" class="replicate_icons m--margin-top-15">
                                     <div class="m-stack m-stack--ver m-stack--general">
                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
-                                                <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a>
+                                                <!-- <a href="whatsapp://send?text=http://localhost:4200/journal/{{articleId}}"><i class="socicon-whatsapp"></i></a> -->
                                         </div>
                                         <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
                                                 <i (click)="facebookShare(articleId)" class="socicon-facebook"></i>
@@ -266,12 +265,10 @@
                                     </div>   
                                 </div>
                                 <div class="m--margin-top-20">
-                                    
-                                    <form [hidden]="!journal.hideme" #commentBoxInput="ngForm" >
+                                    <form *ngIf="showCommentBox" #commentBoxInput="ngForm" >
                                         <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">	
                                             <div class="m-messenger__form">
                                                 <div class="m-messenger__form-controls">
-                                                    <span> <img height="40px" [src]="user?.profileImg"> </span>
                                                     <input  type="text" name="commentInput" [(ngModel)]="commentInput"  placeholder="Your point of view..." class="m-messenger__form-input">
                                                 </div>
                                             </div>

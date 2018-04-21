@@ -9,7 +9,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 
-router.get('/comments/:journalId', (req,res)=>{
+router.get('/getCommentsByJournalId/:journalId', (req,res)=>{
     Comment.findComment(req.params.journalId,(err,comments)=>{
         if(err) throw err;
         if(!comments){res.json({success:false, msg:"No comments till now"});}
@@ -19,24 +19,24 @@ router.get('/comments/:journalId', (req,res)=>{
     });
 });
 
-router.post('/add/comment',(req,res)=>{
-    const flag = new Comment( {
-        commentId        : uniqid('gmplC'),
-        genjouristId     : req.body.genjouristId,
-        genjourist       : req.body.genjourist,
-        journalId        : req.body.journalId,
-        refrenceId       : req.body.refrenceId,
-        comment          : req.body.comment,
-        date             : Date(),
-        status           : true,
-    })
-    Comment.addComment(flag,(err,status)=>{
-        if(err) throw err;
-        else{
-            res.json({success:true, msg:"Comment added"});
-        }
-    });
-});
+// router.post('/postComment',(req,res)=>{
+//     const flag = new Comment( {
+//         commentId        : uniqid('gmplC'),
+//         genjouristId     : req.body.genjouristId,
+//         genjourist       : req.body.genjourist,
+//         journalId        : req.body.journalId,
+//         refrenceId       : req.body.refrenceId,
+//         comment          : req.body.comment,
+//         date             : Date(),
+//         status           : true,
+//     })
+//     Comment.addComment(flag,(err,status)=>{
+//         if(err) throw err;
+//         else{
+//             res.json({success:true, msg:"Comment added"});
+//         }
+//     });
+// });
 
 router.put('/update/comment/:commentId', (req,res)=>{
     Comment.updateComment(req.params.commentId,data,(err,status)=>{

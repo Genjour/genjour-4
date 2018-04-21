@@ -222,15 +222,15 @@ router.get('/bookmark/status/journal/:journalId/:userId', (req, res) => {
     var userId = req.params.userId;
     var journalId = req.params.journalId;
 
-    Bookmark.checkExistingBookmark(journalId, userId, (err, status) => {
+    Bookmark.checkExistingBookmark(journalId, userId, (err, success) => {
         if (err) throw err;
-        if (!status) {
+        if (!success) {
             res.json({
-                status: false
+                success: false
             });
         } else {
             res.json({
-                status: true
+                success: true
             });
         }
     })

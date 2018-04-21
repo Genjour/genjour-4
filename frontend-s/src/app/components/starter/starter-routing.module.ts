@@ -26,6 +26,10 @@ const routes: Routes = [
     {
       path:'genjourist/:username',
       loadChildren:'./view-profile/view-profile.module#ViewProfileModule'
+    },
+    {
+      path:'category/:category',
+      loadChildren:'./view-category/view-category.module#ViewCategoryModule'
     }
 
   ]
