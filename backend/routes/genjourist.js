@@ -173,6 +173,34 @@ router.get('/supportersList/:userid', function (req, res) {
 });
 
 //=============================================================================
+//============================== Supporters Count =============================
+//=============================================================================
+
+router.get('/getSupportersNumber/:userId',(req,res)=>{
+    var userId = req.params.userId;
+    Support.getSupportersCount(userId, (err,count)=>{
+        if(err) throw err;
+        else{
+            return res.json(count);
+        }
+    });
+});
+
+//=============================================================================
+//============================== Supporting Count =============================
+//=============================================================================
+
+router.get('/getSupportingNumber/:userId',(req,res)=>{
+    var userId = req.params.userId;
+    Support.getSupportingCount(userId, (err,count)=>{
+        if(err) throw err;
+        else{
+            return res.json(count);
+        }
+    });
+});
+
+//=============================================================================
 //============================== Recommended Users ============================
 //=============================================================================
 
@@ -243,7 +271,7 @@ router.post('/bookmarkJournal', function (req, res) {
     console.log(userId)
     var journalId = req.body.journalId;
 
-    let newBookmark = new Bookmark({
+    var newBookmark = new Bookmark({
         bookmarkId: uniqid('b7d4s5wa4'),
         genjouristId: req.body.userId,
         journalId: req.body.journalId,
@@ -251,20 +279,20 @@ router.post('/bookmarkJournal', function (req, res) {
         status: true,
     });
 
-    Bookmark.getBookmarkCount(journalId,userId, (err,count)=>{
+    Bookmark.getBookmarkCount(journalId,userId, function (err,count){
         if(err) throw err;
         console.log(count);
         if(count == 0){
-            Bookmark.addBookmark(newBookmark, function (err, docss) {
+            Bookmark.addBookmark(newBookmark, function (err, docss){
                 
                 if (err) throw err;
                 else {
                     res.json({
                         success: true,
                         msg: "Bookmark saved"
-                    })
+                    });
                 }
-            })
+            });
         }else if(count>0){
             Bookmark.deleteBookmark(journalId, userId, function (err, docs){
                 if (err) throw err;

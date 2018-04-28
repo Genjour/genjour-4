@@ -13,6 +13,10 @@ io.sockets.on('connection', function(socket){
         Comment.addComment(io,commentAdded)
     })
 
+    // socket.emit('commentCount', function(commentCount){
+    //     Comment.getCommentCount(io,commentCount)
+    // })
+
     socket.on('supportJournal', (supportJournal)=>{
         Support.supportJournal(io,supportJournal);
         });

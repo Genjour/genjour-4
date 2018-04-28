@@ -29,7 +29,20 @@ app.addComment = (io,T)=>{
             Comment.getCommentById(flag.commentId, (err,doc)=>{
                 if(err) throw err;
                 else{
+                    console.log(doc)
                     io.emit('commentAddEmit', doc);
+                    Comment.getCommentCount(journalId,(err,count)=>{
+        
+                        if(err) throw err;
+                        if(!count){
+                            let result = {status:false, msg:"Problem in counting the comments"};
+                            io.emit('commentCountEmit',result);
+                        }
+                        else{
+                            console.log(count)
+                            io.emit('commentCountEmit',count);
+                        }
+                    });
                 }
             })
             
@@ -37,6 +50,22 @@ app.addComment = (io,T)=>{
         }
     });
 
+}
+
+app.getCommentCount = function(io,T){
+    const journalId = T;
+
+    Comment.getCommentCount(journalId,(err,count)=>{
+        
+        if(err) throw err;
+        if(!count){
+            let result = {status:false, msg:"Problem in counting the comments"};
+            io.emit('commentCountEmit',result);
+        }
+        else{
+            io.emit('commentCountEmit',count);
+        }
+    });
 }
 
 module.exports=app

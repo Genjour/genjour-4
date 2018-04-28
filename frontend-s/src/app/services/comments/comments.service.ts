@@ -13,10 +13,16 @@ export class CommentsService {
     return this.http.get(EndPoint.getCommentByJournalId+journalId).map(res=>res.json())
   }
 
+  getCommentsCount(journalId){
+    //socket.on('commentCount',journalId)
+    return this.http.get(EndPoint.getCommentsCount+journalId).map(res=>res.json());
+  }
+
   commentAddEmit(flag:any,socket:any){
-    
     socket.emit('commentAdded', flag);
     console.log(flag)
   }
+
+
 
 }

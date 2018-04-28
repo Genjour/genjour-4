@@ -95,4 +95,11 @@ module.exports.getSupporters = function(userId, callback){
     ], callback)
 }
 
+module.exports.getSupportersCount = function(genjouristId,callback){
+    Support.count({supportId:genjouristId},callback)
+}
 
+
+module.exports.getSupportingCount = function(genjouristId,callback){
+   Support.count({genjouristId:genjouristId},callback)
+}

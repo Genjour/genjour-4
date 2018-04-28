@@ -18,6 +18,9 @@ export  class EndPoint  {
     public static getOwnJournals            = "http://localhost:3000/getOwnJournals/";
     public static getCommentByJournalId     = "http://localhost:3000/getCommentsByJournalId/";
     public static postComment               = "http://localhost:3000/postComment";
-    public static getJournalsByCategory     = "http://localhost:3000/getJournalsByCategory/"
-
+    public static getJournalsByCategory     = "http://localhost:3000/getJournalsByCategory/";
+    public static getSupportersNumber       = "http://localhost:3000/getSupportersNumber/"
+    public static getSupportingNumber       = "http://localhost:3000/getSupportingNumber/"
+    public static getCommentsCount          = "http://localhost:3000/comment/count/journal/"
 }
+

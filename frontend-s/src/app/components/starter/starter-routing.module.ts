@@ -24,6 +24,10 @@ const routes: Routes = [
       loadChildren:'./view-journal/view-journal.module#ViewJournalModule'
     },
     {
+      path:'drafts',
+      loadChildren:'./drafts/drafts.module#DraftsModule'
+    },
+    {
       path:'genjourist/:username',
       loadChildren:'./view-profile/view-profile.module#ViewProfileModule'
     },

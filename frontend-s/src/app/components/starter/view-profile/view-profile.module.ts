@@ -11,6 +11,7 @@ import { SupportJournalModule } from '../modules/support-journal/support-journal
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng2CloudinaryModule } from './../../../../../node_modules/ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SupportGenjouristService } from '../../../services/support-genjourist/support-genjourist.service';
 
 const routes: Routes = [
     {
@@ -39,6 +40,9 @@ const routes: Routes = [
     ],
     exports:[
         ViewProfileComponent
+    ],
+    providers:[
+        SupportGenjouristService
     ]
 })
 

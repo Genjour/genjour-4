@@ -1,5 +1,7 @@
+
+import { Component, OnInit } from '@angular/core';
+import { SupportGenjouristService } from './../../../services/support-genjourist/support-genjourist.service';
 import { Journal } from './../../../models/journal.mode';
-import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthService } from '../../../services/user_auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../models/user.model';
@@ -9,7 +11,7 @@ import { User } from '../../../models/user.model';
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.css']
 })
-export class ViewProfileComponent implements OnInit, OnChanges {
+export class ViewProfileComponent implements OnInit {
 
   user:User;
   journals:Journal;
@@ -24,38 +26,37 @@ export class ViewProfileComponent implements OnInit, OnChanges {
     private authService : AuthService,
     private router : Router,
     private route: ActivatedRoute,
+    private supportGenjouristService : SupportGenjouristService
   ) { }
 
   ngOnInit() {
 
-          this.currentUser();
-  
-  }
+    this.authService.getGenjouristByUsername(this.route.snapshot.params.username).subscribe(x => {
+      this.currentUserData = x;
 
-  ngOnChanges(){
-    this.currentUser();
-  }
-  
-  currentUser() {
-      this.authService.getGenjouristByUsername(this.route.snapshot.params.username).subscribe(x => {
-        this.currentUserData = x;
-        this.authService.userSubject.subscribe(
-          data=> {
-                    this.user = data;
-                    if(x.genjouristId == this.user.genjouristId){
-                      this.getOwnJournals();
-                    }else{
-                      this.getUserJournals();
-                      console.log(this.journals)
-                    }
-              })  
-
-        
-
+      this.supportGenjouristService.getSupportersNumber(x.genjouristId).subscribe(x=>{
+        this.supportersNumber = x;
       })
+  
+      this.supportGenjouristService.getSupportingNumber(x.genjouristId).subscribe(x=>{
+        this.supportingNumber = x;
+      })
+      
+      let loggedInUser = JSON.parse(localStorage.getItem('id'));
+          if(loggedInUser == x.genjouristId){
+            console.log("own journals")
+            this.getOwnJournals();
+          }else{
+            this.getUserJournals();
+            console.log("users journals")
+          }
 
+    })
 
-  }
+    
+  
+  } 
+
 
   getOwnJournals(){
     let x =this.route.snapshot.params.username;

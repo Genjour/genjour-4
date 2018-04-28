@@ -3,6 +3,7 @@ import { AuthService } from './../../../../services/user_auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentsService } from '../../../../services/comments/comments.service';
+import { EndPoint } from '../../../../shared/global';
 import * as io from "socket.io-client";
 
 @Component({
@@ -15,7 +16,6 @@ export class ViewCommentsComponent implements OnInit {
 @Input() journalId : String;
 user:User;
 comments:any[]=[];
-private url = 'http://localhost:3000';
 private socket;
 
   constructor(
@@ -29,7 +29,7 @@ private socket;
       this.user = data;
     })
 
-    this.socket = io.connect(this.url);
+    this.socket = io.connect(EndPoint.host);
     this.socket.on('commentAddEmit', (data) => {
          this.comments.push(data[0]);   
      });

@@ -2,6 +2,7 @@ import { AuthService } from './../../../../services/user_auth/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { SupportJournalService } from '../../../../services/support-journal/support-journal.service';
 import { Router } from '@angular/router';
+import { EndPoint } from '../../../../shared/global';
 import * as io from "socket.io-client";
 
 @Component({
@@ -15,7 +16,6 @@ export class SupportJournalComponent implements OnInit {
 @Input() journalId :String;
 @Input() userId: String;
 
-  private url = 'http://localhost:3000';
   private socket;
   supportJournal:boolean;
   supporterNumber: String;
@@ -31,7 +31,7 @@ export class SupportJournalComponent implements OnInit {
   ngOnInit() {
 
     this.currentId=JSON.parse(localStorage.getItem('id'))
-    this.socket = io.connect(this.url);
+    this.socket = io.connect(EndPoint.host);
     this.supportJournalService.getSupportersCount(this.journalId).subscribe(data=>{
       //console.log(data);
       this.supporterNumber = data;

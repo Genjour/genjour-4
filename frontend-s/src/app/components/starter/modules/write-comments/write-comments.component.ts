@@ -58,6 +58,7 @@ export class WriteCommentsComponent implements OnInit {
 
     //console.log(flag);
     this.commentsService.commentAddEmit(flag,this.socket);
+    this.commentBoxInput.reset();
    }else{
       this.router.navigate(['/login']);
    }

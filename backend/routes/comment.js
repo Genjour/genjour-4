@@ -65,8 +65,8 @@ router.get('/replies/:parentCommentId', (req,res)=>{
         else{
             res.json(replies);
         }
-    })
-})
+    });
+});
 
 router.post('/add/reply',(req,res)=>{
     const flag = new Reply({
@@ -97,7 +97,7 @@ router.delete('/delete/reply/:replyId', (req,res)=>{
 });
 
 router.get('/comment/count/journal/:journalId',(req,res)=>{
-    console.log(req.params.journalId)
+    //console.log(req.params.journalId)
     Comment.getCommentCount(req.params.journalId,(err,count)=>{
         
         if(err) throw err;
@@ -107,7 +107,7 @@ router.get('/comment/count/journal/:journalId',(req,res)=>{
         else{
             res.json(count);
         }
-    })
-})
+    });
+});
 
 module.exports = router;
