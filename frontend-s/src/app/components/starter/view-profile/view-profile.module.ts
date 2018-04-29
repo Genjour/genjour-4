@@ -12,6 +12,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng2CloudinaryModule } from './../../../../../node_modules/ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SupportGenjouristService } from '../../../services/support-genjourist/support-genjourist.service';
+import { DropdownModule } from '../../../directives/dropdown/dropdown.directive.module';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
         BookmarkModule,
         ImageCropperModule,
         Ng2CloudinaryModule,
-        FileUploadModule
+        FileUploadModule,
+        DropdownModule
     ],
     declarations:[
         ViewProfileComponent

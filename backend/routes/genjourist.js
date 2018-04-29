@@ -82,9 +82,9 @@ router.get('/genjourist/quotation/:id', function (req, res) {
 //============================== SUPPORT Genjourist ===========================
 //=============================================================================
 
-router.post('/support/genjourist/:userId/:supportId', function (req, res) {
-    const userId = req.params.userId;
-    const supportId = req.params.supportId;
+router.post('/support/genjourist', function (req, res) {
+    const userId = req.body.userId;
+    const supportId = req.body.supportId;
 
     let a = new Support({
         genjouristId: userId,
@@ -99,7 +99,7 @@ router.post('/support/genjourist/:userId/:supportId', function (req, res) {
                 if (err) throw err;
                 else {
                     res.json({
-                        success: true,
+                        success: false,
                         msg: "user is pop"
                     });
                 }
@@ -224,7 +224,7 @@ router.get('/recommended/users/:userid', (req, res) => {
 //=============== Check supporting or not of Users (CheckStatus)===============
 //=============================================================================
 
-router.get('/checkSupportStatus/:userId/:genjouristId', (req, res) => {
+router.get('/checkSupportStatus/genjourist/:userId/:genjouristId', (req, res) => {
     var userId = req.params.userId;
     var genjouristId = req.params.genjouristId;
     Support.findSupporters(userId, genjouristId, (err, status) => {

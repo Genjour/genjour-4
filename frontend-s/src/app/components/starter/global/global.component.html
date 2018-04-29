@@ -119,7 +119,7 @@
                             <app-bookmark [journalId]="journal?.journalId"></app-bookmark>
                           </div>
                         </div>
-
+                        <!-- replicate division -->
                         <div [hidden]="!journal.hideReplicate" class="replicate_icons m--margin-top-15">
                           <div class="m-stack m-stack--ver m-stack--general">
                             <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid social_icon_base">
@@ -138,6 +138,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- comment box -->
                         <div class="m--margin-top-20">
                           <div [hidden]="!journal.hideme" class="row">
                             <div class="col-md-auto">
@@ -274,7 +275,7 @@
                         </span>
                       </div>
                       <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                        <app-bookmark></app-bookmark>
+                        <app-bookmark  [journalId]="journal.journalId"></app-bookmark>
                       </div>
                     </div>
                     <div [hidden]="!journal.hideReplicate" class="replicate_icons m--margin-top-15">

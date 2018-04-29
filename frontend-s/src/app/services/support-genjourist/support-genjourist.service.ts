@@ -15,4 +15,11 @@ export class SupportGenjouristService {
     return this.http.get(EndPoint.getSupportingNumber+genjouristId).map(res=>res.json())
   }
 
+  SupportGenjourist(data){
+    return this.http.post(EndPoint.SupportGenjourist,data).map(res=>res.json())
+  }
+
+  getSupportStatusOfGenjourist(userId,supportId){
+    return this.http.get(EndPoint.getSupportStatusOfGenjourist+userId+'/'+supportId).map(res=>res.json())
+  }
 }
