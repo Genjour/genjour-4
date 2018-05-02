@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 import { NavbarComponent } from './navbar.component';
 import { AuthService } from '../../../services/user_auth/auth.service';
 import { DropdownModule } from '../../../directives/dropdown/dropdown.directive.module';
+import { AgeCategoryPipe } from '../../../pipes/age-category/age-category.pipe';
 
 
 @NgModule({
@@ -16,6 +17,6 @@ import { DropdownModule } from '../../../directives/dropdown/dropdown.directive.
   ],
   declarations: [NavbarComponent],
   exports: [NavbarComponent],
-  providers:[AuthService]
+  providers:[AuthService,AgeCategoryPipe]
 })
 export class NavbarModule { }

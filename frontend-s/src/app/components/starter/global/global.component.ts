@@ -13,7 +13,9 @@ import * as io from "socket.io-client";
   styleUrls: ['./global.component.css']
 })
 export class GlobalComponent implements OnInit {
+
   selectedRow: number;
+  ReplicatedRow:number;
   status : boolean = true;
   user: any;
   journalId :String;
@@ -72,9 +74,10 @@ export class GlobalComponent implements OnInit {
 
 
   setClickedRow(index) {
-    console.log(index)
+    //console.log(index)
     this.selectedRow = index;
-
   }
+
+
 
 }

@@ -5,6 +5,9 @@ import { Journal } from './../../../models/journal.mode';
 import { AuthService } from '../../../services/user_auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../models/user.model';
+import * as io from "socket.io-client";
+import { EndPoint } from '../../../shared/global';
+
 
 @Component({
   selector: 'app-view-profile',
@@ -13,6 +16,11 @@ import { User } from '../../../models/user.model';
 })
 export class ViewProfileComponent implements OnInit {
 
+  nameStatus: boolean;
+  bioStatus: boolean;
+  genderStatus: boolean;
+  profileEditStatus: boolean;
+  imgUploaderModal: boolean;
   loggedInUser: String;
   user:User;
   journals:Journal;
@@ -24,6 +32,7 @@ export class ViewProfileComponent implements OnInit {
   currentUserData:any[]=[];
   currentUserGenjouristId:String;
   supportStatus:boolean;
+  private socket;
 
   constructor(
     private authService : AuthService,
@@ -33,7 +42,8 @@ export class ViewProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
+    this.socket = io.connect(EndPoint.host);
     this.authService.getGenjouristByUsername(this.route.snapshot.params.username).subscribe(x => {
       this.currentUserData = x;
       this.currentUserGenjouristId = x.genjouristId
@@ -44,15 +54,15 @@ export class ViewProfileComponent implements OnInit {
       
       this.loggedInUser = JSON.parse(localStorage.getItem('id'));
           if(this.loggedInUser == x.genjouristId){
-            console.log("own journals")
+            // console.log("own journals")
             this.getOwnJournals();
           }else{
             this.getUserJournals();
-            console.log("users journals")
+            // console.log("users journals")
           }
         
       this.supportGenjouristService.getSupportStatusOfGenjourist(this.loggedInUser,this.currentUserGenjouristId).subscribe(status=>{
-        console.log(status);
+        //console.log(status);
         if(status.success){
           this.supportStatus = false
         }else{
@@ -85,6 +95,7 @@ export class ViewProfileComponent implements OnInit {
     let x =this.route.snapshot.params.username;
     this.authService.getOwnJournals(x).subscribe(data=>{
       this.journals = data;
+      console.log(this.journals)
     })
   }
 
@@ -97,22 +108,66 @@ export class ViewProfileComponent implements OnInit {
   }
 
   supportGenjourist(){
-    const flag = {
-      userId: this.loggedInUser,
-      supportId: this.currentUserGenjouristId
-    }
-    this.supportGenjouristService.SupportGenjourist(flag).subscribe(status=>{
-      console.log(status);
+
+    if(this.authService.loggedIn()){
+      
+      const flag = {
+        userId: this.loggedInUser,
+        supportId: this.currentUserGenjouristId
+      }
+      this.supportGenjouristService.SupportGenjourist(flag,this.socket)
+  
       if(this.supportStatus == true){
         this.supportStatus = false
-        console.log(status.msg)
       }else if(this.supportStatus == false){
         this.supportStatus = true
-        console.log(status.msg)
       }
+  
+      this.socket.on('SupportersCountEmit', count=>{
+        // console.log(count);
+        this.supportersNumber = count;
+      })
+  
+      this.socket.on('SupportingCountEmit', count=>{
+        // console.log(count);
+        this.supportingNumber = count;
+      })
+
+    }else{
+      this.router.navigate(['/login'])
+    }
 
 
-    })
+
+  }
+
+  onSelectEditButton(){
+    
+    this.profileEditStatus = true;
+    this.bioStatus = true;
+    this.nameStatus = true;
+    console.log("edit");
+
+  }
+
+  cancelEditMode(){
+    this.profileEditStatus = false;
+    this.bioStatus = false;
+    this.nameStatus = false;
+
+  }
+  
+  openModal(){
+    this.imgUploaderModal = true;
+  }
+
+  closeModal(){
+    this.imgUploaderModal = false;
+  }
+
+  cancelImageUpload(){
+    this.imgUploaderModal = false;
+
   }
 
 }

@@ -20,7 +20,10 @@ io.sockets.on('connection', function(socket){
     socket.on('supportJournal', (supportJournal)=>{
         Support.supportJournal(io,supportJournal);
         });
-
+    
+    socket.on('supportGenjourist',(supportGenjourist)=>{
+        Support.supportGenjourist(io,supportGenjourist)
+    })
 
     });
 }

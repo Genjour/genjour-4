@@ -1,7 +1,7 @@
-<div style="background-color: #f2f3f8">
+<div style="background-color: #f2f3f8; padding-top:25px;">
   <div class="container">
     <div class="card-columns">
-      <div *ngFor="let journal of journals; let i = index" (click)="setClickedRow(i)" [attr.data-index]="i">
+      <div *ngFor="let journal of journals; let i = index" [attr.data-index]="i">
 
         <div *ngIf="journal.type == 1; then article else quotation"></div>
 
@@ -106,7 +106,7 @@
                             <app-support-journal [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal>
                           </div>
                           <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                            <span (click)="journal.hideme = !journal.hideme">
+                            <span (click)="setClickedRow(i)">
                               <i class="m-menu__link-icon fa fa-eye"> </i> <app-comments [journalId]="journal.journalId"></app-comments> 
                             </span>
                           </div>
@@ -140,29 +140,29 @@
                         </div>
                         <!-- comment box -->
                         <div class="m--margin-top-20">
-                          <div [hidden]="!journal.hideme" class="row">
-                            <div class="col-md-auto">
-                              <div class="m-messenger__message-pic">
-                                <img height="40px" style="border-radius: 50%;" [src]="user?.profileImg" alt="">
+                          <div *ngIf="i == selectedRow" class="row">
+                              <div class="col-md-auto">
+                                <div class="m-messenger__message-pic">
+                                  <img height="40px" style="border-radius: 50%;" [src]="user?.profileImg" alt="">
+                                </div>
                               </div>
-                            </div>
-                            <div class="col" style="margin: 0px; padding: 0px;">
-                              <form #commentBoxInput="ngForm">
-                                <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
-                                  <div class="m-messenger__form">
-                                    <div class="m-messenger__form-controls">
-                                      <input autocomplete="off" type="text" name="commentInput" [(ngModel)]="commentInput" placeholder="Opinon..." class="m-messenger__form-input">
-                                    </div>
-                                    <div class="m-messenger__form-tools">
-                                      <label hidden class="m-messenger__form-attachment" for="commentButton">
-                                        <i class="la la-comment"></i>
-                                      </label>
-                                      <input hidden type="submit" id="commentButton" (click)="submitComment(journal.journalId)">
+                              <div class="col" style="margin: 0px; padding: 0px;">
+                                <form  #commentBoxInput="ngForm">
+                                  <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
+                                    <div class="m-messenger__form">
+                                      <div class="m-messenger__form-controls">
+                                        <input autocomplete="off" type="text" name="commentInput" [(ngModel)]="commentInput" placeholder="Opinon..." class="m-messenger__form-input">
+                                      </div>
+                                      <div class="m-messenger__form-tools">
+                                        <label hidden class="m-messenger__form-attachment" for="commentButton">
+                                          <i class="la la-comment"></i>
+                                        </label>
+                                        <input hidden type="submit" id="commentButton" (click)="submitComment(journal.journalId)">
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </form>
-                            </div>
+                                </form>
+                              </div>
                           </div>
                         </div>
                       </div>
@@ -265,7 +265,7 @@
                         <app-support-journal [journalId]="journal?.journalId" [userId]="user?.genjouristId"></app-support-journal>
                       </div>
                       <div class="m-stack__item m-stack__item--center m-stack__item--middle m-stack__item--fluid">
-                        <span (click)="journal.hideme = !journal.hideme">
+                        <span (click)="setClickedRow(i)">
                           <i class="m-menu__link-icon fa fa-eye"> </i> <app-comments [journalId]="journal.journalId"></app-comments>
                         </span>
                       </div>
@@ -298,7 +298,7 @@
                     </div>
                     <div class="m--margin-top-20">
 
-                      <div [hidden]="!journal.hideme" class="row">
+                      <div *ngIf="i == selectedRow" class="row">
                         <div class="col-md-auto">
                           <div class="m-messenger__message-pic">
                             <img height="40px" style="border-radius: 50%;" [src]="user?.profileImg" alt="">

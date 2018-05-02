@@ -1,4 +1,4 @@
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
+<div class="m-grid__item m-grid__item--fluid m-wrapper"  style="background-color: #f2f3f8;">
   <!-- BEGIN: Subheader -->
   <div class="m-subheader">
   </div>
@@ -12,15 +12,11 @@
               <div class="m-card-profile__title m--hide">
                 Profile
               </div>
-              <div *ngIf="editMode" class="edit_profile_pic">
-                <i class="m-nav__link-icon fa fa-pencil m--pull-right"></i>
-              </div>
               <div class="m-card-profile__pic">
                 <div class="m-card-profile__pic-wrapper">
                   <!-- <img style="border:3px soild grey" src="{{currentUserData.profileImg}}" alt="Genjourist profile pic"> -->
                   <div class="m-dropdown m-dropdown--inline m-dropdown--arrow" appDropdown>
                     <img style="cursor: pointer; " class="m-dropdown__toggle dropdown-toggle" src="{{currentUserData.profileImg}}" alt="Genjourist profile pic">
-
                     <div class="m-dropdown__wrapper">
                       <span class="m-dropdown__arrow m-dropdown__arrow--left"></span>
                       <div class="m-dropdown__inner">
@@ -57,7 +53,6 @@
                   </div>
                   <input *ngIf="profileImgStatus" type="file" hidden name="profileImg" id="profileImg">
                 </div>
-
               </div>
               <div class="m-card-profile__details">
                 <span *ngIf="!nameStatus" class="m-card-profile__name">
@@ -96,17 +91,18 @@
               </div>
             </div>
             <div class="m-separator"></div>
-            <span *ngIf="loggedInUser == currentUserData.genjouristId" (click)="onSelectEditButton()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+            <span *ngIf="loggedInUser == currentUserData.genjouristId && !profileEditStatus" (click)="onSelectEditButton()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
               Edit your profile
             </span>
-
-              <span *ngIf="loggedInUser!= currentUserData.genjouristId && supportStatus == true" (click)="supportGenjourist()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
-                Support
-              </span>
-              <span *ngIf="loggedInUser!= currentUserData.genjouristId && supportStatus == false" (click)="supportGenjourist()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
-                Supporting
-              </span>
-
+            <span *ngIf="profileEditStatus" (click)="cancelEditMode()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+              Cancel
+            </span>
+            <span *ngIf="loggedInUser!= currentUserData.genjouristId && supportStatus == true" (click)="supportGenjourist()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+              Support
+            </span>
+            <span *ngIf="loggedInUser!= currentUserData.genjouristId && supportStatus == false" (click)="supportGenjourist()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
+              Supporting
+            </span>
             <span *ngIf="profileEditStatus" (click)="onSaveProfile()" style="color:white" class="btn m-btn--square  btn-brand btn-block">
               Save
             </span>
@@ -140,8 +136,8 @@
               </li>
               <li class="m-nav__item">
                 <a class="m-nav__link">
-                  <i *ngIf="!genderStatus" class="m-nav__link-icon flaticon-user"></i>
-                  <span *ngIf="!genderStatus" class="m-nav__link-title">
+                  <i class="m-nav__link-icon flaticon-user"></i>
+                  <span class="m-nav__link-title">
                     <span class="m-nav__link-wrap">
                       <span class="m-nav__link-text">
                         Gender
@@ -153,14 +149,7 @@
                       </span>
                     </span>
                   </span>
-                  <select *ngIf="genderStatus" [(ngModel)]="currentUserData.gender" name="gender" class="form-control m-input m-input--solid"
-                    id="exampleSelect1">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Others</option>
-                  </select>
                 </a>
-
               </li>
               <li *ngIf="currentUserData.emailStatus" class="m-nav__item">
                 <a class="m-nav__link">
@@ -297,7 +286,7 @@
                                 </div>
                                 <div class="m-widget19__info">
                                   <span class="m-widget19__username">
-                                    <a [routerLink]="['/genjourist',journal?.username]">{{journal?.name}}</a>
+                                    <a [routerLink]="['/genjourist',journal?.username]">{{journal?.genjourist}}</a>
                                   </span>
                                   <br>
                                   <span class="m-widget19__time">
@@ -464,7 +453,7 @@
                               <div class="m-widget7__info">
                                 <a [routerLink]="['/genjourist',journal.username]">
                                   <span class="m-widget7__username">
-                                    {{journal.name}}
+                                    {{journal.genjourist}}
                                   </span>
                                 </a>
                                 <br>

@@ -1,6 +1,9 @@
 a {
     text-decoration:none;
 }
+
+
+
 .m-header-search .m-header-search__wrapper{
     background-color:transparent;
     border:1px solid #e8e7f4;
@@ -83,7 +86,11 @@ color: rgba(0, 0, 0, 0.562);
 .m-stack--demo.m-stack--ver .m-stack__item{
 padding: 5px 5px 5px 5px;
 border: 0px ;
-background: #fbfbfb;
+
 font-weight: 500;
 }
+
+/* .m-stack--ver .m-stack__item{
+    background: yellow;
+} */
 

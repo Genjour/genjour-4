@@ -15,8 +15,9 @@ export class SupportGenjouristService {
     return this.http.get(EndPoint.getSupportingNumber+genjouristId).map(res=>res.json())
   }
 
-  SupportGenjourist(data){
-    return this.http.post(EndPoint.SupportGenjourist,data).map(res=>res.json())
+  SupportGenjourist(data:any, socket:any){
+    socket.emit('supportGenjourist',data)
+    // return this.http.post(EndPoint.SupportGenjourist,data).map(res=>res.json())
   }
 
   getSupportStatusOfGenjourist(userId,supportId){
